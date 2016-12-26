@@ -23,3 +23,10 @@ $container['logger'] = function ($c) {
     $logger->pushHandler(new Monolog\Handler\StreamHandler($settings['path'], $settings['level']));
     return $logger;
 };
+
+// -----------------------------------------------------------------------------
+// Action factories
+// -----------------------------------------------------------------------------
+$container[App\HomePage::class] = function ($c) {
+    return new App\HomePage($c->get('renderer'), $c->get('logger'));
+};
