@@ -27,6 +27,14 @@ $container['logger'] = function ($c) {
 // -----------------------------------------------------------------------------
 // Action factories
 // -----------------------------------------------------------------------------
+function invoke($container, $class){
+	return new $class($container->get('renderer'), $container->get('logger'));
+}
+
 $container[App\HomePage::class] = function ($c) {
-    return new App\HomePage($c->get('renderer'), $c->get('logger'));
+    return invoke($c, App\HomePage::class);
+};
+
+$container[App\NamePage::class] = function ($c) {
+    return invoke($c, App\NamePage::class);
 };
