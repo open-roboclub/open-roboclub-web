@@ -27,72 +27,30 @@ $container['logger'] = function ($c) {
 // -----------------------------------------------------------------------------
 // Action factories
 // -----------------------------------------------------------------------------
-function invoke($container, $class){
-	return new $class($container->get('renderer'), $container->get('logger'));
+
+$generic_pages = [
+	'home', 
+	'team', 
+	'members', 
+	'projects', 
+	'robocon', 
+	'downloads',
+	'announcements',
+	'robonics',
+	'budget'
+];
+
+foreach ($generic_pages as $page) {
+	$container[$page] = function ($c) use($page, $generic_pages) {
+		
+    	$object =  new App\GenericPage($c->get('renderer'), $c->get('logger'));
+    	$object->setTitle($page);
+    	$object->setTemplate($page . '.twig');
+    	$object->setNavigation($generic_pages);
+
+    	return $object;
+	};
 }
-
-$container['home'] = function ($c) {
-    $object =  invoke($c, App\GenericPage::class);
-    $object->setTitle('Home');
-    $object->setTemplate('home.twig');
-    return $object;
-};
-
-$container['team'] = function ($c) {
-    $object =  invoke($c, App\GenericPage::class);
-    $object->setTitle('Team');
-    $object->setTemplate('team.twig');
-    return $object;
-};
-
-$container['members'] = function ($c) {
-    $object =  invoke($c, App\GenericPage::class);
-    $object->setTitle('Members');
-    $object->setTemplate('members.twig');
-    return $object;
-};
-
-$container['projects'] = function ($c) {
-    $object =  invoke($c, App\GenericPage::class);
-    $object->setTitle('Projects');
-    $object->setTemplate('projects.twig');
-    return $object;
-};
-
-$container['robocon'] = function ($c) {
-    $object =  invoke($c, App\GenericPage::class);
-    $object->setTitle('Robocon');
-    $object->setTemplate('robocon.twig');
-    return $object;
-};
-
-$container['downloads'] = function ($c) {
-    $object =  invoke($c, App\GenericPage::class);
-    $object->setTitle('Downloads');
-    $object->setTemplate('downloads.twig');
-    return $object;
-};
-
-$container['announcements'] = function ($c) {
-    $object =  invoke($c, App\GenericPage::class);
-    $object->setTitle('Announcements');
-    $object->setTemplate('announcements.twig');
-    return $object;
-};
-
-$container['robonics'] = function ($c) {
-    $object =  invoke($c, App\GenericPage::class);
-    $object->setTitle('Robonics');
-    $object->setTemplate('robonics.twig');
-    return $object;
-};
-
-$container['budget'] = function ($c) {
-    $object =  invoke($c, App\GenericPage::class);
-    $object->setTitle('Budgets');
-    $object->setTemplate('budget.twig');
-    return $object;
-};
 
 $container[App\NamePage::class] = function ($c) {
     return invoke($c, App\NamePage::class);
