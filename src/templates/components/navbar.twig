@@ -14,7 +14,7 @@
                 {% for item in navigation %}
                     {% if route == item %}
                         <li class="active"><a href="./{{ item }}">{{ item|title }} <span class="sr-only">(current)</span></a></li>
-                    {% elseif route == '/' and item == 'home' %}
+                    {% elseif route == '' and item == 'home' %}
                         <li class="active"><a href="./">{{ item|title }} <span class="sr-only">(current)</span></a></li>
                     {% else %}
                         <li><a href="./{{ item }}">{{ item|title }}</a></li>
