@@ -13,22 +13,34 @@
         <link rel="shortcut icon" href="http://res.cloudinary.com/amuroboclub/image/upload/old/icon.png" />
         <title>{{ title|title }}</title>
         <!-- Bootstrap -->
-        <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/paper/bootstrap.min.css" rel="stylesheet" integrity="sha384-awusxf8AUojygHf2+joICySzB780jVvQaVCAt1clU3QsyAitLGul28Qxb2r1e5g+" crossorigin="anonymous">
-    </head>
-    <body>
-        {{ include('components/navbar.twig') }}
+        <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.7/paper/bootstrap.min.css" rel="stylesheet" integrity="sha384-awusxf8AUojygHf2+joICySzB780jVvQaVCAt1clU3QsyAitLGul28Qxb2r1e5g+" crossorigin="anonymous">
+        <link href="//cdn.materialdesignicons.com/1.7.22/css/materialdesignicons.min.css" rel="stylesheet">
+        <link href="{{ base_url() }}/css/style.css" rel="stylesheet">
 
-        <div class="container">
-            <div class="starter-template">
-                <h1>Bootstrap starter template</h1>
-                <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
-            </div>
-        </div>
+        {% block styles %}
+        {% endblock %}
+
         
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        
+    </head>
+    <body>
+        {{ include('components/navbar.twig') }}
+
+        {% block content %}
+            <div>
+                <h1>Bootstrap starter template</h1>
+                <p>Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+            </div>
+        {% endblock %}
+
+        {{ include('components/footer.twig') }}
+        
+    {% block scripts %}
+    {% endblock %}
     </body>
 </html>

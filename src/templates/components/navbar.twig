@@ -1,15 +1,16 @@
-<nav class="navbar navbar-default">
+
+<nav class="navbar navbar-default navbar-fixed-top" style="margin-bottom: 60px;">
     <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"><img src="http://res.cloudinary.com/amuroboclub/image/upload/old/logo-vector.svg" alt="AMU RoboClub" style="margin:-15px;"/></a>
+            <a class="navbar-brand" href="./"><img src="http://res.cloudinary.com/amuroboclub/image/upload/old/logo-vector.svg" alt="AMU RoboClub" style="margin:-15px;"/></a>
         </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav">
                 {% for item in navigation %}
                     {% if route == item %}
@@ -21,8 +22,9 @@
                     {% endif %}
                 {% endfor %}
             </ul>
-            
-            
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="./developers">Developers</a></li>
+            </ul>
         </div>
     </div>
 </nav>

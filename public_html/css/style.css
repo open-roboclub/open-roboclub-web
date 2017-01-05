@@ -1,0 +1,75 @@
+body {
+	background: #eee;
+	padding-top: 80px;
+}
+
+.navbar-default {
+	opacity:0.95;
+}
+
+@media (min-width: 768px) {
+  #jumbo-image {
+  	padding-right: 10px;
+  }
+}
+
+.panel-text {
+	color: #fff;
+	opacity: 0.7;
+}
+
+.text-dark {
+	color: rgba(255, 255, 255, 0.8);
+}
+
+.rectangle {
+	background: #ccc;
+	padding: 5px;
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+	margin-left: 10px;
+	margin-bottom: 10px;
+	min-width:300px;
+}
+
+.overflow {
+	height: 280px;
+	overflow: auto;
+}
+
+.vertical-ali {
+    display:inline-block;
+    vertical-align: -3px;
+}
+
+#news-footer {
+	background: #ef5350;
+	color: rgba(255, 255, 255, 0.8);
+	font-size: 15px;
+}
+
+.fab {
+	border:none;
+	outline: none;
+    font-size:2em;
+    color: rgba(255, 255, 255, 0.8);
+    background-color: #ff4081;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    transition: all .1s ease-out;
+    margin: auto;
+    -webkit-box-shadow: 2px 3px 3px 0px rgba(41, 41, 41, .3);
+       -moz-box-shadow: 2px 3px 3px 0px rgba(41, 41, 41, .3);
+            box-shadow: 2px 3px 3px 0px rgba(41, 41, 41, .3);
+}
+
+.fab:hover {
+  transform: scale(1.03);
+  -webkit-box-shadow: 2px 4px 3px 0px rgba(41, 41, 41, .2);
+       -moz-box-shadow: 2px 4px 3px 0px rgba(41, 41, 41, .2);
+            box-shadow: 2px 4px 3px 0px rgba(41, 41, 41, .2);
+}
+
+.padding-10 {
+	padding: 10px;
+}

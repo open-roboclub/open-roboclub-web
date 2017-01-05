@@ -53,5 +53,5 @@ foreach ($generic_pages as $page) {
 }
 
 $container[App\NamePage::class] = function ($c) {
-    return invoke($c, App\NamePage::class);
+    return new App\NamePage($c->get('renderer'), $c->get('logger'));
 };
