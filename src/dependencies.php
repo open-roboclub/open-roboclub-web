@@ -35,8 +35,7 @@ $generic_pages = [
 	'projects', 
 	'robocon', 
 	'downloads',
-	'robonics',
-	'budget'
+	'robonics'
 ];
 
 foreach ($generic_pages as $page) {
@@ -52,6 +51,10 @@ foreach ($generic_pages as $page) {
 
 $container[App\AnnouncementsPage::class] = function($c) {
     return new App\AnnouncementsPage($c->get('renderer'), $c->get('logger'));
+};
+
+$container[App\ContributionsPage::class] = function($c) {
+    return new App\ContributionsPage($c->get('renderer'), $c->get('logger'));
 };
 
 $container[App\NamePage::class] = function ($c) {

@@ -17,7 +17,7 @@ class GenericPage extends BasePage {
 		'downloads',
 		'announcements',
 		'robonics',
-		'budget'
+		'contributions'
 	];
 
 	private $twig_object = [];

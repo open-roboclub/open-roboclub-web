@@ -1,0 +1,51 @@
+{% extends "components/base.twig" %}
+{% block content %}
+	<div class="container">
+		<div class="jumbotron" style="background: #B2EBF2;">
+			<div class="container-fluid">
+				<div class="text-center">
+					<i class="mdi mdi-coin" style="color: #FFC107; font-size: 150px;" aria-hidden="true"></i>
+					<div class="lead">We are because of you!</div>
+				</div>
+			</div>
+		</div>
+		<div class="row" id="contributions">
+			{% for contribution in contributions %}
+				<div class="col-lg-3 col-md-4 col-xs-6">
+					<div class="panel panel-default">
+						<div class="panel-body" style="font-size: 16px;">
+							<div class="text-center">
+								<i class="mdi mdi-coin mdi-48px" style="color: #FFC107;" aria-hidden="true"></i>
+								
+								<div style="font-size: 18px;"><strong>{{ contribution.amount }}</strong></div>
+								<br>
+								<div><em><strong>Contributors :</strong></em><br> {{ contribution.contributor|split(',')|join(',<br>')|raw }}</div>
+								<div><em><strong>Purpose :</strong></em><br> {{ contribution.purpose }}</div>
+								<div><em><strong>Remark :</strong></em><br> {{ contribution.remark }}</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+	$(window).ready(function() {
+		// Finding the maximum height and applying to all columns
+		var max = -1;
+
+		$('#contributions').children().each( function() {
+			height = $(this).outerHeight();
+			if(max<height) max = height;
+		});
+
+		console.log(max);
+		$('#contributions').children().each( function() {
+			$(this).outerHeight(max);
+		});
+	});
+</script>
+{% endblock %}
