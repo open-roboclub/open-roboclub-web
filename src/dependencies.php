@@ -35,7 +35,6 @@ $generic_pages = [
 	'projects', 
 	'robocon', 
 	'downloads',
-	'announcements',
 	'robonics',
 	'budget'
 ];
@@ -46,11 +45,14 @@ foreach ($generic_pages as $page) {
     	$object =  new App\GenericPage($c->get('renderer'), $c->get('logger'));
     	$object->setTitle($page);
     	$object->setTemplate($page . '.twig');
-    	$object->setNavigation($generic_pages);
 
     	return $object;
 	};
 }
+
+$container[App\AnnouncementsPage::class] = function($c) {
+    return new App\AnnouncementsPage($c->get('renderer'), $c->get('logger'));
+};
 
 $container[App\NamePage::class] = function ($c) {
     return new App\NamePage($c->get('renderer'), $c->get('logger'));

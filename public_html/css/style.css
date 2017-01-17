@@ -41,9 +41,20 @@ body {
     vertical-align: -3px;
 }
 
+.vcenter {
+    display:inline-block;
+    vertical-align: middle;
+    float: none;
+}
+
 #news-footer {
 	background: #ef5350;
 	color: rgba(255, 255, 255, 0.8);
+	font-size: 15px;
+}
+
+#newspanel-footer {
+	color: #607D8B;
 	font-size: 15px;
 }
 

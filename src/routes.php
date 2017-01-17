@@ -7,4 +7,6 @@ foreach ($generic_pages as $page) {
 	$app->get('/' . $page, $page);
 }
 
+$app->get('/announcements', App\AnnouncementsPage::class);
+
 $app->get('/{name}', App\NamePage::class);
