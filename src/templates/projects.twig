@@ -35,8 +35,9 @@
 <div class="container">
 	<div class="row" id="projects">
 		{% for project in projects %}
+			{% set id = project.name|lower|replace({' ': ""})[:15] %}
 			<div class="col-lg-3 col-md-4 col-sm-6">
-				<a href="#" data-toggle="modal" data-target="#{{ project.name|lower|replace({' ': ""})[:10] }}" style="text-decoration: none; color: currentColor;">
+				<a href="#" data-toggle="modal" data-target="#{{ id }}" style="text-decoration: none; color: currentColor;">
 					<div class="panel panel-default" id="panel-shadow">
 						<div class="panel-body text-center" style="font-size: 16px;">
 							<div class="container-fluid">
@@ -49,7 +50,7 @@
 			</div>
 
 			<!-- Modal -->
-			<div id="{{ project.name|lower|replace({' ': ""})[:10] }}" class="modal fade" role="dialog">
+			<div id="{{ id }}" class="modal fade" role="dialog">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">

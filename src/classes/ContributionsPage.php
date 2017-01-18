@@ -45,7 +45,7 @@ final class ContributionsPage extends GenericPage {
 		$this->setTitle('Contributions');
 		$this->setTemplate('contributions.twig');
 
-		$contributions = $this->getContributions(TRUE);
+		$contributions = $this->getContributions();
 
 		$this->addTwigObject(['contributions' => $contributions]);
 		$this->render_page($request, $response);
