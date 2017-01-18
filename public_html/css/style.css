@@ -17,11 +17,16 @@ body {
   }
 }
 
-@media (max-width: 550px) {
+@media (max-width: 768px) {
 	.navbar-brand>img {
 	    margin: -15px;
 	    padding-top: 5px;
 	    max-width: 260px;
+	}
+
+	#projects {
+		margin-left: 20px;
+		margin-right: 20px;
 	}
 }
 
@@ -91,6 +96,17 @@ body {
   -webkit-box-shadow: 2px 4px 3px 0px rgba(41, 41, 41, .2);
        -moz-box-shadow: 2px 4px 3px 0px rgba(41, 41, 41, .2);
             box-shadow: 2px 4px 3px 0px rgba(41, 41, 41, .2);
+}
+
+
+#panel-shadow {
+	transition: all .1s ease-out;
+}
+
+#panel-shadow:hover {
+    -webkit-box-shadow: 0px 3px 3px 0px rgba(41, 41, 41, .3);
+       -moz-box-shadow: 0px 3px 3px 0px rgba(41, 41, 41, .3);
+            box-shadow: 0px 3px 3px 0px rgba(41, 41, 41, .3);
 }
 
 .padding-10 {

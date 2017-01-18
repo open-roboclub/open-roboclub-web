@@ -32,7 +32,7 @@ final class AnnouncementsPage extends GenericPage {
 			];
 		}
 
-		return Utils::getJsonArray('https://amu-roboclub.firebaseio.com/news.json');
+		return Utils::getReverseJsonArray('https://amu-roboclub.firebaseio.com/news.json');
 	}
 
 	public function __invoke(Request $request, Response $response, $args) {

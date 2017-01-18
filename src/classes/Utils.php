@@ -4,6 +4,10 @@ namespace App;
 
 final class Utils {
 	
+	public static function getReverseJsonArray($url) {
+		return array_reverse(Utils::getJsonArray($url), true);
+	}
+
 	public static function getJsonArray($url) {
 		$curlSession = curl_init();
 		$curlSession = curl_init();
@@ -13,6 +17,7 @@ final class Utils {
 
 	    $jsonData = json_decode(curl_exec($curlSession));
 	    curl_close($curlSession);
-		return array_reverse($jsonData, true);
+
+		return (array) $jsonData;
 	}
 }

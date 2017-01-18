@@ -38,14 +38,14 @@ final class ContributionsPage extends GenericPage {
 			];
 		}
 
-		return Utils::getJsonArray('https://amu-roboclub.firebaseio.com/contribution.json');
+		return Utils::getReverseJsonArray('https://amu-roboclub.firebaseio.com/contribution.json');
 	}
 
 	public function __invoke(Request $request, Response $response, $args) {
 		$this->setTitle('Contributions');
 		$this->setTemplate('contributions.twig');
 
-		$contributions = $this->getContributions();
+		$contributions = $this->getContributions(TRUE);
 
 		$this->addTwigObject(['contributions' => $contributions]);
 		$this->render_page($request, $response);
