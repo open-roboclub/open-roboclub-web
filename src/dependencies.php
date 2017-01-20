@@ -39,7 +39,7 @@ $generic_pages = [
 foreach ($generic_pages as $page) {
 	$container[$page] = function ($c) use($page, $generic_pages) {
 		
-    	$object =  new App\GenericPage($c->get('renderer'), $c->get('logger'));
+    	$object =  new App\Page\GenericPage($c->get('renderer'), $c->get('logger'));
     	$object->setTitle($page);
     	$object->setTemplate($page . '.twig');
 
@@ -47,23 +47,23 @@ foreach ($generic_pages as $page) {
 	};
 }
 
-$container[App\AnnouncementsPage::class] = function($c) {
-    return new App\AnnouncementsPage($c->get('renderer'), $c->get('logger'));
+$container[App\Page\AnnouncementsPage::class] = function($c) {
+    return new App\Page\AnnouncementsPage($c->get('renderer'), $c->get('logger'));
 };
 
-$container[App\ContributionsPage::class] = function($c) {
-    return new App\ContributionsPage($c->get('renderer'), $c->get('logger'));
+$container[App\Page\ContributionsPage::class] = function($c) {
+    return new App\Page\ContributionsPage($c->get('renderer'), $c->get('logger'));
 };
 
-$container[App\ProjectsPage::class] = function($c) {
-    return new App\ProjectsPage($c->get('renderer'), $c->get('logger'));
+$container[App\Page\ProjectsPage::class] = function($c) {
+    return new App\Page\ProjectsPage($c->get('renderer'), $c->get('logger'));
 };
 
-$container[App\DownloadsPage::class] = function($c) {
-    return new App\DownloadsPage($c->get('renderer'), $c->get('logger'));
+$container[App\Page\DownloadsPage::class] = function($c) {
+    return new App\Page\DownloadsPage($c->get('renderer'), $c->get('logger'));
 };
 
 
-$container[App\NamePage::class] = function ($c) {
-    return new App\NamePage($c->get('renderer'), $c->get('logger'));
+$container[App\Page\NamePage::class] = function ($c) {
+    return new App\Page\NamePage($c->get('renderer'), $c->get('logger'));
 };

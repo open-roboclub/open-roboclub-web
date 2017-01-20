@@ -20,11 +20,11 @@
                 {% for item in download.items %}
                 <div class="row">
                     <div>
-                        <div style="font-size: 16px; position: absolute; display: inline; padding-top: 15px; padding-left: 20px; margin-right: 100px;" >{{item.name}}</div>
+                        <div style="font-size: 16px; display: inline-block; margin-top: 15px; margin-left: 20px; margin-right: 100px;" >{{item.name}}</div>
                         <div class="text-center pull-right" style="margin-right: 20px; margin-top: -10px; margin-bottom: -15px;">
                             <a href="{{ item.url }}"  style="display: block;" {% if item.file %} data-toggle="tooltip" title="{{ item.file }}" {% endif %} target="_blank">
                             <button class="fab text-center" style="background-color: #E91E63;">
-                            <i class="mdi mdi-download" aria-hidden="true"></i>
+                            <i class="mdi mdi-share" aria-hidden="true"></i>
                             </button>
                             </a>
                             {% if item.size %} 
