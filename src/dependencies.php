@@ -32,8 +32,7 @@ $generic_pages = [
 	'home', 
 	'team', 
 	'members', 
-	'robocon', 
-	'downloads',
+	'robocon',
 	'robonics'
 ];
 
@@ -59,6 +58,11 @@ $container[App\ContributionsPage::class] = function($c) {
 $container[App\ProjectsPage::class] = function($c) {
     return new App\ProjectsPage($c->get('renderer'), $c->get('logger'));
 };
+
+$container[App\DownloadsPage::class] = function($c) {
+    return new App\DownloadsPage($c->get('renderer'), $c->get('logger'));
+};
+
 
 $container[App\NamePage::class] = function ($c) {
     return new App\NamePage($c->get('renderer'), $c->get('logger'));

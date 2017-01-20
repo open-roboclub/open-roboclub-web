@@ -1,4 +1,3 @@
-
 <nav class="navbar navbar-default navbar-fixed-top" style="margin-bottom: 60px;">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -12,15 +11,15 @@
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav">
-                {% for item in navigation %}
-                    {% if route == item %}
-                        <li class="active"><a href="./{{ item }}">{{ item|title }} <span class="sr-only">(current)</span></a></li>
-                    {% elseif route == '' and item == 'home' %}
-                        <li class="active"><a href="./">{{ item|title }} <span class="sr-only">(current)</span></a></li>
-                    {% else %}
-                        <li><a href="./{{ item }}">{{ item|title }}</a></li>
-                    {% endif %}
-                {% endfor %}
+{%- for item in navigation -%}
+            {% if route == item %}
+                <li class="active"><a href="./{{ item }}">{{ item|title }} <span class="sr-only">(current)</span></a></li>
+            {% elseif route == '' and item == 'home' %}
+                <li class="active"><a href="./">{{ item|title }} <span class="sr-only">(current)</span></a></li>
+            {% else %}
+                <li><a href="./{{ item }}">{{ item|title }}</a></li>
+            {% endif %}
+{%- endfor -%}
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="./developers">Developers</a></li>
