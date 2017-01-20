@@ -5,6 +5,7 @@ namespace App\Page;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use App\Utils;
+use App\Repo;
 
 final class DownloadsPage extends GenericPage {
 
@@ -178,7 +179,7 @@ final class DownloadsPage extends GenericPage {
 		$this->setTitle('Downloads');
 		$this->setTemplate('downloads.twig');
 
-		$downloads = $this->getDownloads();
+		$downloads = Repo::getDownloads();
 
 		$this->adjustSize($downloads);
 

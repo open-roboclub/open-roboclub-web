@@ -5,6 +5,7 @@ namespace App\Page;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use App\Utils;
+use App\Repo;
 
 final class AnnouncementsPage extends GenericPage {
 
@@ -39,7 +40,7 @@ final class AnnouncementsPage extends GenericPage {
 		$this->setTitle('Announcements');
 		$this->setTemplate('announcements.twig');
 
-		$news = $this->getNews();
+		$news = Repo::getNews();
 
 		$this->addTwigObject(['news' => $news]);
 		$this->render_page($request, $response);

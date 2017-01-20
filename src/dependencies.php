@@ -24,6 +24,11 @@ $container['logger'] = function ($c) {
     return $logger;
 };
 
+// Setup Cache
+use phpFastCache\CacheManager;
+
+CacheManager::setDefaultConfig($container->get('settings')['cache']);
+
 // -----------------------------------------------------------------------------
 // Action factories
 // -----------------------------------------------------------------------------
@@ -62,7 +67,6 @@ $container[App\Page\ProjectsPage::class] = function($c) {
 $container[App\Page\DownloadsPage::class] = function($c) {
     return new App\Page\DownloadsPage($c->get('renderer'), $c->get('logger'));
 };
-
 
 $container[App\Page\NamePage::class] = function ($c) {
     return new App\Page\NamePage($c->get('renderer'), $c->get('logger'));

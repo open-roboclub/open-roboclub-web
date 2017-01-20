@@ -5,6 +5,7 @@ namespace App\Page;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use App\Utils;
+use App\Repo;
 
 final class ProjectsPage extends GenericPage {
 
@@ -49,7 +50,7 @@ final class ProjectsPage extends GenericPage {
 		$this->setTitle('Projects');
 		$this->setTemplate('projects.twig');
 
-		$projects = $this->getProjects();
+		$projects = Repo::getProjects();
 		krsort($projects);
 
 		$this->addTwigObject(['projects' => $projects]);
