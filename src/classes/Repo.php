@@ -6,10 +6,10 @@ use phpFastCache\CacheManager;
 
 final class Repo {
 
-	public static function purgeCache($keys) {
+	public static function purgeCache($keys=[]) {
 		$cache = CacheManager::getInstance('files');
 
-		if(isset($keys)) {
+		if(!empty($keys)) {
 			$cache->deleteItems($keys);
 			return;
 		}
@@ -21,7 +21,7 @@ final class Repo {
 		$cache = CacheManager::getInstance('files');
 
 		$item = $cache->getItem($key);
-		
+
 		if (is_null($item->get())) {
 			$data = Utils::getJsonArray($url);
 
@@ -66,6 +66,14 @@ final class Repo {
 		}
 
 		return Repo::getCacheItem('projects', 'https://amu-roboclub.firebaseio.com/projects.json?orderBy="ongoing"&equalTo=false');
+	}
+
+	public static function rebuildCache(){
+		Repo::purgeCache();
+		Repo::getDownloads();
+		Repo::getProjects();
+		Repo::getNews();
+		Repo::getContributions();
 	}
 
 };

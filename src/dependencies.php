@@ -68,6 +68,10 @@ $container[App\Page\DownloadsPage::class] = function($c) {
     return new App\Page\DownloadsPage($c->get('renderer'), $c->get('logger'));
 };
 
+$container[App\CacheControl::class] = function ($c) {
+    return new App\CacheControl();
+};
+
 $container[App\Page\NamePage::class] = function ($c) {
     return new App\Page\NamePage($c->get('renderer'), $c->get('logger'));
 };
