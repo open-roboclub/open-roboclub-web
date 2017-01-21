@@ -6,15 +6,31 @@ use phpFastCache\CacheManager;
 
 final class Repo {
 
+	public static function purgeCache($keys) {
+		$cache = CacheManager::getInstance('files');
+
+		if(isset($keys)) {
+			$cache->deleteItems($keys);
+			return;
+		}
+
+		$cache->clear();
+	}
+
 	private static function getCacheItem($key, $url) {
 		$cache = CacheManager::getInstance('files');
 
 		$item = $cache->getItem($key);
+		
 		if (is_null($item->get())) {
-			$item->set(Utils::getJsonArray($url));
-			$cache->save($item);
+			$data = Utils::getJsonArray($url);
 
-			return $item->get();
+			if (!empty($data)) {
+				$item->set($data);
+				$cache->save($item);
+			} else {
+				return $data;
+			}
 		}
 
 		return $item->get();
