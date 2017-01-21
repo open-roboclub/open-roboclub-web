@@ -5,29 +5,31 @@ namespace App;
 use phpFastCache\CacheManager;
 
 final class Repo {
+	private static $cache;
+
+	public function setCache($cache) {
+		Repo::$cache = $cache;
+	}
 
 	public static function purgeCache($keys=[]) {
-		$cache = CacheManager::getInstance('files');
 
 		if(!empty($keys)) {
-			$cache->deleteItems($keys);
+			Repo::$cache->deleteItems($keys);
 			return;
 		}
 
-		$cache->clear();
+		Repo::$cache->clear();
 	}
 
 	private static function getCacheItem($key, $url) {
-		$cache = CacheManager::getInstance('files');
-
-		$item = $cache->getItem($key);
+		$item = Repo::$cache->getItem($key);
 
 		if (is_null($item->get())) {
 			$data = Utils::getJsonArray($url);
 
 			if (!empty($data)) {
 				$item->set($data);
-				$cache->save($item);
+				Repo::$cache->save($item);
 			} else {
 				return $data;
 			}
@@ -68,12 +70,33 @@ final class Repo {
 		return Repo::getCacheItem('projects', 'https://amu-roboclub.firebaseio.com/projects.json?orderBy="ongoing"&equalTo=false');
 	}
 
-	public static function rebuildCache(){
+	public static function rebuildCache($key=''){
 		Repo::purgeCache();
-		Repo::getDownloads();
-		Repo::getProjects();
-		Repo::getNews();
-		Repo::getContributions();
+		if(!isset($key) || empty($key)) {
+			Repo::getDownloads();
+			Repo::getProjects();
+			Repo::getNews();
+			Repo::getContributions();
+
+			return TRUE;
+		}
+
+		switch ($key) {
+			case 'downloads':
+				Repo::getDownloads();
+				return TRUE;
+			case 'news':
+				Repo::getDownloads();
+				return TRUE;
+			case 'projects':
+				Repo::getDownloads();
+				return TRUE;
+			case 'contribution':
+				Repo::getContributions();
+				return TRUE;
+			default:
+				return FALSE;
+		}
 	}
 
 };

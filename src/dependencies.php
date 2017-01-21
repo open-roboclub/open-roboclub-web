@@ -26,8 +26,11 @@ $container['logger'] = function ($c) {
 
 // Setup Cache
 use phpFastCache\CacheManager;
+use App\Repo;
 
 CacheManager::setDefaultConfig($container->get('settings')['cache']);
+Repo::setCache(CacheManager::getInstance('files')); // !!! Extremely Important !!!
+// TODO : Change Repo to Singleton to avoid above line
 
 // -----------------------------------------------------------------------------
 // Action factories

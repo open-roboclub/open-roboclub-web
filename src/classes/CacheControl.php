@@ -20,8 +20,12 @@ final class CacheControl {
 				$response->write('Cache Purged!');
 				break;
 			case 'rebuild':
-				Repo::rebuildCache();
-				$response->write('Cache Rebuilt!');
+				$rebuilt = @Repo::rebuildCache($args['parameter']);
+
+				if($rebuilt)
+					$response->write('Cache Rebuilt!');
+				else
+					$response->write('Wrong key!');
 				break;
 			case 'delete':
 				if(!isset($args['parameter'])) {
