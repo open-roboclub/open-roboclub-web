@@ -11,12 +11,10 @@ class GenericPage extends BasePage {
 	private $navigation = [
 		'home', 
 		'team', 
-		'members', 
 		'projects', 
 		'robocon', 
 		'downloads',
 		'announcements',
-		'robonics',
 		'contributions'
 	];
 

@@ -38,9 +38,7 @@ Repo::setCache(CacheManager::getInstance('files')); // !!! Extremely Important !
 
 $generic_pages = [
 	'home', 
-	'members', 
-	'robocon',
-	'robonics'
+	'robocon'
 ];
 
 foreach ($generic_pages as $page) {
