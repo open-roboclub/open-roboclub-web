@@ -70,6 +70,14 @@ final class Repo {
 		return Repo::getCacheItem('projects', 'https://amu-roboclub.firebaseio.com/projects.json?orderBy="ongoing"&equalTo=false');
 	}
 
+	public static function getTeam($debug = FALSE) {
+		if ($debug) {
+			return Mock::getTeam();
+		}
+
+		return Repo::getCacheItem('team', 'https://amu-roboclub.firebaseio.com/team/16.json');
+	}
+
 	public static function rebuildCache($key=''){
 		Repo::purgeCache();
 		if(!isset($key) || empty($key)) {
@@ -77,6 +85,7 @@ final class Repo {
 			Repo::getProjects();
 			Repo::getNews();
 			Repo::getContributions();
+			Repo::getTeam();
 
 			return TRUE;
 		}
@@ -93,6 +102,9 @@ final class Repo {
 				return TRUE;
 			case 'contribution':
 				Repo::getContributions();
+				return TRUE;
+			case 'team':
+				Repo::getTeam();
 				return TRUE;
 			default:
 				return FALSE;

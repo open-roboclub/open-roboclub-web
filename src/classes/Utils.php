@@ -15,7 +15,7 @@ final class Utils {
 	    curl_setopt($curlSession, CURLOPT_BINARYTRANSFER, true);
 	    curl_setopt($curlSession, CURLOPT_RETURNTRANSFER, true);
 
-	    $jsonData = json_decode(curl_exec($curlSession));
+	    $jsonData = json_decode(curl_exec($curlSession), TRUE);
 	    curl_close($curlSession);
 
 		return (array) $jsonData;

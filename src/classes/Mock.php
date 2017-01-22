@@ -4,6 +4,69 @@ namespace App;
 
 final class Mock {
 
+	public static function getTeam() {
+		return (array) json_decode('[{
+			  "avatar" : "/DrAbidAliKhan.bmp",
+			  "name" : "Dr. Abid Ali Khan",
+			  "position" : "Faculty Adviser",
+			  "thumbnail" : "https://res.cloudinary.com/amuroboclub/image/upload/old/team/DrAbidAliKhan.bmp"
+			}, {
+			  "avatar" : "/DrAnwarSadat.bmp",
+			  "links" : {
+			    "email" : "anwart7039@gmail.com"
+			  },
+			  "name" : "Dr. Anwar Sadat",
+			  "position" : "Faculty Adviser",
+			  "thumbnail" : "https://res.cloudinary.com/amuroboclub/image/upload/old/team/DrAnwarSadat.bmp"
+			}, {
+			  "avatar" : "/NishantPratapSingh.jpg",
+			  "id" : "NishantPratapSingh",
+			  "links" : {
+			    "email" : "npsaligarh@gmail.com",
+			    "facebook" : "httpss://facebook.com/NPSIN",
+			    "mobile" : "+91-9412272766"
+			  },
+			  "name" : "Nishant Pratap Singh",
+			  "position" : "Coordinator",
+			  "profile" : "https://amuroboclub.in/profile.php?id=NishantPratapSingh",
+			  "thumbnail" : "https://res.cloudinary.com/amuroboclub/image/upload/old/members/thumbs/NishantPratapSingh.jpg"
+			}, {
+			  "avatar" : "/AmarUpadhyay.jpg",
+			  "id" : "AmarUpadhyay",
+			  "links" : {
+			    "email" : "chat2amar@yahoo.in",
+			    "facebook" : "httpss://www.facebook.com/amarupadhyay.happy",
+			    "g-plus" : "httpss://plus.google.com/u/0/107125332291865356506/posts",
+			    "linkedin" : "httpss://www.linkedin.com/profile/view?id=380171064",
+			    "mobile" : "+91-9045414527"
+			  },
+			  "name" : "Amar Upadhyay",
+			  "position" : "Coordinator",
+			  "profile" : "https://amuroboclub.in/profile.php?id=AmarUpadhyay",
+			  "thumbnail" : "https://res.cloudinary.com/amuroboclub/image/upload/old/members/thumbs/AmarUpadhyay.jpg"
+			}, {
+			  "avatar" : "/MohdTalha.jpg",
+			  "id" : "MohdTalha",
+			  "links" : {
+			    "email" : "mohdtalha13@gmail.com",
+			    "facebook" : "httpss://www.facebook.com/talha.mohd.5",
+			    "linkedin" : "httpss://www.linkedin.com/profile/view?id=403978334",
+			    "mobile" : "+91-7417108769"
+			  },
+			  "name" : "Mohd Talha",
+			  "position" : "Coordinator",
+			  "profile" : "https://amuroboclub.in/profile.php?id=MohdTalha",
+			  "thumbnail" : "https://res.cloudinary.com/amuroboclub/image/upload/old/members/thumbs/MohdTalha.jpg"
+			}, {
+			  "avatar" : "/AbdulHudaif.jpg",
+			  "id" : "AbdulHudaif",
+			  "name" : "Abdul Hudaif",
+			  "position" : "Joint Coordinator",
+			  "profile" : "https://amuroboclub.in/profile.php?id=AbdulHudaif",
+			  "thumbnail" : "https://res.cloudinary.com/amuroboclub/image/upload/old/members/thumbs/AbdulHudaif.jpg"
+			}]');
+	}
+
 	public static function getNews() {
 		return [
 				[
