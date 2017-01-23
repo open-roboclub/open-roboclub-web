@@ -36,19 +36,6 @@ Repo::setCache(CacheManager::getInstance('files')); // !!! Extremely Important !
 // Action factories
 // -----------------------------------------------------------------------------
 
-$generic_pages = [];
-
-foreach ($generic_pages as $page) {
-	$container[$page] = function ($c) use($page, $generic_pages) {
-		
-    	$object =  new App\Page\GenericPage($c->get('renderer'), $c->get('logger'));
-    	$object->setTitle($page);
-    	$object->setTemplate($page . '.twig');
-
-    	return $object;
-	};
-}
-
 $container[App\Page\AnnouncementsPage::class] = function($c) {
     return new App\Page\AnnouncementsPage($c->get('renderer'), $c->get('logger'));
 };
