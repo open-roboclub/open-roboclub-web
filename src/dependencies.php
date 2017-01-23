@@ -64,6 +64,10 @@ $container[App\Page\RoboconPage::class] = function($c) {
     return new App\Page\RoboconPage($c->get('renderer'), $c->get('logger'));
 };
 
+$container[App\Page\DevelopersPage::class] = function($c) {
+    return new App\Page\DevelopersPage($c->get('renderer'), $c->get('logger'));
+};
+
 $container[App\CacheControl::class] = function ($c) {
     return new App\CacheControl();
 };

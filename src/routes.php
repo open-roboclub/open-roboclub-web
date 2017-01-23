@@ -11,6 +11,7 @@ $app->get('/downloads', App\Page\DownloadsPage::class);
 $app->get('/team', App\Page\TeamPage::class);
 $app->get('/[home]', App\Page\HomePage::class);
 $app->get('/robocon', App\Page\RoboconPage::class);
+$app->get('/developers', App\Page\DevelopersPage::class);
 
 // Cache Control
 

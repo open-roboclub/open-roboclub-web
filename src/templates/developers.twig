@@ -1,0 +1,53 @@
+{% extends "components/base.twig" %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <div class="panel panel-default text-center" style="background-color: #3F51B5;">
+                    <div class="panel-body">
+                        <h5 class="panel-text">Developers</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="panel panel-default text-center">
+                <div class="panel-body">
+                    <img class="img-circle" style="width: 150px; height: 150px;" src="https://res.cloudinary.com/amuroboclub/image/upload/old/members/thumbs/AreebJamal.jpg"></img>
+                    <h5>Areeb Jamal</h5>
+                </div>
+                <div class="panel-footer">
+                    <a href="https://fb.me/iamareebjamal" style="text-decoration: none;" target="_blank">
+                        <button class="fab text-center" data-toggle="tooltip" title="Facebook" style="background-color: #3F51B5;">
+                        <i class="mdi mdi-facebook" aria-hidden="true"></i>
+                        </button>
+                    </a>
+                    <a href="https://github.com/iamareebjamal" style="text-decoration: none;" target="_blank">
+                        <button class="fab text-center" data-toggle="tooltip" title="Github" style="background-color: #424242;">
+                        <i class="mdi mdi-github-circle" aria-hidden="true"></i>
+                        </button>
+                    </a>
+                    <a href="https://plus.google.com/+areebjamaliam" style="text-decoration: none;" target="_blank">
+                        <button class="fab text-center" data-toggle="tooltip" title="Google Plus" style="background-color: #f44336;">
+                        <i class="mdi mdi-google-plus" aria-hidden="true"></i>
+                        </button>
+                    </a>
+                </div>
+            </div>
+
+            <h3 class="text-muted text-center">More coming soon...</h3>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+    $(window).ready(function() {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
+{% endblock %}
