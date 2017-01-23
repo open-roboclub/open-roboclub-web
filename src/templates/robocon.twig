@@ -42,25 +42,26 @@
             </div>
             <div class="panel panel-default">
                 <div class="panel-body">
-                    {% for item in downloads.items %}
-                        <div class="row vertical-align">
-                            <div class="col-xs-10">
-                                <h6>{{ item.name }}</h6>
-                            </div>
-                            <div class="col-xs-3 text-center">
-                                <a href="{{ item.url }}" style="display: block;" {% if item.file %} data-toggle="tooltip" title="{{ item.file }}" {% endif %} target="_blank">
+                {% for item in downloads.items %}
+
+                    <div class="row vertical-align">
+                        <div class="col-xs-10">
+                            <h6>{{ item.name }}</h6>
+                        </div>
+                        <div class="col-xs-3 text-center">
+                            <a href="{{ item.url }}" style="display: block;" {% if item.file %} data-toggle="tooltip" title="{{ item.file }}" {% endif %} target="_blank">
                                 <button class="fab text-center" style="background-color: #E91E63;">
                                 <i class="mdi mdi-share" aria-hidden="true"></i>
                                 </button>
                             </a>
-                            {% if item.size %}
+                            {%- if item.size -%}
                                 <div>{{item.size}}</div>
-                            {% else %}
+                            {%- else -%}
                                 <div>---</div>
-                            {% endif %}
+                            {%- endif -%}
                         </div>
                     </div>
-                    <hr style="margin-top: 2px; margin-bottom: 5px;">
+                <hr style="margin-top: 2px; margin-bottom: 5px;">
                 {% endfor %}
             </div>
         </div>
@@ -69,8 +70,8 @@
 {% endblock %}
 {% block scripts %}
 <script type="text/javascript">
-$(window).ready(function() {
-$('[data-toggle="tooltip"]').tooltip();
+    $(window).ready(function() {
+    $('[data-toggle="tooltip"]').tooltip();
 });
 </script>
 {% endblock %}
