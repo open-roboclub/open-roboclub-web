@@ -36,6 +36,11 @@ Repo::setCache(CacheManager::getInstance('files')); // !!! Extremely Important !
 // Action factories
 // -----------------------------------------------------------------------------
 
+
+$container[App\Page\HomePage::class] = function($c) {
+    return new App\Page\HomePage($c->get('renderer'), $c->get('logger'));
+};
+
 $container[App\Page\AnnouncementsPage::class] = function($c) {
     return new App\Page\AnnouncementsPage($c->get('renderer'), $c->get('logger'));
 };
@@ -54,10 +59,6 @@ $container[App\Page\DownloadsPage::class] = function($c) {
 
 $container[App\Page\TeamPage::class] = function($c) {
     return new App\Page\TeamPage($c->get('renderer'), $c->get('logger'));
-};
-
-$container[App\Page\HomePage::class] = function($c) {
-    return new App\Page\HomePage($c->get('renderer'), $c->get('logger'));
 };
 
 $container[App\Page\RoboconPage::class] = function($c) {
