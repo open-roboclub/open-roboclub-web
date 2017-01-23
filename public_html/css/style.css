@@ -113,3 +113,8 @@ body {
 .padding-10 {
 	padding: 10px;
 }
+
+.vertical-align {
+    display: flex;
+    align-items: center;
+}

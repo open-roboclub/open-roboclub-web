@@ -36,9 +36,7 @@ Repo::setCache(CacheManager::getInstance('files')); // !!! Extremely Important !
 // Action factories
 // -----------------------------------------------------------------------------
 
-$generic_pages = [
-	'robocon'
-];
+$generic_pages = [];
 
 foreach ($generic_pages as $page) {
 	$container[$page] = function ($c) use($page, $generic_pages) {
@@ -73,6 +71,10 @@ $container[App\Page\TeamPage::class] = function($c) {
 
 $container[App\Page\HomePage::class] = function($c) {
     return new App\Page\HomePage($c->get('renderer'), $c->get('logger'));
+};
+
+$container[App\Page\RoboconPage::class] = function($c) {
+    return new App\Page\RoboconPage($c->get('renderer'), $c->get('logger'));
 };
 
 $container[App\CacheControl::class] = function ($c) {

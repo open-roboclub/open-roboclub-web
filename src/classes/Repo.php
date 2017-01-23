@@ -78,6 +78,11 @@ final class Repo {
 		return Repo::getCacheItem('team', 'https://amu-roboclub.firebaseio.com/team/16.json');
 	}
 
+	// No mock data for simplicity. TODO : Implement Mock data
+	public static function getRoboconData() {
+		return Repo::getCacheItem('robocon', 'https://amu-roboclub.firebaseio.com/robocon/17.json');
+	}
+
 	public static function rebuildCache($key=''){
 		Repo::purgeCache();
 		if(!isset($key) || empty($key)) {
@@ -86,6 +91,7 @@ final class Repo {
 			Repo::getNews();
 			Repo::getContributions();
 			Repo::getTeam();
+			Repo::getRoboconData();
 
 			return TRUE;
 		}
@@ -105,6 +111,9 @@ final class Repo {
 				return TRUE;
 			case 'team':
 				Repo::getTeam();
+				return TRUE;
+			case 'robocon':
+				Repo::getRoboconData();
 				return TRUE;
 			default:
 				return FALSE;
