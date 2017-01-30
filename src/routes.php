@@ -13,6 +13,8 @@ $app->get('/team', App\Page\TeamPage::class);
 $app->get('/robocon', App\Page\RoboconPage::class);
 $app->get('/developers', App\Page\DevelopersPage::class);
 
+$app->get('/signin', App\Page\SigninPage::class);
+
 // Cache Control
 
 $app->get('/cache[/{option}[/{parameter}]]', App\CacheControl::class);
