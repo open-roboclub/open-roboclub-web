@@ -1,0 +1,107 @@
+{% extends "components/base.twig" %}
+{% block content %}
+<div class="container">
+    {% if not project %}
+    <div class="text-center" style="background-color: #ef9a9a; padding: 50px; border-radius: 10px;">
+        <h3>No project with this ID </h3>
+        <i class="mdi mdi-robot mdi-48px" style="color: #555555;" aria-hidden="true"></i>
+    </div>
+    {% else %}
+    {% if project.youtube or project.docs or project.images %}
+        {% set start = 8 %}
+        {% set end = 4 %}
+    {% else %}
+        {% set start = 12 %}
+        {% set end = 0 %}
+    {% endif %}
+
+    <div class="col-md-{{ start }}">
+        <div class="panel panel-default">
+            <div class="panel-body text-center">
+                <h3>{{ project.name }}</h3>
+                <img src="{{project.image}}" style="height: 200px; margin-bottom: 10px;"></img>
+                <h5>Team : {{ project.team }}</h5>
+                
+                <p class="lead" style="padding: 30px">{{ project.description }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-{{ end }}">
+        {% if project.youtube %}
+
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h5 class="panel-text text-center">Youtube Video</h5>
+            </div>
+            <div class="panel-body text-center">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" frameborder="0" allowfullscreen
+                        src="https://www.youtube.com/embed/{{ project.youtube }}?rel=0&showinfo=0&theme=light">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% if project.thumbs %}
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h5 class="panel-text text-center">Images</h5>
+            </div>
+            <div class="panel-body text-center">
+                <div>
+                {% for key, image in project.thumbs %}
+
+                    <a href="#" data-toggle="modal" data-target="#{{ key }}" style="text-decoration: none; color: currentColor;">
+                        <img src="{{ image }}" style="padding: 1px;"></img>
+                    </a>
+
+                    <!-- Modal -->
+                    <div id="{{ key }}" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <div class="modal-body">
+                                    <img src="{{ project.images[key] }}" class="img-responsive" style="padding: 1px;"></img>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if project.docs %}
+
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h5 class="panel-text text-center">Documents</h5>
+            </div>
+            <div class="panel-body">
+                <ul>
+                {% for doc in project.docs %}
+
+                    <li style="font-size: 15px;">
+                        <a href="{{ doc.url }}">{{doc.name}}</a>
+                    </li>
+                {% endfor %}
+
+                </ul>
+            </div>
+        </div>
+        {% endif %}
+
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}

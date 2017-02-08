@@ -12,11 +12,11 @@
     
     <meta name="apple-mobile-web-app-status-bar-style" content="#00BCD4">
     <link rel="shortcut icon" href="https://res.cloudinary.com/amuroboclub/image/upload/old/icon.png" />
-    <title>Roboclub - {{ title|title }}</title>
+    <title>{{ title|title }} - Roboclub</title>
 
     <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.7/paper/bootstrap.min.css" rel="stylesheet" />
     <link href="//cdn.materialdesignicons.com/1.7.22/css/materialdesignicons.min.css" rel="stylesheet" />
-    <link href="./css/style.css" rel="stylesheet" />
+    <link href="{{ base_url() }}/css/style.css" rel="stylesheet" />
 
     {% block styles %}
     {% endblock %}

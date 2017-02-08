@@ -60,6 +60,11 @@ $container[App\Page\ProjectsPage::class] = function($c) {
     return new App\Page\ProjectsPage($c->get('renderer'), $c->get('logger'));
 };
 
+$container[App\Page\ProjectPage::class] = function($c) {
+    return new App\Page\ProjectPage($c->get('renderer'), $c->get('logger'));
+};
+
+
 $container[App\Page\DownloadsPage::class] = function($c) {
     return new App\Page\DownloadsPage($c->get('renderer'), $c->get('logger'));
 };

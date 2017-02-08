@@ -36,9 +36,8 @@
     <div class="row" id="projects">
     {% for project in projects %}
 
-    {% set id = project.name|lower|replace({' ': ""})[:15] %}
     <div class="col-lg-3 col-md-4 col-sm-6">
-        <a href="#" data-toggle="modal" data-target="#{{ id }}" style="text-decoration: none; color: currentColor;">
+        <a href="#" data-toggle="modal" data-target="#{{ project.id }}" style="text-decoration: none; color: currentColor;">
             <div class="panel panel-default" id="panel-shadow">
                 <div class="panel-body text-center" style="font-size: 16px;">
                     <div class="container-fluid">
@@ -50,7 +49,7 @@
         </a>
     </div>
     <!-- Modal -->
-    <div id="{{ id }}" class="modal fade" role="dialog">
+    <div id="{{ project.id }}" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -59,7 +58,13 @@
                 </div>
                 <div class="modal-body">
                     {{ utils.image(project.image) }}
+                    <h5>Team : {{ project.team }}</h5>
                     <p class="lead">{{ project.description }}</p>
+                    <div class="row text-center">
+                    <a href="{{ path_for('projects', { 'id': project.id }) }}" class="text-center">
+                        <button type="button" class="btn btn-primary">Show Details</button>
+                    </a>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
