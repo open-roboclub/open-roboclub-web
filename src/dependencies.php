@@ -40,6 +40,10 @@ $container[App\Page\SigninPage::class] = function($c) {
     return new App\Page\SigninPage($c->get('renderer'), $c->get('logger'));
 };
 
+$container[App\Page\AdminPage::class] = function($c) {
+    return new App\Page\AdminPage($c->get('renderer'), $c->get('logger'));
+};
+
 $container[App\Page\HomePage::class] = function($c) {
     return new App\Page\HomePage($c->get('renderer'), $c->get('logger'));
 };
