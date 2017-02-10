@@ -26,7 +26,8 @@
             var photoURL = user.photoURL;
             var uid = user.uid;
             var providerData = user.providerData;
-            document.getElementById('account-details').textContent = displayName;
+            var account_details = document.getElementById('account-details');
+            account_details.textContent = displayName;
             document.getElementById('sign-in-status').textContent = 'Signed in';
             document.getElementById('sign-in').textContent = 'Sign out';
             document.getElementById('sign-in').onclick = function() {
@@ -36,6 +37,12 @@
                 alert(error);
               });
             };
+
+            firebase.auth().currentUser.getToken(/* forceRefresh */ true).then(function(idToken) {
+			  account_details.textContent = account_details.textContent + '\n\nJWT : ' + idToken;
+			}).catch(function(error) {
+			  // Handle error
+			});
           } else {
             // User is signed out.
             document.getElementById('sign-in-status').textContent = 'Signed out';

@@ -45,7 +45,8 @@ class GenericPage extends BasePage {
 		$this->addTwigObject([
     		'title' => $this->title,
     		'navigation' => $this->navigation,
-    		'route' => $path
+    		'route' => $path,
+    		'base_url' => $uri->getBasePath()
     	]);
     	return $this->renderer->render($response, $this->template, $this->twig_object);
 	}
