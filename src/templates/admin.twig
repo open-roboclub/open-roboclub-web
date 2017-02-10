@@ -1,71 +1,56 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Sample FirebaseUI App</title>
-    <script src="https://www.gstatic.com/firebasejs/3.6.7/firebase.js"></script>
-    <script>
-      // Initialize Firebase
-      var config = {
-        apiKey: "AIzaSyB375ZkbrouviVJ1YG7_3n8K3jAhIXlsOU",
-        authDomain: "amu-roboclub.firebaseapp.com",
-        databaseURL: "https://amu-roboclub.firebaseio.com",
-        storageBucket: "amu-roboclub.appspot.com",
-        messagingSenderId: "911524271284"
-      };
-      firebase.initializeApp(config);
-    </script>
-    <script type="text/javascript">
-      initApp = function() {
-        firebase.auth().onAuthStateChanged(function(user) {
-          if (user) {
-            // User is signed in.
-            var displayName = user.displayName;
-            var email = user.email;
-            var emailVerified = user.emailVerified;
-            var photoURL = user.photoURL;
-            var uid = user.uid;
-            var providerData = user.providerData;
-            var account_details = document.getElementById('account-details');
-            account_details.textContent = displayName;
-            document.getElementById('sign-in-status').textContent = 'Signed in';
-            document.getElementById('sign-in').textContent = 'Sign out';
-            document.getElementById('sign-in').onclick = function() {
-              firebase.auth().signOut().then(function() {
-                console.log('Logged Out!');
-              }, function(error) {
-                alert(error);
-              });
-            };
+{% extends "components/base.twig" %}
 
-            firebase.auth().currentUser.getToken(/* forceRefresh */ true).then(function(idToken) {
-			  account_details.textContent = account_details.textContent + '\n\nJWT : ' + idToken;
-			}).catch(function(error) {
-			  // Handle error
-			});
-          } else {
-            // User is signed out.
-            document.getElementById('sign-in-status').textContent = 'Signed out';
-            document.getElementById('sign-in').textContent = 'Sign in';
-            document.getElementById('account-details').textContent = 'null';
-            document.getElementById('sign-in').onclick = function() {
-              location.href = './signin';
-            };
-          }
-        }, function(error) {
-          console.log(error);
-        });
-      };
+{% block styles %}
+<script src="https://www.gstatic.com/firebasejs/3.6.7/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.6.7/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.6.7/firebase-database.js"></script>
+<script src="{{ base_url }}/scripts/admin.js"></script>
+{% endblock %}
 
-      window.addEventListener('load', function() {
-        initApp()
-      });
-    </script>
-  </head>
-  <body>
-    <h1>Welcome to My Awesome App</h1>
-    <div id="sign-in-status"></div>
-    <button id="sign-in"></button>
-    <div id="account-details"></div>
-  </body>
-</html>
+{% block content %}
+<div class="container" style="padding: 10px;">
+  <div class="panel panel-default">
+    <div class="panel panel-body">
+      <div class="row" style="padding: 10px;">
+        <div class="col-sm-10">
+          <h3 id="welcome" style="margin-top: -2px;">Welcome to Admin Panel</h3>
+        </div>
+        <div class="col-sm-2">
+          <button class="btn btn-primary" id="sign-in">Sign In</button>
+        </div>
+      </div>
+      
+      <div id="profile-info" style="display: none;">
+        <div class="text-center">
+          <img id="avatar" class="img-thumbnail" src="" style="height: 200px;" /><br>
+          <button class="btn btn-info" id="change-profile" style="margin: 10px;">Change Profile</button>
+        </div>
+        
+        <form class="form-horizontal"  id="profile-form" style="margin: 10px; display: none;">
+          <fieldset>
+            <legend>Profile Settings</legend>
+            <div class="form-group">
+              <label for="inputName" class="col-lg-2 control-label">Name</label>
+              <div class="col-lg-10">
+                <input type="text" class="form-control" id="inputName" placeholder="Name" >
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="select" class="col-lg-2 control-label">Profile Picture</label>
+              <div class="col-lg-10">
+                <select class="form-control" id="select">
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-lg-10 col-lg-offset-2">
+                <button type="submit" id="save" class="btn btn-primary">Save</button>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
