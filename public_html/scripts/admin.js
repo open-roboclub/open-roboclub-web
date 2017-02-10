@@ -63,7 +63,11 @@ function loadProfileSettings(username, currentPhoto, userProvider) {
   });
 
   photoSelect.onchange = function() {
-    avatar.src = this.value;
+    if(this.value != 'null') {
+      avatar.src = this.value;
+    } else {
+      avatar.src = 'https://res.cloudinary.com/amuroboclub/image/upload/person.svg';
+    }
   }
 
   name.value = username;
@@ -96,7 +100,10 @@ function initApp() {
 
       savetoDatabase(userData);
 
-      avatar.src = userData.photoURL;
+      if (user.photoURL != null && user.photoURL != 'null') {
+        avatar.src = userData.photoURL;
+      }
+      
       welcome.textContent = 'Welcome, ' + userData.name;
       signinButton.textContent = 'Sign out';
       signinButton.onclick = function() {
