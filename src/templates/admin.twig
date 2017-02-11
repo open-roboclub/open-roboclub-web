@@ -17,23 +17,20 @@
           <button class="btn btn-primary" id="sign-in">Sign In</button>
         </div>
       </div>
-      <div id="progress-bar" class="progress progress-striped active">
-        <div class="progress-bar" style="width: 100%"></div>
-      </div>
     </div>
 
-    <div id="profile-info" style="display: none;">
+    <div id="account-detail" style="display: none;">
 
       <div class="col-md-3">
         <div class="list-group">
-          <a href="#" id="tab-profile" class="list-group-item active">Profile</a>
-          <a href="#" id="tab-notification" class="list-group-item">Notification</a>
+          <a href="#profile" id="tab-profile" class="list-group-item">Profile</a>
+          <a href="#notification" id="tab-notification" class="list-group-item">Notification</a>
         </div>
       </div>
 
       <div class="col-md-9">
 
-        <div class="panel panel-default">
+        <div id="profile" class="panel panel-default">
           <div class="panel panel-body">
             <form class="form-horizontal"  id="profile-form" style="margin: 10px;">
               <fieldset>
@@ -57,6 +54,39 @@
                 <div class="form-group">
                   <div class="col-lg-10 col-lg-offset-2">
                     <button type="submit" id="save" class="btn btn-primary">Save</button>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+
+        <div id="notification" class="panel panel-default">
+          <div class="panel panel-body">
+          <form class="form-horizontal"  id="notification-form" style="margin: 10px;">
+              <fieldset>
+                <legend>Send Notifications</legend>
+                <div class="form-group">
+                  <label for="title" class="col-lg-2 control-label">Title</label>
+                  <div class="col-lg-10">
+                    <input type="text" class="form-control" id="title" placeholder="Notification Title" >
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="message" class="col-lg-2 control-label">Message</label>
+                  <div class="col-lg-10">
+                    <textarea class="form-control" rows="1" name="message" id="message" placeholder="Notification Message"></textarea>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="link" class="col-lg-2 control-label">Link</label>
+                  <div class="col-lg-10">
+                    <input type="text" class="form-control" id="link" placeholder="Link URL (Optional)" >
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-lg-10 col-lg-offset-2">
+                    <button type="submit" class="btn btn-primary">Send</button>
                   </div>
                 </div>
               </fieldset>

@@ -56,7 +56,7 @@ function progress(show) {
 
 function changeProfilePic(url) {
   progress(true);
-  if(url == null) {
+  if(url == null || url == 'null' || url == '') {
     avatar.src = 'https://res.cloudinary.com/amuroboclub/image/upload/person.svg';
   } else {
     avatar.src = url;
@@ -97,19 +97,66 @@ function loadProfileSettings(username, currentPhoto, userProvider) {
   };
 }
 
+function sendNotification(title, message, link) {
+  if(title == null || message == null) {
+    alert("Can't send empty message");
+    return;
+  } else if(title.length < 5 || message.length < 5) {
+    alert("Title or Message is too small");
+    return;
+  }
+
+  const date = new Date();
+
+  var newsObject = {
+    notice : message,
+    date : date.toDateString()
+  };
+
+  console.log(link);
+  if(link != null && link.length > 5)
+    newsObject.link = link;
+
+  progress(true);
+  firebase.database().ref('news/').push(newsObject)
+    .then(function() {
+      progress(false);
+      alert('News posted successfully');
+    })
+    .catch(function(error) {
+      progress(false);
+      alert('An error occurred! \n' + error + '\n You do not have permission to send notiifcatons');
+    });
+
+}
+
+function initializeNotificationPanel() {
+  const title = document.getElementById('title');
+  const message = document.getElementById('message');
+  const link = document.getElementById('link');
+
+  document.getElementById('notification-form').onsubmit = function() {
+    sendNotification(title.value, message.value, link.value);
+    return false;
+  };
+}
+
 function populateOptions(user) {
   loadProfileSettings(user.displayName, user.photoURL, user.providerData);
-  $('#tab-notification').click(function() {
+  initializeNotificationPanel();
+  /*$('#tab-notification').click(function() {
     alert("Ability for notifications coming soon!");
-  });
+  });*/
 }
 
 
 function initApp() {
   const signinButton = document.getElementById('sign-in');
   const welcome = document.getElementById('welcome');
-  const profile_info = document.getElementById('profile-info');
+  const profile_info = document.getElementById('account-detail');
 
+  progress(true);
+  
   firebase.auth().onAuthStateChanged(function(user) {
     progress(false);
 
