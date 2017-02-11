@@ -99,6 +99,9 @@ function loadProfileSettings(username, currentPhoto, userProvider) {
 
 function populateOptions(user) {
   loadProfileSettings(user.displayName, user.photoURL, user.providerData);
+  $('#tab-notification').click(function() {
+    alert("Ability for notifications coming soon!");
+  });
 }
 
 
