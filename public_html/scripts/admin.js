@@ -134,5 +134,6 @@ function initApp() {
 };
 
 window.addEventListener('load', function() {
+  console.log(firebase.database.ServerValue.TIMESTAMP);
   initApp()
 });
