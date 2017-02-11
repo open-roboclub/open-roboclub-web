@@ -35,18 +35,41 @@ function updateProfile(username, photo) {
     return;
   }
 
+  progress(true);
   currentUser.updateProfile({
     displayName: username,
     photoURL: photo
   }).then(function() {
+    progress(false);
     alert('Settings Saved!');
     location = location;
   }, function(error) {
+    progress(false);
     alert(error);
   });
 }
 
+function progress(show) {
+  const progressBar = document.getElementById('progress-bar');
+  toggleVisibility(show, progressBar);
+}
+
+function changeProfilePic(url) {
+  progress(true);
+  if(url == null) {
+    avatar.src = 'https://res.cloudinary.com/amuroboclub/image/upload/person.svg';
+  } else {
+    avatar.src = url;
+  }
+}
+
 function loadProfileSettings(username, currentPhoto, userProvider) {
+  changeProfilePic(currentPhoto);
+
+  $(avatar).load(function() {
+    progress(false);
+  });
+
   const name = document.getElementById('inputName');
   const photoSelect = document.getElementById('select');
 
@@ -63,11 +86,7 @@ function loadProfileSettings(username, currentPhoto, userProvider) {
   });
 
   photoSelect.onchange = function() {
-    if(this.value != 'null') {
-      avatar.src = this.value;
-    } else {
-      avatar.src = 'https://res.cloudinary.com/amuroboclub/image/upload/person.svg';
-    }
+    changeProfilePic(this.value);
   }
 
   name.value = username;
@@ -78,12 +97,18 @@ function loadProfileSettings(username, currentPhoto, userProvider) {
   };
 }
 
+function populateOptions(user) {
+  loadProfileSettings(user.displayName, user.photoURL, user.providerData);
+}
+
+
 function initApp() {
   const signinButton = document.getElementById('sign-in');
   const welcome = document.getElementById('welcome');
   const profile_info = document.getElementById('profile-info');
 
   firebase.auth().onAuthStateChanged(function(user) {
+    progress(false);
 
     if (user) {
       // User is signed in.
@@ -99,25 +124,15 @@ function initApp() {
       };
 
       savetoDatabase(userData);
-
-      if (user.photoURL != null && user.photoURL != 'null') {
-        avatar.src = userData.photoURL;
-      }
       
-      welcome.textContent = 'Welcome, ' + userData.name;
+      welcome.innerHTML = 'Welcome, <strong>' + userData.name + '</strong>';
       signinButton.textContent = 'Sign out';
       signinButton.onclick = function() {
         firebase.auth().signOut();
       };
 
-      var show = true;
-      document.getElementById('change-profile').onclick = function() {
-        toggleVisibility(show, document.getElementById('profile-form'));
-        show = !show;
-      };
-
       toggleVisibility(true, profile_info);
-      loadProfileSettings(user.displayName, user.photoURL, user.providerData);
+      populateOptions(user);
     } else {
       // User is signed out.
       signinButton.textContent = 'Sign in';
@@ -134,6 +149,5 @@ function initApp() {
 };
 
 window.addEventListener('load', function() {
-  console.log(firebase.database.ServerValue.TIMESTAMP);
   initApp()
 });

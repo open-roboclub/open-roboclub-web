@@ -1,56 +1,72 @@
 {% extends "components/base.twig" %}
-
 {% block styles %}
-<script src="https://www.gstatic.com/firebasejs/3.6.7/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/3.6.7/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/3.6.7/firebase-database.js"></script>
-<script src="{{ base_url }}/scripts/admin.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.6.7/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.6.7/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.6.7/firebase-database.js"></script>
+  <script src="{{ base_url }}/scripts/admin.js"></script>
 {% endblock %}
-
 {% block content %}
-<div class="container" style="padding: 10px;">
-  <div class="panel panel-default">
+  <div class="container" style="padding: 10px;">
+
     <div class="panel panel-body">
       <div class="row" style="padding: 10px;">
-        <div class="col-sm-10">
-          <h3 id="welcome" style="margin-top: -2px;">Welcome to Admin Panel</h3>
+        <div class="col-xs-9 col-sm-10">
+          <h4 id="welcome" style="margin-top: 7px;">Welcome to Admin Panel</h4>
         </div>
-        <div class="col-sm-2">
+        <div class="col-xs-3 col-sm-2">
           <button class="btn btn-primary" id="sign-in">Sign In</button>
         </div>
       </div>
-      
-      <div id="profile-info" style="display: none;">
-        <div class="text-center">
-          <img id="avatar" class="img-thumbnail" src="https://res.cloudinary.com/amuroboclub/image/upload/person.svg" style="height: 200px;" /><br>
-          <button class="btn btn-info" id="change-profile" style="margin: 10px;">Change Profile</button>
-        </div>
-        
-        <form class="form-horizontal"  id="profile-form" style="margin: 10px; display: none;">
-          <fieldset>
-            <legend>Profile Settings</legend>
-            <div class="form-group">
-              <label for="inputName" class="col-lg-2 control-label">Name</label>
-              <div class="col-lg-10">
-                <input type="text" class="form-control" id="inputName" placeholder="Name" >
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="select" class="col-lg-2 control-label">Profile Picture</label>
-              <div class="col-lg-10">
-                <select class="form-control" id="select">
-                </select>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="col-lg-10 col-lg-offset-2">
-                <button type="submit" id="save" class="btn btn-primary">Save</button>
-              </div>
-            </div>
-          </fieldset>
-        </form>
+      <div id="progress-bar" class="progress progress-striped active">
+        <div class="progress-bar" style="width: 100%"></div>
       </div>
     </div>
+
+    <div id="profile-info" style="display: none;">
+
+      <div class="col-md-3">
+        <div class="list-group">
+          <a href="#" class="list-group-item active">Profile</a>
+          <a href="#" class="list-group-item">Notification</a>
+        </div>
+      </div>
+
+      <div class="col-md-9">
+
+        <div class="panel panel-default">
+          <div class="panel panel-body">
+            <form class="form-horizontal"  id="profile-form" style="margin: 10px;">
+              <fieldset>
+                <legend>Profile Settings</legend>
+                <div class="text-center">
+                  <img id="avatar" class="img-thumbnail" src="https://res.cloudinary.com/amuroboclub/image/upload/person.svg" style="height: 200px;" /><br>
+                </div>
+                <div class="form-group">
+                  <label for="inputName" class="col-lg-2 control-label">Name</label>
+                  <div class="col-lg-10">
+                    <input type="text" class="form-control" id="inputName" placeholder="Name" >
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="select" class="col-lg-2 control-label">Profile Picture</label>
+                  <div class="col-lg-10">
+                    <select class="form-control" id="select">
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-lg-10 col-lg-offset-2">
+                    <button type="submit" id="save" class="btn btn-primary">Save</button>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
-</div>
 {% endblock %}
