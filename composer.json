@@ -10,6 +10,7 @@
         "monolog/monolog": "^1.22",
         "slim/twig-view": "^2.1",
 		"phpFastCache/phpFastCache": "^5.0",
-		"firebase/php-jwt": "^4.0"
+		"firebase/php-jwt": "^4.0",
+		"paragraph1/php-fcm": "^0.7.0"
     }
 }

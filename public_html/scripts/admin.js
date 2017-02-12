@@ -97,15 +97,17 @@ function loadProfileSettings(username, currentPhoto, userProvider) {
   };
 }
 
+completed = false;
+
 function pushNewsToDatabase(newsObject) {
   progress(true);
   firebase.database().ref('news/').push(newsObject)
     .then(function() {
-      progress(false);
+      if(completed) progress(false);
       alert('News posted successfully');
     })
     .catch(function(error) {
-      progress(false);
+      if(completed) progress(false);
       alert('An error occurred! \n' + error + '\n You do not have permission to send notiifcatons');
     });
 }
@@ -114,15 +116,12 @@ function requestFCM(message_title, message_body) {
   const requestObject = {
     title : message_title,
     message : message_body
-  };
+  }
 
   progress(true);
 
-  handleResponse = function(responseData) {
-    console.log(responseData);
-  };
-
   firebase.auth().currentUser.getToken().then(function(idToken) {
+
     $.ajax(
       {
         type: "POST",
@@ -134,16 +133,26 @@ function requestFCM(message_title, message_body) {
         data: requestObject,
         dataType: 'json',
         success: function(responseData, status, xhr) {
+          completed = true;
           progress(false);
-          handleResponse(responseData);
+
+          if (responseData.error) {
+            alert(responseData.message);
+          } else {
+            alert(responseData.message + '\nMessage ID : ' + responseData.message_id);
+          }
         },
         error: function(request, status, error) {
+          completed = true;
           progress(false);
-          alert(error);
+          alert('Error '+error);
         }
       }
     );
+
   }).catch(function(error) {
+    completed = true;
+    progress(false);
     alert(error);
   });
 
@@ -153,7 +162,7 @@ function sendNotification(title, message, link) {
   if(title == null || message == null) {
     alert("Can't send empty message");
     return;
-  } else if(title.length < 5 || message.length < 5) {
+  } else if(title.length < 4 || message.length < 5) {
     alert("Title or Message is too small");
     return;
   }
@@ -165,10 +174,10 @@ function sendNotification(title, message, link) {
     date : date.toDateString()
   };
 
-  console.log(link);
   if(link != null && link.length > 5)
     newsObject.link = link;
 
+  completed = false;
   pushNewsToDatabase(newsObject);
   requestFCM(title, message);
 
@@ -180,8 +189,7 @@ function initializeNotificationPanel() {
   const link = document.getElementById('link');
 
   document.getElementById('notification-form').onsubmit = function() {
-    //sendNotification(title.value, message.value, link.value);
-    requestFCM('Test', 'New Message');
+    sendNotification(title.value, message.value, link.value);
 
     return false;
   };
@@ -190,9 +198,6 @@ function initializeNotificationPanel() {
 function populateOptions(user) {
   loadProfileSettings(user.displayName, user.photoURL, user.providerData);
   initializeNotificationPanel();
-  /*$('#tab-notification').click(function() {
-    alert("Ability for notifications coming soon!");
-  });*/
 }
 
 

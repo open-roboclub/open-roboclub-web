@@ -54,7 +54,7 @@ final class Utils {
             return $admins['error'];
         }
 
-        return $admins[0];
+        return @$admins[0];
     }
 
     public static function getUserFromToken($token) {

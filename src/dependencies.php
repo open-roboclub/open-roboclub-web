@@ -81,8 +81,8 @@ $container[App\Page\DevelopersPage::class] = function($c) {
     return new App\Page\DevelopersPage($c->get('renderer'), $c->get('logger'));
 };
 
-$container[App\Notification::class] = function($c) {
-    return new App\Notification();
+$container[App\NotificationSender::class] = function($c) {
+    return new App\NotificationSender();
 };
 
 $container[App\CacheControl::class] = function ($c) {
