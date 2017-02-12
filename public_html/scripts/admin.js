@@ -9,7 +9,7 @@ var config = {
 
 firebase.initializeApp(config);
 
-function savetoDatabase(user) {
+function saveUsertoDatabase(user) {
   firebase.database().ref('users/' + user.uid).set(user)
     .then(function() {
       console.log('Synchronization succeeded');
@@ -97,6 +97,58 @@ function loadProfileSettings(username, currentPhoto, userProvider) {
   };
 }
 
+function pushNewsToDatabase(newsObject) {
+  progress(true);
+  firebase.database().ref('news/').push(newsObject)
+    .then(function() {
+      progress(false);
+      alert('News posted successfully');
+    })
+    .catch(function(error) {
+      progress(false);
+      alert('An error occurred! \n' + error + '\n You do not have permission to send notiifcatons');
+    });
+}
+
+function requestFCM(message_title, message_body) {
+  const requestObject = {
+    title : message_title,
+    message : message_body
+  };
+
+  progress(true);
+
+  handleResponse = function(responseData) {
+    console.log(responseData);
+  };
+
+  firebase.auth().currentUser.getToken().then(function(idToken) {
+    $.ajax(
+      {
+        type: "POST",
+        url: "./send_notification",
+        headers: {
+            'Authorization': "Bearer " + idToken
+        },
+        crossDomain: false,
+        data: requestObject,
+        dataType: 'json',
+        success: function(responseData, status, xhr) {
+          progress(false);
+          handleResponse(responseData);
+        },
+        error: function(request, status, error) {
+          progress(false);
+          alert(error);
+        }
+      }
+    );
+  }).catch(function(error) {
+    alert(error);
+  });
+
+}
+
 function sendNotification(title, message, link) {
   if(title == null || message == null) {
     alert("Can't send empty message");
@@ -117,16 +169,8 @@ function sendNotification(title, message, link) {
   if(link != null && link.length > 5)
     newsObject.link = link;
 
-  progress(true);
-  firebase.database().ref('news/').push(newsObject)
-    .then(function() {
-      progress(false);
-      alert('News posted successfully');
-    })
-    .catch(function(error) {
-      progress(false);
-      alert('An error occurred! \n' + error + '\n You do not have permission to send notiifcatons');
-    });
+  pushNewsToDatabase(newsObject);
+  requestFCM(title, message);
 
 }
 
@@ -136,7 +180,9 @@ function initializeNotificationPanel() {
   const link = document.getElementById('link');
 
   document.getElementById('notification-form').onsubmit = function() {
-    sendNotification(title.value, message.value, link.value);
+    //sendNotification(title.value, message.value, link.value);
+    requestFCM('Test', 'New Message');
+
     return false;
   };
 }
@@ -156,7 +202,7 @@ function initApp() {
   const profile_info = document.getElementById('account-detail');
 
   progress(true);
-  
+
   firebase.auth().onAuthStateChanged(function(user) {
     progress(false);
 
@@ -173,7 +219,7 @@ function initApp() {
         'providerData': user.providerData
       };
 
-      savetoDatabase(userData);
+      saveUsertoDatabase(userData);
       
       welcome.innerHTML = 'Welcome, <strong>' + userData.name + '</strong>';
       signinButton.textContent = 'Sign out';

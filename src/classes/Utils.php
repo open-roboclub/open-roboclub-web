@@ -2,6 +2,8 @@
 
 namespace App;
 
+use \Firebase\JWT\JWT;
+
 final class Utils {
 	
 	public static function getReverseJsonArray($url) {
@@ -44,4 +46,60 @@ final class Utils {
 
 		return $bytes;
 	}
+
+	public static function isUserAdmin($uid, $token) {
+        $admins = Utils::getJsonArray("https://amu-roboclub.firebaseio.com/admins/$uid.json?auth=$token");
+
+        if(isset($admins['error'])) {
+            return $admins['error'];
+        }
+
+        return $admins[0];
+    }
+
+    public static function getUserFromToken($token) {
+        // TODO: Cache response and add appropriate cache expire time
+        $key = Utils::getJsonArray('https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system.gserviceaccount.com');
+
+        JWT::$leeway = 60;
+        return @JWT::decode($token, $key, ['RS256']);
+    }
+
+    public static function verifyKey($key, &$data) {
+        if(!isset($key) || $key == '') {
+            $data['message'] = 'No authorization header provided';
+            return FALSE;
+        }
+
+        $matches = array();
+        preg_match('/Bearer\s(\S+)/', $key, $matches);
+
+        if(!isset($matches[1])){
+            $data['message'] = 'No bearer in Authorization Header';
+            return FALSE;
+        }
+
+        $token = $matches[1];
+
+        try {
+            $user = Utils::getUserFromToken($token, $data);
+            $data['uid'] = $user->user_id;
+
+            $isAdmin = $this->isUserAdmin($user->user_id, $token);
+
+            if($isAdmin != 'true') {
+                $data['message'] = 'You do not have admin privileges!';
+                return FALSE;
+            }
+
+        } catch (Exception $e) {
+            $data['message'] = $e->getMessage();
+            return FALSE;
+        } catch (\UnexpectedValueException $unv) {
+            $data['message'] = $unv->getMessage();
+            return FALSE;
+        }
+
+        return TRUE;
+    }
 }
