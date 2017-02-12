@@ -83,9 +83,8 @@ final class Utils {
 
         try {
             $user = Utils::getUserFromToken($token, $data);
-            $data['uid'] = $user->user_id;
 
-            $isAdmin = $this->isUserAdmin($user->user_id, $token);
+            $isAdmin = Utils::isUserAdmin($user->user_id, $token);
 
             if($isAdmin != 'true') {
                 $data['message'] = 'You do not have admin privileges!';
