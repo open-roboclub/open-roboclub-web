@@ -1,13 +1,3 @@
-// Initialize Firebase
-var config = {
-  apiKey: "AIzaSyB375ZkbrouviVJ1YG7_3n8K3jAhIXlsOU",
-  authDomain: "amu-roboclub.firebaseapp.com",
-  databaseURL: "https://amu-roboclub.firebaseio.com",
-  storageBucket: "amu-roboclub.appspot.com",
-  messagingSenderId: "911524271284"
-};
-
-firebase.initializeApp(config);
 
 function saveUsertoDatabase(user) {
   firebase.database().ref('users/' + user.uid).set(user)
@@ -17,14 +7,6 @@ function saveUsertoDatabase(user) {
     .catch(function(error) {
       console.log('Synchronization failed');
     });
-}
-
-function toggleVisibility(show, view) {
-  if (show) {
-    view.style.display = 'block';
-  } else {
-    view.style.display = 'none';
-  }
 }
 
 function updateProfile(username, photo) {
@@ -47,11 +29,6 @@ function updateProfile(username, photo) {
     progress(false);
     alert(error);
   });
-}
-
-function progress(show) {
-  const progressBar = document.getElementById('progress-bar');
-  toggleVisibility(show, progressBar);
 }
 
 function changeProfilePic(url) {
@@ -250,5 +227,5 @@ function initApp() {
 };
 
 window.addEventListener('load', function() {
-  initApp()
+  initApp();
 });
