@@ -12,6 +12,12 @@ var config = {
 
 firebase.initializeApp(config);
 
+toastr.options = {
+    "closeButton": true,
+    "progressBar": true,
+    "timeOut": "2000"
+}
+
 function toggleVisibility(show, view) {
   if (show) {
     view.style.display = 'block';
@@ -23,6 +29,10 @@ function toggleVisibility(show, view) {
 function progress(show) {
   const progressBar = document.getElementById('progress-bar');
   toggleVisibility(show, progressBar);
+}
+
+function show(notification) {
+  notification.css("top", 70);
 }
 
 window.addEventListener('load', function() {

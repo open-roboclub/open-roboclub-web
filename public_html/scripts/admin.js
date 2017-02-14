@@ -13,7 +13,7 @@ function updateProfile(username, photo) {
   const currentUser = firebase.auth().currentUser;
 
   if (!currentUser) {
-    alert("You're logged out!");
+    show(toastr.error("You're logged out!"));
     return;
   }
 
@@ -23,11 +23,10 @@ function updateProfile(username, photo) {
     photoURL: photo
   }).then(function() {
     progress(false);
-    alert('Settings Saved!');
-    location = location;
+    show(toastr.success('Profile updated successfully!'));
   }, function(error) {
     progress(false);
-    alert(error);
+    show(toastr.error(error));
   });
 }
 
@@ -81,11 +80,11 @@ function pushNewsToDatabase(newsObject) {
   firebase.database().ref('news/').push(newsObject)
     .then(function() {
       if(completed) progress(false);
-      alert('News posted successfully');
+      show(toastr.success('News posted successfully'));
     })
     .catch(function(error) {
       if(completed) progress(false);
-      alert('An error occurred! \n' + error + '\n You do not have permission to send notiifcatons');
+      show(toastr.error('An error occurred! \n' + error + '\n You do not have permission to send notiifcatons'));
     });
 }
 
@@ -114,15 +113,15 @@ function requestFCM(message_title, message_body) {
           progress(false);
 
           if (responseData.error) {
-            alert(responseData.message);
+            show(toastr.error(responseData.message));
           } else {
-            alert(responseData.message + '\nMessage ID : ' + responseData.message_id);
+            show(toastr.success(responseData.message + '\nMessage ID : ' + responseData.message_id));
           }
         },
         error: function(request, status, error) {
           completed = true;
           progress(false);
-          alert('Error '+error);
+          show(toastr.error('Error ' + error));
         }
       }
     );
@@ -130,17 +129,17 @@ function requestFCM(message_title, message_body) {
   }).catch(function(error) {
     completed = true;
     progress(false);
-    alert(error);
+    show(toastr.error(error));
   });
 
 }
 
 function sendNotification(title, message, link) {
   if(title == null || message == null) {
-    alert("Can't send empty message");
+    show(toastr.error("Can't send empty message"));
     return;
   } else if(title.length < 4 || message.length < 5) {
-    alert("Title or Message is too small");
+    show(toastr.error("Title or Message is too small"));
     return;
   }
 
@@ -222,7 +221,7 @@ function initApp() {
       toggleVisibility(false, profile_info);
     }
   }, function(error) {
-    console.log(error);
+    show(toastr.error(error));
   });
 };
 
