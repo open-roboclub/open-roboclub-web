@@ -26,6 +26,12 @@ function toggleVisibility(show, view) {
   }
 }
 
+function toggleVisibilities(show, views) {
+  for(var i = 0; i < views.length; i++) {
+    toggleVisibility(show, views[i]);
+  }
+}
+
 function progress(show) {
   const progressBar = document.getElementById('progress-bar');
   toggleVisibility(show, progressBar);
@@ -33,6 +39,14 @@ function progress(show) {
 
 function show(notification) {
   notification.css("top", 70);
+}
+
+function showError(error) {
+  show(toastr.error(error));
+}
+
+function signOut() {
+  firebase.auth().signOut();
 }
 
 window.addEventListener('load', function() {

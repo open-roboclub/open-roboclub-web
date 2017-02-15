@@ -13,7 +13,7 @@ function updateProfile(username, photo) {
   const currentUser = firebase.auth().currentUser;
 
   if (!currentUser) {
-    show(toastr.error("You're logged out!"));
+    showError("You're logged out!");
     return;
   }
 
@@ -26,7 +26,7 @@ function updateProfile(username, photo) {
     show(toastr.success('Profile updated successfully!'));
   }, function(error) {
     progress(false);
-    show(toastr.error(error));
+    showError(error);
   });
 }
 
@@ -38,6 +38,8 @@ function changeProfilePic(url) {
     avatar.src = url;
   }
 }
+
+completed = false;
 
 function loadProfileSettings(username, currentPhoto, userProvider) {
   changeProfilePic(currentPhoto);
@@ -73,8 +75,6 @@ function loadProfileSettings(username, currentPhoto, userProvider) {
   };
 }
 
-completed = false;
-
 function pushNewsToDatabase(newsObject) {
   progress(true);
   firebase.database().ref('news/').push(newsObject)
@@ -84,7 +84,7 @@ function pushNewsToDatabase(newsObject) {
     })
     .catch(function(error) {
       if(completed) progress(false);
-      show(toastr.error('An error occurred! \n' + error + '\n You do not have permission to send notiifcatons'));
+      showError('An error occurred! \n' + error + '\n You do not have permission to send notiifcatons');
     });
 }
 
@@ -113,7 +113,7 @@ function requestFCM(message_title, message_body) {
           progress(false);
 
           if (responseData.error) {
-            show(toastr.error(responseData.message));
+            showError(responseData.message);
           } else {
             show(toastr.success(responseData.message + '\nMessage ID : ' + responseData.message_id));
           }
@@ -121,7 +121,7 @@ function requestFCM(message_title, message_body) {
         error: function(request, status, error) {
           completed = true;
           progress(false);
-          show(toastr.error('Error ' + error));
+          showError('Error ' + error);
         }
       }
     );
@@ -129,17 +129,17 @@ function requestFCM(message_title, message_body) {
   }).catch(function(error) {
     completed = true;
     progress(false);
-    show(toastr.error(error));
+    showError(error);
   });
 
 }
 
 function sendNotification(title, message, link) {
   if(title == null || message == null) {
-    show(toastr.error("Can't send empty message"));
+    showError("Can't send empty message");
     return;
   } else if(title.length < 4 || message.length < 5) {
-    show(toastr.error("Title or Message is too small"));
+    showError("Title or Message is too small");
     return;
   }
 
@@ -159,7 +159,22 @@ function sendNotification(title, message, link) {
 
 }
 
-function initializeNotificationPanel() {
+function initializeNotificationPanel(uid) {
+  const notificationPanel = document.getElementById('notification');
+  const notificationTab = document.getElementById('tab-notification');
+
+  toggleVisibilities(false, [notificationPanel, notificationTab]);
+
+  progress(true);
+  const key = '/admins/'+uid;
+  firebase.database().ref(key).once('value').then(function(snapshot) {
+    if(snapshot.val()) {
+      toggleVisibilities(true, [notificationPanel, notificationTab]);
+    }
+    progress(false);
+  });
+
+
   const title = document.getElementById('title');
   const message = document.getElementById('message');
   const link = document.getElementById('link');
@@ -173,9 +188,8 @@ function initializeNotificationPanel() {
 
 function populateOptions(user) {
   loadProfileSettings(user.displayName, user.photoURL, user.providerData);
-  initializeNotificationPanel();
+  initializeNotificationPanel(user.uid);
 }
-
 
 function initApp() {
   const signinButton = document.getElementById('sign-in');
@@ -204,9 +218,7 @@ function initApp() {
       
       welcome.innerHTML = 'Welcome, <strong>' + userData.name + '</strong>';
       signinButton.textContent = 'Sign out';
-      signinButton.onclick = function() {
-        firebase.auth().signOut();
-      };
+      signinButton.onclick = signOut;
 
       toggleVisibility(true, profile_info);
       populateOptions(user);
@@ -220,9 +232,7 @@ function initApp() {
 
       toggleVisibility(false, profile_info);
     }
-  }, function(error) {
-    show(toastr.error(error));
-  });
+  }, showError);
 };
 
 window.addEventListener('load', function() {
