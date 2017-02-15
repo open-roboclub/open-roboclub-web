@@ -87,7 +87,7 @@ final class Repo {
 	}
 
 	public static function getAdmins($uid, $token) {
-		return Repo::getCacheItem('admins', "https://amu-roboclub.firebaseio.com/admins/$uid.json?auth=$token");
+		return Repo::getCacheItem("admin_$uid_$token", "https://amu-roboclub.firebaseio.com/admins/$uid.json?auth=$token", 60);
 	}
 
 	public static function rebuildCache($key=''){
