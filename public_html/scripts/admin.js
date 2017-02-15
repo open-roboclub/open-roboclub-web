@@ -98,6 +98,7 @@ function requestFCM(message_title, message_body) {
 
     $.ajax(
       {
+        async: true,
         type: "POST",
         url: "./send_notification",
         headers: {

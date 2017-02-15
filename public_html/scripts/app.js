@@ -32,9 +32,19 @@ function toggleVisibilities(show, views) {
   }
 }
 
+var progressCount = 0;
 function progress(show) {
   const progressBar = document.getElementById('progress-bar');
-  toggleVisibility(show, progressBar);
+
+  if(show) 
+    progressCount++;
+  else
+    progressCount--;
+
+  if(progressCount > 0)
+    toggleVisibility(true, progressBar);
+  else
+    toggleVisibility(false, progressBar);
 }
 
 function show(notification) {
