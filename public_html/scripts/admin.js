@@ -94,33 +94,32 @@ function requestFCM(message_title, message_body) {
 
   progress(true);
 
+  const successFunction = function(responseData, status, xhr) {
+    progress(false);
+
+    if (responseData.error) {
+      showError(responseData.message);
+    } else {
+      show(toastr.success('Notification ' + responseData.message + ' Message ID : ' + responseData.message_id));
+    }
+  };
+
+  const errorFunction = function(request, status, error) {
+    progress(false);
+    showError('Error ' + error);
+  };
+
   firebase.auth().currentUser.getToken().then(function(idToken) {
 
-    $.ajax(
+    request(
+      'POST',
+      './send_notification', 
       {
-        async: true,
-        type: "POST",
-        url: "./send_notification",
-        headers: {
-            'Authorization': "Bearer " + idToken
-        },
-        crossDomain: false,
-        data: requestObject,
-        dataType: 'json',
-        success: function(responseData, status, xhr) {
-          progress(false);
-
-          if (responseData.error) {
-            showError(responseData.message);
-          } else {
-            show(toastr.success(responseData.message + ' Message ID : ' + responseData.message_id));
-          }
-        },
-        error: function(request, status, error) {
-          progress(false);
-          showError('Error ' + error);
-        }
-      }
+        'Authorization': "Bearer " + idToken
+      },
+      requestObject,
+      successFunction,
+      errorFunction
     );
 
   }).catch(function(error) {

@@ -59,6 +59,22 @@ function signOut() {
   firebase.auth().signOut();
 }
 
+function request(request_type, request_url, header, requestObject, successFunction, errorFunction) {
+  $.ajax(
+    {
+      async: true,
+      type: request_type,
+      url: request_url,
+      headers: header,
+      crossDomain: false,
+      data: requestObject,
+      dataType: 'json',
+      success: successFunction,
+      error: errorFunction
+    }
+  );
+}
+
 window.addEventListener('load', function() {
   const signinButton = $('#signin-button');
   const signinLink = $('#signin-link');
