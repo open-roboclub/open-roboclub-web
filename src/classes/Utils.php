@@ -48,7 +48,7 @@ final class Utils {
 	}
 
 	public static function isUserAdmin($uid, $token) {
-        $admins = Utils::getJsonArray("https://amu-roboclub.firebaseio.com/admins/$uid.json?auth=$token");
+        $admins = Repo::getAdmins($uid, $token);
 
         if(isset($admins['error'])) {
             return $admins['error'];
@@ -59,7 +59,7 @@ final class Utils {
 
     public static function getUserFromToken($token) {
         // TODO: Cache response and add appropriate cache expire time
-        $key = Utils::getJsonArray('https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system.gserviceaccount.com');
+        $key = Repo::getRobotsMetaData();
 
         JWT::$leeway = 60;
         return @JWT::decode($token, $key, ['RS256']);
