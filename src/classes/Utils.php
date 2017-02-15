@@ -97,6 +97,9 @@ final class Utils {
         } catch (\UnexpectedValueException $unv) {
             $data['message'] = $unv->getMessage();
             return FALSE;
+        } catch (\DomainException $de) {
+            $data['message'] = $de->getMessage();
+            return FALSE;
         }
 
         return TRUE;
