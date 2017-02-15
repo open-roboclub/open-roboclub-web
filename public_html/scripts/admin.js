@@ -39,8 +39,6 @@ function changeProfilePic(url) {
   }
 }
 
-completed = false;
-
 function loadProfileSettings(username, currentPhoto, userProvider) {
   changeProfilePic(currentPhoto);
 
@@ -79,11 +77,11 @@ function pushNewsToDatabase(newsObject) {
   progress(true);
   firebase.database().ref('news/').push(newsObject)
     .then(function() {
-      if(completed) progress(false);
+      progress(false);
       show(toastr.success('News posted successfully'));
     })
     .catch(function(error) {
-      if(completed) progress(false);
+      progress(false);
       showError('An error occurred! \n' + error + '\n You do not have permission to send notiifcatons');
     });
 }
@@ -109,17 +107,15 @@ function requestFCM(message_title, message_body) {
         data: requestObject,
         dataType: 'json',
         success: function(responseData, status, xhr) {
-          completed = true;
           progress(false);
 
           if (responseData.error) {
             showError(responseData.message);
           } else {
-            show(toastr.success(responseData.message + '\nMessage ID : ' + responseData.message_id));
+            show(toastr.success(responseData.message + ' Message ID : ' + responseData.message_id));
           }
         },
         error: function(request, status, error) {
-          completed = true;
           progress(false);
           showError('Error ' + error);
         }
@@ -127,7 +123,6 @@ function requestFCM(message_title, message_body) {
     );
 
   }).catch(function(error) {
-    completed = true;
     progress(false);
     showError(error);
   });
@@ -154,8 +149,20 @@ function sendNotification(title, message, link) {
     newsObject.link = link;
 
   completed = false;
-  pushNewsToDatabase(newsObject);
-  requestFCM(title, message);
+
+  var option = $("input[name='sendOptions']:checked").val();
+
+  switch(option) {
+    case 'news':
+      pushNewsToDatabase(newsObject);
+      break;
+    case 'notification':
+      requestFCM(title, message);
+      break;
+    default:
+      pushNewsToDatabase(newsObject);
+      requestFCM(title, message);
+  }
 
 }
 

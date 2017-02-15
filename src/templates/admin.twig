@@ -1,7 +1,7 @@
 {% extends "components/base.twig" %}
 
 {% block scripts %}
-<script src="{{ base_url }}/scripts/admin.min.js"></script>
+<script src="{{ base_url }}/scripts/admin.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -81,6 +81,29 @@
                   <label for="link" class="col-lg-2 control-label">Link</label>
                   <div class="col-lg-10">
                     <input type="text" class="form-control" id="link" placeholder="Link URL (Optional)" >
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-lg-2 control-label">Options</label>
+                  <div class="col-lg-10">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="sendOptions" id="both" value="both" checked="">
+                        Send notification and save to Announcements
+                      </label>
+                    </div>
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="sendOptions" id="news" value="news">
+                        Save to Announcements only
+                      </label>
+                    </div>
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="sendOptions" id="notification" value="notification">
+                        Send notification only
+                      </label>
+                    </div>
                   </div>
                 </div>
                 <div class="form-group">
