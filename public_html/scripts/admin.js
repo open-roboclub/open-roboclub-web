@@ -73,7 +73,7 @@ function loadProfileSettings(username, currentPhoto, userProvider) {
   };
 }
 
-const newsRef = 'news-debug/';
+const newsRef = 'news/';
 
 function loadEditNotification(key) {
   const editNotification = document.getElementById('edit-form');
