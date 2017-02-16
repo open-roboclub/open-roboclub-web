@@ -12,9 +12,9 @@ final class AnnouncementsPage extends GenericPage {
 		$this->setTitle('Announcements');
 		$this->setTemplate('announcements.twig');
 
-		$news = Repo::getNews();
+		//$news = Repo::getNews();
 
-		$this->addTwigObject(['news' => $news]);
+		//$this->addTwigObject(['news' => $news]);
 		$this->render_page($request, $response);
 	}
 

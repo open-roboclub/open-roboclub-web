@@ -114,7 +114,23 @@ body {
 	padding: 10px;
 }
 
+.pr-5 {
+	padding-right: 5px;
+}
+
 .vertical-align {
     display: flex;
     align-items: center;
+}
+
+.news-notice {
+	font-size: 18px;
+	display: inline;
+	padding-left: 10px;
+}
+
+.news-date {
+	padding-top: 5px;
+	font-size: 15px;
+	color: #888;
 }

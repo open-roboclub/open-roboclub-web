@@ -191,11 +191,12 @@ function sendNotification(title, message, link) {
     return;
   }
 
-  const date = new Date();
+  const date = $.format.date(new Date().getTime(), 'ddd, D MMMM yyyy');
 
   var newsObject = {
     notice : message,
-    date : date.toDateString()
+    date : date,
+    timestamp : -Math.floor(Date.now() / 1000)
   };
 
   if(link != null && link.length > 5)
