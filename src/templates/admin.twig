@@ -116,7 +116,7 @@
 
             <form class="form-horizontal"  id="edit-form" style="margin: 10px;">
               <fieldset>
-                <legend>Edit Notification</legend>
+                <legend>Edit Announcement</legend>
                 <div class="form-group">
                   <label class="col-lg-2 control-label" for="newsKey">Post Key</label>
                   <div class="col-lg-10">
@@ -126,12 +126,13 @@
                 <div class="form-group">
                   <label for="edit-message" class="col-lg-2 control-label">Message</label>
                   <div class="col-lg-10">
-                    <input type="text" class="form-control" id="edit-message" placeholder="Announcement Message" >
+                    <input type="text" class="form-control" id="edit-message" placeholder="Announcement Message" value="lol">
                   </div>
                 </div>
                 <div class="form-group">
                   <div class="col-lg-10 col-lg-offset-2">
-                    <button type="submit" class="btn btn-info">Update</button>
+                    <button id="update-news" type="button" class="btn btn-info">Update</button>
+                    <button id="delete-news" type="button" class="btn btn-danger">Delete</button>
                   </div>
                 </div>
               </fieldset>

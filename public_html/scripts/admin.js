@@ -75,24 +75,36 @@ function loadProfileSettings(username, currentPhoto, userProvider) {
 
 const newsRef = 'news/';
 
-function loadEditNotification(key) {
-  const editNotification = document.getElementById('edit-form');
+function loadEditNews(key) {
+  const editForm = document.getElementById('edit-form');
+
+  const editNews = document.getElementById('update-news');
+  const deleteNews = document.getElementById('delete-news');
   const newsKey = $("#newsKey");
   const newsMessage = $("#edit-message");
 
   newsKey.val(key);
 
-  const updateNotification = function() {
-    toggleVisibility(true, editNotification);
-    editNotification.onsubmit = function() {
+  editNews.onclick = function() {
       pushNewsToDatabase(newsMessage.val(), key);
-      return false;
-    };
+  };
+
+  deleteNews.onclick = function() {
+    progress(true);
+    firebase.database().ref(newsRef + key).remove().then(function() {
+      progress(false);
+      show(toastr.success('Announcement Deleted'));
+      toggleVisibility(false, editForm);
+    })
+    .catch(function(error) {
+      progress(false);
+      showError(error);
+    });
   };
 
   firebase.database().ref(newsRef + key).once('value').then(function(snapshot) {
     newsMessage.val(snapshot.val().notice);
-    updateNotification();
+    toggleVisibility(true, editForm);
   })
   .catch(function(error) {
     console.log(error);
@@ -119,7 +131,7 @@ function pushNewsToDatabase(newsObject, key) {
       progress(false);
       show(toastr.success('News posted successfully'));
 
-      try { loadEditNotification(snapshot.key); } catch(error) { console.log(error); };
+      try { loadEditNews(snapshot.key); } catch(error) { console.log(error); };
     })
     .catch(function(error) {
       progress(false);
@@ -210,9 +222,9 @@ function sendNotification(title, message, link) {
 function initializeNotificationPanel(uid) {
   const notificationPanel = document.getElementById('notification');
   const notificationTab = document.getElementById('tab-notification');
-  const editNotification = document.getElementById('edit-form');
+  const editNews = document.getElementById('edit-form');
 
-  toggleVisibilities(false, [notificationPanel, notificationTab, editNotification]);
+  toggleVisibilities(false, [notificationPanel, notificationTab, editNews]);
 
   progress(true);
   const key = '/admins/'+uid;
@@ -234,9 +246,8 @@ function initializeNotificationPanel(uid) {
     return false;
   };
 
-  document.getElementById('edit-form').onsubmit = function() {
+  document.getElementById('update-news').onclick = function() {
     showError('No message to edit');
-    return false;
   };
 }
 
