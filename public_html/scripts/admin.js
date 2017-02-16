@@ -73,12 +73,53 @@ function loadProfileSettings(username, currentPhoto, userProvider) {
   };
 }
 
-function pushNewsToDatabase(newsObject) {
+const newsRef = 'news-debug/';
+
+function loadEditNotification(key) {
+  const editNotification = document.getElementById('edit-form');
+  const newsKey = $("#newsKey");
+  const newsMessage = $("#edit-message");
+
+  newsKey.val(key);
+
+  const updateNotification = function() {
+    toggleVisibility(true, editNotification);
+    editNotification.onsubmit = function() {
+      pushNewsToDatabase(newsMessage.val(), key);
+      return false;
+    };
+  };
+
+  firebase.database().ref(newsRef + key).once('value').then(function(snapshot) {
+    newsMessage.val(snapshot.val().notice);
+    updateNotification();
+  })
+  .catch(function(error) {
+    console.log(error);
+  });
+
+}
+
+function pushNewsToDatabase(newsObject, key) {
   progress(true);
-  firebase.database().ref('news/').push(newsObject)
-    .then(function() {
+
+  if(key) {
+    firebase.database().ref(newsRef+key).update({
+      notice : newsObject
+    }).then(function() {
+      progress(false);
+      show(toastr.success('Message successfully updated!'));
+    });
+
+    return;
+  }
+
+  firebase.database().ref(newsRef).push(newsObject)
+    .then(function(snapshot) {
       progress(false);
       show(toastr.success('News posted successfully'));
+
+      try { loadEditNotification(snapshot.key); } catch(error) { console.log(error); };
     })
     .catch(function(error) {
       progress(false);
@@ -169,8 +210,9 @@ function sendNotification(title, message, link) {
 function initializeNotificationPanel(uid) {
   const notificationPanel = document.getElementById('notification');
   const notificationTab = document.getElementById('tab-notification');
+  const editNotification = document.getElementById('edit-form');
 
-  toggleVisibilities(false, [notificationPanel, notificationTab]);
+  toggleVisibilities(false, [notificationPanel, notificationTab, editNotification]);
 
   progress(true);
   const key = '/admins/'+uid;
@@ -189,6 +231,11 @@ function initializeNotificationPanel(uid) {
   document.getElementById('notification-form').onsubmit = function() {
     sendNotification(title.value, message.value, link.value);
 
+    return false;
+  };
+
+  document.getElementById('edit-form').onsubmit = function() {
+    showError('No message to edit');
     return false;
   };
 }

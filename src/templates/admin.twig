@@ -1,7 +1,7 @@
 {% extends "components/base.twig" %}
 
 {% block scripts %}
-<script src="{{ base_url }}/scripts/admin.min.js"></script>
+<script src="{{ base_url }}/scripts/admin.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -113,7 +113,29 @@
                 </div>
               </fieldset>
             </form>
-          </div>
+
+            <form class="form-horizontal"  id="edit-form" style="margin: 10px;">
+              <fieldset>
+                <legend>Edit Notification</legend>
+                <div class="form-group">
+                  <label class="col-lg-2 control-label" for="newsKey">Post Key</label>
+                  <div class="col-lg-10">
+                    <input class="form-control" id="newsKey" type="text" placeholder="Key Value" disabled="">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="edit-message" class="col-lg-2 control-label">Message</label>
+                  <div class="col-lg-10">
+                    <input type="text" class="form-control" id="edit-message" placeholder="Announcement Message" >
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-lg-10 col-lg-offset-2">
+                    <button type="submit" class="btn btn-info">Update</button>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
         </div>
 
       </div>
