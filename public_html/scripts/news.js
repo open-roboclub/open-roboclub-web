@@ -36,7 +36,7 @@ $(function(){
 
     window.addEventListener('load', function() {
 
-        var newsRef = firebase.database().ref('news').orderByChild('timestamp');
+        var newsRef = firebase.database().ref('news');
         newsRef.on('child_added', function(snapshot) {
             addNews(snapshot.val(), snapshot.key);
         });
@@ -50,4 +50,4 @@ $(function(){
         });
 
     });
-}());
+});
