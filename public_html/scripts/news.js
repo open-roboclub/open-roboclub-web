@@ -19,7 +19,7 @@ $(function(){
     var loaded = false;
     function addNews(news, key) {
         if(!loaded) {
-            toggleVisibility(false, document.getElementById('progress-news'));
+            progress(false);
             loaded = true;
         }
 
@@ -35,6 +35,7 @@ $(function(){
     }
 
     window.addEventListener('load', function() {
+        progress(true);
 
         var newsRef = firebase.database().ref('news');
         newsRef.on('child_added', function(snapshot) {
