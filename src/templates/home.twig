@@ -10,11 +10,12 @@
                 <div class="panel-body overflow" id="news-panel" >
                     {% for news in news %}
 
-                    <div class="row padding-10">
+                    <div class="row" style="margin: 10px;">
                         <i class="mdi mdi-newspaper mdi-36px vcenter" aria-hidden="true"></i>
                         <div class="vcenter news-notice" >{{ news.notice }}</div>
                         <div class="news-date"><em> {{ news.date }} </em></div>
                     </div>
+                    <hr>
                     {% endfor %}
                 </div>
                 <a href="./announcements" style="text-decoration: none;">
