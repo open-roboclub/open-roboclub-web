@@ -8,7 +8,7 @@ $app->get('/[home]', App\Page\HomePage::class);
 $app->get('/announcements', App\Page\AnnouncementsPage::class);
 $app->get('/contributions', App\Page\ContributionsPage::class);
 $app->get('/projects', App\Page\ProjectsPage::class);
-$app->get('/projects/{id}', App\Page\ProjectPage::class)->setName('projects');
+$app->any('/projects/{id}', App\Page\ProjectPage::class)->setName('projects');
 $app->get('/downloads', App\Page\DownloadsPage::class);
 $app->get('/team', App\Page\TeamPage::class);
 $app->get('/robocon', App\Page\RoboconPage::class);

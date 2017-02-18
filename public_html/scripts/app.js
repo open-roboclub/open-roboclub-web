@@ -33,8 +33,8 @@ function toggleVisibilities(show, views) {
 }
 
 var progressCount = 0;
+const progressBar = document.getElementById('progress-bar');
 function progress(show) {
-  const progressBar = document.getElementById('progress-bar');
 
   if(show) 
     progressCount++;
@@ -45,6 +45,26 @@ function progress(show) {
     toggleVisibility(true, progressBar);
   else
     toggleVisibility(false, progressBar);
+}
+
+var loadingCount = 0;
+const loadingContainer = document.getElementById('loading-container');
+function loadingAnimation(show) {
+
+  if(show) 
+    loadingCount++;
+  else
+    loadingCount--;
+
+  if(loadingCount > 0)
+    toggleVisibility(true, loadingContainer);
+  else
+    toggleVisibility(false, loadingContainer);
+}
+
+function loaders(show) {
+  loadingAnimation(show);
+  progress(show);
 }
 
 function show(notification) {
