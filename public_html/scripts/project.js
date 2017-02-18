@@ -2,7 +2,6 @@ $(function() {
 
     const received = function(data, status, xhr) {
         loaders(false);
-        console.log('Receive HTML');
         $('#project-container').html(data);
     }
 
@@ -16,8 +15,8 @@ $(function() {
 
         const project_id = window.location.href.split("/").pop();
 
+        var docLoaded = false;
         firebase.database().ref('projects').orderByChild('id').equalTo(project_id).on('value', function(snap) {
-            loaders(false);
 
             var obj = snap.val();
             var arr = null;
@@ -26,8 +25,9 @@ $(function() {
                 arr = Object.keys(obj).map(function (key) { return obj[key]; })[0];
             } catch(error) { }
 
-            loaders(true);
-            console.log('Receive Payload');
+            if(docLoaded) loaders(true);
+
+            docLoaded = true;
 
             $.ajax(
                 {
