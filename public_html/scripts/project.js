@@ -2,6 +2,7 @@ $(function() {
 
     const received = function(data, status, xhr) {
         loaders(false);
+        console.log('Receive HTML');
         $('#project-container').html(data);
     }
 
@@ -26,6 +27,7 @@ $(function() {
             } catch(error) { }
 
             loaders(true);
+            console.log('Receive Payload');
 
             $.ajax(
                 {
