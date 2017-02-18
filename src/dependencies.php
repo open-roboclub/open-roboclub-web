@@ -88,3 +88,7 @@ $container[App\NotificationSender::class] = function($c) {
 $container[App\CacheControl::class] = function ($c) {
     return new App\CacheControl();
 };
+
+$container[App\ImageServer::class] = function($c) {
+    return new App\ImageServer();
+};

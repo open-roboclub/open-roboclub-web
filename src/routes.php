@@ -14,6 +14,8 @@ $app->get('/team', App\Page\TeamPage::class);
 $app->get('/robocon', App\Page\RoboconPage::class);
 $app->get('/developers', App\Page\DevelopersPage::class);
 
+$app->get('/img/{path:.*}', App\ImageServer::class);
+
 $app->get('/signin', App\Page\SigninPage::class);
 
 $app->get('/admin', App\Page\AdminPage::class);
