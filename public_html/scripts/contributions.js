@@ -19,7 +19,7 @@ $(function() {
     var loaded = false;
     function addContribution(contribution, key) {
         if(!loaded) {
-            progress(false);
+            loaders(false);
             loaded = true;
         }
 
@@ -35,7 +35,7 @@ $(function() {
     }
 
     window.addEventListener('load', function () {
-        progress(true);
+        loaders(true);
 
         var newsRef = firebase.database().ref('contribution');
         newsRef.on('child_added', function(snapshot) {

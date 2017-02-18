@@ -263,9 +263,11 @@ function initApp() {
   const profile_info = document.getElementById('account-detail');
 
   progress(true);
+  loadingAnimation(true);
 
   firebase.auth().onAuthStateChanged(function(user) {
     progress(false);
+    loadingAnimation(false);
 
     if (user) {
       // User is signed in.

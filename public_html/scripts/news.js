@@ -17,9 +17,10 @@ $(function(){
     );
 
     var loaded = false;
-    function addNews(news, key) {
+    function addNews(newsContainer, news, key) {
         if(!loaded) {
-            progress(false);
+            loaders(false);
+            toggleVisibility(true, newsContainer);
             loaded = true;
         }
 
@@ -35,11 +36,14 @@ $(function(){
     }
 
     window.addEventListener('load', function() {
-        progress(true);
+        loaders(true);
+
+        const newsContainer = document.getElementById('news-container');
+        toggleVisibility(false, newsContainer);
 
         var newsRef = firebase.database().ref('news');
         newsRef.on('child_added', function(snapshot) {
-            addNews(snapshot.val(), snapshot.key);
+            addNews(newsContainer, snapshot.val(), snapshot.key);
         });
 
         newsRef.on('child_changed', function(snapshot) {
