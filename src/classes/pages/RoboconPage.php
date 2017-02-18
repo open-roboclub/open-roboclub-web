@@ -12,10 +12,14 @@ final class RoboconPage extends GenericPage {
 		$this->setTitle('Robocon');
 		$this->setTemplate('robocon.twig');
 
-		$robocon = Repo::getRoboconData();
-		$downloads = Repo::getDownloads()['robocon'];
+		$robocon = null;
+		if($request->isPost()) {
+			$this->setTemplate('robocon-core.twig');
+			$robocon = $request->getParsedBody();
 
-		$this->addTwigObject(['robocon' => $robocon, 'downloads' => $downloads]);
+			$this->addTwigObject($robocon);
+		}
+
 		$this->render_page($request, $response);
 	}
 

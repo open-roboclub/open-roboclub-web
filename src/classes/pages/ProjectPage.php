@@ -25,11 +25,10 @@ final class ProjectPage extends GenericPage {
 	public function __invoke(Request $request, Response $response, $args) {
 		$this->setTitle('Project');
 		$this->setTemplate('project.twig');
-
-		$project = null;
 		
 		if ($request->isPost()) {
 			$this->setTemplate('project-core.twig');
+			
 			$project = $request->getParsedBody();
 			$this->generateThumbs($project);
 			$this->addTwigObject(['project' => $project]);
