@@ -7,16 +7,16 @@ $(function() {
 
     const error = function(request, status, error) {
         console.log(error);
-        loaders(false);
+        progress(false);
     }
 
     window.addEventListener('load', function() {
-        loaders(true);
+        progress(true);
 
         const project_id = window.location.href.split("/").pop();
 
         firebase.database().ref('projects').orderByChild('id').equalTo(project_id).on('value', function(snap) {
-            loaders(false);
+            progress(false);
 
             var obj = snap.val();
             var arr = null;
