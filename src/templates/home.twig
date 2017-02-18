@@ -2,7 +2,7 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="panel panel-danger">
                 <div class="panel-heading">
                     <h4 class="panel-text">News</h4>
@@ -10,15 +10,11 @@
                 <div class="panel-body overflow" id="news-panel" >
                     {% for news in news %}
 
-                    <div class="row">
-                        <div class="col-xs-2">
-                            <i class="mdi mdi-newspaper mdi-36px" aria-hidden="true"></i>
-                        </div>
-                        <div class="col-xs-10">
-                            {{ news.notice }}
-                        </div>
+                    <div class="row padding-10">
+                        <i class="mdi mdi-newspaper mdi-36px vcenter" aria-hidden="true"></i>
+                        <div class="vcenter news-notice" >{{ news.notice }}</div>
+                        <div class="news-date"><em> {{ news.date }} </em></div>
                     </div>
-                    <hr>
                     {% endfor %}
                 </div>
                 <a href="./announcements" style="text-decoration: none;">
@@ -28,7 +24,7 @@
                 </a>
             </div>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-8">
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h4 class="panel-text">AMU Roboclub</h4>
