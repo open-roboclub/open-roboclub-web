@@ -22,18 +22,8 @@ final class ProjectPage extends GenericPage {
 		return $project;
 	}
 
-	private function findProject(&$array, $id) {
-		foreach ($array as $project) {
-			if ($project['id'] === $id) {
-				return $this->generateThumbs($project);
-			}
-		}
-
-		return NULL;
-	}
-
 	public function __invoke(Request $request, Response $response, $args) {
-		$this->setTitle('Projects');
+		$this->setTitle('Project');
 		$this->setTemplate('project.twig');
 
 		$project = null;
@@ -42,13 +32,9 @@ final class ProjectPage extends GenericPage {
 			$this->setTemplate('project-core.twig');
 			$project = $request->getParsedBody();
 			$this->generateThumbs($project);
-		} else {
-			$projects = Repo::getProjects();
-			$project = $this->findProject($projects, $args['id']);
+			$this->addTwigObject(['project' => $project]);
 		}
 		
-
-		$this->addTwigObject(['project' => $project]);
 		$this->render_page($request, $response);
 	}
 
