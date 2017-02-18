@@ -7,16 +7,16 @@ $(function() {
 
     const error = function(request, status, error) {
         console.log(error);
-        progress(false);
+        loaders(false);
     }
 
     window.addEventListener('load', function() {
-        progress(true);
+        loaders(true);
 
         const project_id = window.location.href.split("/").pop();
 
         firebase.database().ref('projects').orderByChild('id').equalTo(project_id).on('value', function(snap) {
-            progress(false);
+            loaders(false);
 
             var obj = snap.val();
             var arr = null;
@@ -38,6 +38,7 @@ $(function() {
             );
 
         }, function(error) {
+            loaders(false);
             console.log(error);
         });
     });
