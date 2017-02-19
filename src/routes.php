@@ -16,7 +16,8 @@ $app->get('/team', App\Page\TeamPage::class);
 $app->any('/robocon', App\Page\RoboconPage::class);
 $app->get('/developers', App\Page\DevelopersPage::class);
 
-$app->get('/img/{path:.*}', App\ImageServer::class);
+$app->get('/img/{path:.*}', App\ImageServer::class)->setName('old_images');
+$app->get('/image/{path:.*}', App\ImageServer::class)->setName('new_images');
 
 $app->get('/signin', App\Page\SigninPage::class);
 
