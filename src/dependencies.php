@@ -92,3 +92,9 @@ $container[App\CacheControl::class] = function ($c) {
 $container[App\ImageServer::class] = function($c) {
     return new App\ImageServer();
 };
+
+$container['notFoundHandler'] = function ($c) {
+    return function ($request, $response) use ($c) {
+        return $c->renderer->render($response, '404.twig', ['base_url' => $uri = $request->getUri()->getBasePath()]);
+    };
+};
