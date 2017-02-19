@@ -4,7 +4,6 @@ namespace App\Page;
 
 use Slim\Http\Request;
 use Slim\Http\Response;
-use App\Repo;
 
 final class RoboconPage extends GenericPage {
 
