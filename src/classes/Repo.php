@@ -2,12 +2,10 @@
 
 namespace App;
 
-use phpFastCache\CacheManager;
-
 final class Repo {
 	private static $cache;
 
-	public function setCache($cache) {
+	public static function setCache($cache) {
 		Repo::$cache = $cache;
 	}
 
@@ -87,7 +85,7 @@ final class Repo {
 	}
 
 	public static function getAdmins($uid, $token) {
-		return Repo::getCacheItem("admin_$uid_$token", "https://amu-roboclub.firebaseio.com/admins/$uid.json?auth=$token", 60);
+		return Repo::getCacheItem("admin_$uid.$token", "https://amu-roboclub.firebaseio.com/admins/$uid.json?auth=$token", 60);
 	}
 
 	public static function rebuildCache($key=''){

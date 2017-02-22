@@ -2,15 +2,12 @@
 
 namespace App;
 
+use GuzzleHttp\Exception\ClientException;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
-use App\Utils;
-use App\Secrets;
-
 use paragraph1\phpFCM\Client;
 use paragraph1\phpFCM\Message;
-use paragraph1\phpFCM\Recipient\Device;
 use paragraph1\phpFCM\Recipient\Topic;
 use paragraph1\phpFCM\Notification;
 
@@ -21,7 +18,6 @@ final class NotificationSender {
         $client = new Client();
         $client->setApiKey($apiKey);
         $client->injectHttpClient(new \GuzzleHttp\Client());
-
 
         $message = new Message();
         $message->addRecipient(new Topic('news'));
@@ -54,7 +50,7 @@ final class NotificationSender {
 
             if($verified) {
                 try {
-                    $response_data = $this->sendNotification($title, $message, $result);
+                    $response_data = $this->sendNotification($title, $message);
 
                     if(array_key_exists('error', $response_data)) {
                         $result['error'] = TRUE;
@@ -64,7 +60,7 @@ final class NotificationSender {
                         $result['message_id'] = $response_data['message_id'];
                     }
 
-                } catch (\GuzzleHttp\Exception\ClientException $e) {
+                } catch (ClientException $e) {
                     $result['error'] = TRUE;
                     $result['message'] = "Wrong Key or User unauthorized";
                 }

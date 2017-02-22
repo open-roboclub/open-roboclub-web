@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Exception;
 use \Firebase\JWT\JWT;
 
 final class Utils {
@@ -11,7 +12,6 @@ final class Utils {
 	}
 
 	public static function getJsonArray($url) {
-		$curlSession = curl_init();
 		$curlSession = curl_init();
 	    curl_setopt($curlSession, CURLOPT_URL, $url);
 	    curl_setopt($curlSession, CURLOPT_BINARYTRANSFER, true);
@@ -82,7 +82,7 @@ final class Utils {
         $token = $matches[1];
 
         try {
-            $user = Utils::getUserFromToken($token, $data);
+            $user = Utils::getUserFromToken($token);
 
             $isAdmin = Utils::isUserAdmin($user->user_id, $token);
 
@@ -93,12 +93,6 @@ final class Utils {
 
         } catch (Exception $e) {
             $data['message'] = $e->getMessage();
-            return FALSE;
-        } catch (\UnexpectedValueException $unv) {
-            $data['message'] = $unv->getMessage();
-            return FALSE;
-        } catch (\DomainException $de) {
-            $data['message'] = $de->getMessage();
             return FALSE;
         }
 

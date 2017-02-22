@@ -1,7 +1,5 @@
 <?php
 
-use App\Repo;
-
 // Routes
 
 $app->get('/[home]', App\Page\HomePage::class);

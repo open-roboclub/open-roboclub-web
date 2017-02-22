@@ -85,11 +85,11 @@ $container[App\NotificationSender::class] = function($c) {
     return new App\NotificationSender();
 };
 
-$container[App\CacheControl::class] = function ($c) {
+$container[App\CacheControl::class] = function () {
     return new App\CacheControl();
 };
 
-$container[App\ImageServer::class] = function($c) {
+$container[App\ImageServer::class] = function() {
     return new App\ImageServer();
 };
 
