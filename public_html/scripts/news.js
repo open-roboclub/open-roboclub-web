@@ -3,7 +3,7 @@ $(function(){
     '<div class="panel panel-default">\
         <div class="panel-body">\
             <i class="mdi mdi-newspaper mdi-36px vcenter" aria-hidden="true"></i>\
-            <div class="vcenter news-notice" >{{= it.notice }}</div>\
+            <div class="vcenter news-notice white-space-pre" >{{= it.notice }}</div>\
             <div class="news-date"><em> {{= it.date }} </em></div>\
         </div>\
         {{? it.link }}\
@@ -13,8 +13,7 @@ $(function(){
             </div>\
         </a>\
         {{?}}\
-    </div>'
-    );
+    </div>');
 
     var loaded = false;
     function addNews(newsContainer, news, key) {

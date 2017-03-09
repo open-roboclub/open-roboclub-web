@@ -117,7 +117,7 @@ function pushNewsToDatabase(newsObject, key) {
 
   if(key) {
     firebase.database().ref(newsRef+key).update({
-      notice : newsObject
+      notice : newsObject.replace(/\n/g, "\\n")
     }).then(function() {
       progress(false);
       show(toastr.success('Message successfully updated!'));
@@ -125,6 +125,8 @@ function pushNewsToDatabase(newsObject, key) {
 
     return;
   }
+
+  newsObject.notice = newsObject.notice.replace(/\n/g, "\\n");
 
   firebase.database().ref(newsRef).push(newsObject)
     .then(function(snapshot) {
