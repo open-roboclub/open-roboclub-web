@@ -2,135 +2,139 @@
 
 namespace App;
 
+use phpFastCache\Cache\ExtendedCacheItemPoolInterface;
+
 final class Repo {
-	private static $cache;
 
-	public static function setCache($cache) {
-		Repo::$cache = $cache;
-	}
+    /** @var ExtendedCacheItemPoolInterface */
+    private static $cache;
 
-	public static function purgeCache($keys=[]) {
+    public static function setCache($cache) {
+        Repo::$cache = $cache;
+    }
 
-		if(!empty($keys)) {
-			Repo::$cache->deleteItems($keys);
-			return;
-		}
+    public static function purgeCache($keys=[]) {
 
-		Repo::$cache->clear();
-	}
+        if(!empty($keys)) {
+            Repo::$cache->deleteItems($keys);
+            return;
+        }
 
-	private static function getCacheItem($key, $url, $seconds = 600) {
-		$item = Repo::$cache->getItem($key);
+        Repo::$cache->clear();
+    }
 
-		if (is_null($item->get())) {
-			$data = Utils::getJsonArray($url);
+    private static function getCacheItem($key, $url, $seconds = 600) {
+        $item = Repo::$cache->getItem($key);
 
-			if (!empty($data)) {
-				$item->set($data)->expiresAfter($seconds);
-				Repo::$cache->save($item);
-			} else {
-				return $data;
-			}
-		}
+        if (is_null($item->get())) {
+            $data = Utils::getJsonArray($url);
 
-		return $item->get();
-	}
+            if (!empty($data)) {
+                $item->set($data)->expiresAfter($seconds);
+                Repo::$cache->save($item);
+            } else {
+                return $data;
+            }
+        }
 
-	public static function getDownloads($debug = FALSE) {
-		if ($debug) {
-			return Mock::getDownloads();
-		}
+        return $item->get();
+    }
 
-		return Repo::getCacheItem('downloads', 'https://amu-roboclub.firebaseio.com/downloads.json');
-	}
+    public static function getDownloads($debug = FALSE) {
+        if ($debug) {
+            return Mock::getDownloads();
+        }
 
-	public static function getNews($debug = FALSE) {
-		if ($debug) {
-			return Mock::getNews();
-		}
+        return Repo::getCacheItem('downloads', 'https://amu-roboclub.firebaseio.com/downloads.json');
+    }
 
-		return array_reverse(Repo::getCacheItem('news', 'https://amu-roboclub.firebaseio.com/news.json'));
-	}
+    public static function getNews($debug = FALSE) {
+        if ($debug) {
+            return Mock::getNews();
+        }
 
-	public static function getContributions($debug = FALSE) {
-		if ($debug) {
-			return Mock::getContributions();
-		}
+        return array_reverse(Repo::getCacheItem('news', 'https://amu-roboclub.firebaseio.com/news.json'));
+    }
 
-		return array_reverse(Repo::getCacheItem('contributions', 'https://amu-roboclub.firebaseio.com/contribution.json'));
-	}
+    public static function getContributions($debug = FALSE) {
+        if ($debug) {
+            return Mock::getContributions();
+        }
 
-	public static function getProjects($debug = FALSE) {
-		if ($debug) {
-			return Mock::getProjects();
-		}
+        return array_reverse(Repo::getCacheItem('contributions', 'https://amu-roboclub.firebaseio.com/contribution.json'));
+    }
 
-		return Repo::getCacheItem('projects', 'https://amu-roboclub.firebaseio.com/projects.json?orderBy="ongoing"&equalTo=false');
-	}
+    public static function getProjects($debug = FALSE) {
+        if ($debug) {
+            return Mock::getProjects();
+        }
 
-	public static function getTeam($debug = FALSE) {
-		if ($debug) {
-			return Mock::getTeam();
-		}
+        return Repo::getCacheItem('projects', 'https://amu-roboclub.firebaseio.com/projects.json?orderBy="ongoing"&equalTo=false');
+    }
 
-		return Repo::getCacheItem('team', 'https://amu-roboclub.firebaseio.com/team/16.json');
-	}
+    public static function getTeam($debug = FALSE) {
+        if ($debug) {
+            return Mock::getTeam();
+        }
 
-	public static function getRoboconData() {
-		return Repo::getCacheItem('robocon', 'https://amu-roboclub.firebaseio.com/robocon/17.json');
-	}
+        return Repo::getCacheItem('team', 'https://amu-roboclub.firebaseio.com/team/16.json');
+    }
 
-	public static function getRobotsMetaData() {
-		return Repo::getCacheItem('google_robots', 'https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system.gserviceaccount.com');
-	}
+    public static function getRoboconData() {
+        return Repo::getCacheItem('robocon', 'https://amu-roboclub.firebaseio.com/robocon/17.json');
+    }
 
-	public static function getAdmins($uid, $token) {
-		return Repo::getCacheItem("admin_$uid.$token", "https://amu-roboclub.firebaseio.com/admins/$uid.json?auth=$token", 60);
-	}
+    public static function getRobotsMetaData() {
+        return Repo::getCacheItem('google_robots', 'https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system.gserviceaccount.com');
+    }
 
-	public static function rebuildCache($key=''){
-		
-		if(!isset($key) || empty($key)) {
-			Repo::purgeCache();
+    public static function getAdmins($uid, $token) {
+        return Repo::getCacheItem("admin_$uid_$token", "https://amu-roboclub.firebaseio.com/admins/$uid.json?auth=$token", 60);
+    }
 
-			Repo::getDownloads();
-			Repo::getProjects();
-			Repo::getNews();
-			Repo::getContributions();
-			Repo::getTeam();
-			Repo::getRoboconData();
-			Repo::getRobotsMetaData();
+    public static function rebuildCache($key=''){
 
-			return TRUE;
-		}
+        if(!isset($key) || empty($key)) {
+            Repo::purgeCache();
 
-		Repo::purgeCache([$key]);
+            Repo::getDownloads();
+            Repo::getProjects();
+            Repo::getNews();
+            Repo::getContributions();
+            Repo::getTeam();
+            Repo::getRoboconData();
+            Repo::getRobotsMetaData();
 
-		switch ($key) {
-			case 'downloads':
-				Repo::getDownloads();
-				return TRUE;
-			case 'news':
-				Repo::getDownloads();
-				return TRUE;
-			case 'projects':
-				Repo::getProjects();
-				return TRUE;
-			case 'contribution':
-				Repo::getContributions();
-				return TRUE;
-			case 'team':
-				Repo::getTeam();
-				return TRUE;
-			case 'robocon':
-				Repo::getRoboconData();
-				return TRUE;
-			case 'robots':
-				Repo::getRobotsMetaData();
-				return TRUE;
-			default:
-				return FALSE;
-		}
-	}
+            return TRUE;
+        }
+
+        Repo::purgeCache([$key]);
+
+        switch ($key) {
+            case 'downloads':
+                Repo::getDownloads();
+                return TRUE;
+            case 'news':
+                Repo::getDownloads();
+                return TRUE;
+            case 'projects':
+                Repo::getProjects();
+                return TRUE;
+            case 'contribution':
+                Repo::getContributions();
+                return TRUE;
+            case 'team':
+                Repo::getTeam();
+                return TRUE;
+            case 'robocon':
+                Repo::getRoboconData();
+                return TRUE;
+            case 'robots':
+                Repo::getRobotsMetaData();
+                return TRUE;
+            default:
+                return FALSE;
+        }
+    }
 
 };

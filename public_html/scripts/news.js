@@ -16,10 +16,9 @@ $(function(){
     </div>');
 
     var loaded = false;
-    function addNews(newsContainer, news, key) {
+    function addNews(news, key) {
         if(!loaded) {
-            loaders(false);
-            toggleVisibility(true, newsContainer);
+            progress(false);
             loaded = true;
         }
 
@@ -35,14 +34,12 @@ $(function(){
     }
 
     window.addEventListener('load', function() {
-        loaders(true);
-
-        const newsContainer = document.getElementById('news-container');
-        toggleVisibility(false, newsContainer);
+        loadingAnimation(false);
+        progress(true);
 
         var newsRef = firebase.database().ref('news');
         newsRef.on('child_added', function(snapshot) {
-            addNews(newsContainer, snapshot.val(), snapshot.key);
+            addNews(snapshot.val(), snapshot.key);
         });
 
         newsRef.on('child_changed', function(snapshot) {

@@ -1,24 +1,41 @@
 {% extends "components/base.twig" %}
 {% block content %}
-<div class="container">
-    {{ include('components/loading.twig') }}
-    <div id="news-container" >
-        <div class="col-md-1"></div>
-        <div class="col-md-10">
-            <div class="panel panel-default text-center" style="background-color: #607D8B;">
-                <div class="panel-body">
-                    <h5 class="panel-text">News and Announcements</h5>
+    <div class="container">
+        {{ include('components/loading.twig') }}
+        <div id="news-container" >
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <div class="panel panel-default text-center" style="background-color: #607D8B;">
+                    <div class="panel-body">
+                        <h5 class="panel-text">News and Announcements</h5>
+                    </div>
                 </div>
             </div>
+            <div class="col-md-2"></div>
+            <div id="news-panel" class="col-md-8">
+                {% for it in news %}
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <i class="mdi mdi-newspaper mdi-36px vcenter" aria-hidden="true"></i>
+                            <div class="vcenter news-notice white-space-pre" >{{ it.notice }}</div>
+                            <div class="news-date"><em> {{ it.date }} </em></div>
+                        </div>
+                        {% if it.link %}
+                            <a href="{{ it.link }}" style="text-decoration : none;" target="_blank">
+                                <div class="panel-footer" id="newspanel-footer">
+                                    <i class="mdi mdi-link mdi-24px vertical-ali pr-5" aria-hidden="true"></i> View attached link
+                                </div>
+                            </a>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="col-md-2"></div>
         </div>
-        <div class="col-md-2"></div>
-        <div id="news-panel" class="col-md-8"></div>
-        <div class="col-md-2"></div>
     </div>
-</div>
 {% endblock %}
 
 {% block scripts %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dot/1.1.0/doT.min.js"></script>
-<script src="{{ base_url }}/scripts/news.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dot/1.1.0/doT.min.js"></script>
+    <script src="{{ base_url }}/scripts/news.js"></script>
 {% endblock %}

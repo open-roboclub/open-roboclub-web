@@ -2,16 +2,18 @@
 
 namespace App\Page;
 
+use App\Repo;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
 final class AnnouncementsPage extends GenericPage {
 
-	public function __invoke(Request $request, Response $response, $args) {
-		$this->setTitle('Announcements');
-		$this->setTemplate('announcements.twig');
+    public function __invoke(Request $request, Response $response, $args) {
+        $this->setTitle('Announcements');
+        $this->setTemplate('announcements.twig');
 
-		$this->render_page($request, $response);
-	}
+        $this->addTwigObject(['news' => Repo::getNews()]);
+        $this->render_page($request, $response);
+    }
 
 };
