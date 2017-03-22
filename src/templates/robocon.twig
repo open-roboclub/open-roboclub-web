@@ -1,10 +1,17 @@
 {% extends "components/base.twig" %}
 {% block content %}
-<div class="container">
-    {{ include('components/loading.twig') }}
-</div>
-<div id="robocon-container"></div>
+    <div class="container">
+        {{ include('components/loading.twig') }}
+    </div>
+    <div id="robocon-container">
+        {{ include('./robocon-core.twig') }}
+    </div>
 {% endblock %}
 {% block scripts %}
-<script src="{{ base_url }}/scripts/robocon.min.js"></script>
+    <script src="{{ base_url }}/scripts/robocon.js"></script>
+    <script>
+        $(window).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
 {% endblock %}

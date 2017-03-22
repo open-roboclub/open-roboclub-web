@@ -3,25 +3,24 @@ $(function() {
     var roboconContainer;
 
     function toggleLoader(show) {
-        toggleVisibility(!show, roboconContainer);
-        loaders(show);
+        progress(show);
     }
 
     const received = function(data, status, xhr) {
         toggleLoader(false);
         $('#robocon-container').html(data);
-    }
+    };
 
     const error = function(request, status, error) {
         toggleLoader(false);
         console.log(error);
-    }
+    };
 
     function loadPage(robocon, downloads) {
         const obj = {
             robocon : robocon,
             downloads : downloads
-        }
+        };
 
         toggleLoader(true);
 

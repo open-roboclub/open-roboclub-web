@@ -2,6 +2,7 @@
 
 namespace App\Page;
 
+use App\Repo;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
@@ -17,7 +18,11 @@ final class RoboconPage extends GenericPage {
 			$robocon = $request->getParsedBody();
 
 			$this->addTwigObject($robocon);
-		}
+		} else {
+		    $this->addTwigObject([
+		        'robocon' => Repo::getRoboconData(),
+                'downloads' => Repo::getDownloads()['robocon']]);
+        }
 
 		$this->render_page($request, $response);
 	}
