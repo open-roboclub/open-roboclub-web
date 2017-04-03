@@ -20,7 +20,7 @@ final class NotificationSender {
         $client->injectHttpClient(new \GuzzleHttp\Client());
 
         $message = new Message();
-        $message->addRecipient(new Topic('news'));
+        $message->addRecipient(new Topic('debug'));
         $message->setNotification(new Notification($title, $body));
 
         $response = $client->send($message);

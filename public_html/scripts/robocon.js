@@ -1,18 +1,12 @@
-$(function() {
+var RoboconPanel = function () {
 
-    var roboconContainer;
-
-    function toggleLoader(show) {
-        progress(show);
-    }
-
-    const received = function(data, status, xhr) {
-        toggleLoader(false);
+    const received = function(data) {
+        App.showProgressBar(false);
         $('#robocon-container').html(data);
     };
 
     const error = function(request, status, error) {
-        toggleLoader(false);
+        App.showProgressBar(false);
         console.log(error);
     };
 
@@ -22,7 +16,7 @@ $(function() {
             downloads : downloads
         };
 
-        toggleLoader(true);
+        App.showProgressBar(true);
 
         $.ajax(
             {
@@ -35,47 +29,50 @@ $(function() {
         );
     }
 
-    window.addEventListener('load', function() {
+    return {
+        initialize: function () {
+            App.showProgressBar(true);
 
-        roboconContainer = document.getElementById('robocon-container');
+            var synced = 0;
 
-        toggleLoader(true);
+            var robocon, downloads;
 
-        var synced = 0;
+            FirebaseOps.getDatabaseReference('robocon/17').on('value', function(snap) {
 
-        var robocon, downloads;
+                robocon = snap.val();
 
-        firebase.database().ref('robocon/17').on('value', function(snap) {
+                if(synced < 1) {
+                    App.showProgressBar(false);
+                    synced++;
+                } else {
+                    loadPage(robocon, downloads);
+                }
 
-            robocon = snap.val();
+            }, function(error) {
+                App.showProgressBar(false);
+                console.log(error);
+            });
 
-            if(synced < 1) {
-                toggleLoader(false);
-                synced++;
-            } else {
-                loadPage(robocon, downloads);
-            }
+            FirebaseOps.getDatabaseReference('downloads/robocon').on('value', function(snap) {
 
-        }, function(error) {
-            toggleLoader(false);
-            console.log(error);
-        });
+                downloads = snap.val();
 
-        firebase.database().ref('downloads/robocon').on('value', function(snap) {
+                if(synced < 1) {
+                    App.showProgressBar(false);
+                    synced++;
+                } else {
+                    loadPage(robocon, downloads);
+                }
 
-            downloads = snap.val();
+            }, function(error) {
+                App.showProgressBar(false);
+                console.log(error);
+            });
+        }
+    }
 
-            if(synced < 1) {
-                toggleLoader(false);
-                synced++;
-            } else {
-                loadPage(robocon, downloads);
-            }
+}();
 
-        }, function(error) {
-            toggleLoader(false);
-            console.log(error);
-        });
-
-    });
+window.addEventListener('load', function() {
+    RoboconPanel.initialize();
 });
