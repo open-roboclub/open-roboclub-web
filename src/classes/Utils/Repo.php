@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Utils;
 
 use phpFastCache\Cache\ExtendedCacheItemPoolInterface;
 
@@ -40,43 +40,23 @@ final class Repo {
         return $item->get();
     }
 
-    public static function getDownloads($debug = FALSE) {
-        if ($debug) {
-            return Mock::getDownloads();
-        }
-
+    public static function getDownloads() {
         return Repo::getCacheItem('downloads', 'https://amu-roboclub.firebaseio.com/downloads.json');
     }
 
-    public static function getNews($debug = FALSE) {
-        if ($debug) {
-            return Mock::getNews();
-        }
-
+    public static function getNews() {
         return array_reverse(Repo::getCacheItem('news', 'https://amu-roboclub.firebaseio.com/news.json'));
     }
 
-    public static function getContributions($debug = FALSE) {
-        if ($debug) {
-            return Mock::getContributions();
-        }
-
+    public static function getContributions() {
         return array_reverse(Repo::getCacheItem('contributions', 'https://amu-roboclub.firebaseio.com/contribution.json'));
     }
 
-    public static function getProjects($debug = FALSE) {
-        if ($debug) {
-            return Mock::getProjects();
-        }
-
+    public static function getProjects() {
         return Repo::getCacheItem('projects', 'https://amu-roboclub.firebaseio.com/projects.json?orderBy="ongoing"&equalTo=false');
     }
 
-    public static function getTeam($debug = FALSE) {
-        if ($debug) {
-            return Mock::getTeam();
-        }
-
+    public static function getTeam() {
         return Repo::getCacheItem('team', 'https://amu-roboclub.firebaseio.com/team/16.json');
     }
 

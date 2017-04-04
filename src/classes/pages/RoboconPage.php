@@ -2,7 +2,7 @@
 
 namespace App\Page;
 
-use App\Repo;
+use App\Utils\Repo;
 use Slim\Http\Request;
 use Slim\Http\Response;
 

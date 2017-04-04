@@ -26,7 +26,7 @@ $container['logger'] = function ($c) {
 
 // Setup Cache
 use phpFastCache\CacheManager;
-use App\Repo;
+use App\Utils\Repo;
 
 CacheManager::setDefaultConfig($container->get('settings')['cache']);
 Repo::setCache(CacheManager::getInstance('files')); // !!! Extremely Important !!!

@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Utils;
 
 use Exception;
 use \Firebase\JWT\JWT;

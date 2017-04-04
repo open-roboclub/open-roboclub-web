@@ -4,6 +4,7 @@ namespace App;
 
 use Slim\Http\Request;
 use Slim\Http\Response;
+use App\Utils\Repo;
 
 final class CacheControl {
 

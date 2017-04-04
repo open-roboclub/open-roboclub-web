@@ -4,7 +4,7 @@ namespace App\Page;
 
 use Slim\Http\Request;
 use Slim\Http\Response;
-use App\Repo;
+use App\Utils\Repo;
 
 final class HomePage extends GenericPage {
 

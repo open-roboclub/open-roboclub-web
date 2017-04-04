@@ -4,8 +4,8 @@ namespace App\Page;
 
 use Slim\Http\Request;
 use Slim\Http\Response;
-use App\Utils;
-use App\Repo;
+use App\Utils\Utils;
+use App\Utils\Repo;
 
 final class DownloadsPage extends GenericPage {
 
