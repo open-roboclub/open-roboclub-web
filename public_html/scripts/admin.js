@@ -58,11 +58,14 @@ var DatabaseOps = function () {
                 App.showProgressBar(false);
                 App.showToast(toastr.success('News posted successfully'));
 
-                try {
-                    AdminPanel.loadEditNews(snapshot.key);
-                } catch (error) {
-                    console.log(error);
+                if(loadEditor) {
+                    try {
+                        AdminPanel.loadEditNews(snapshot.key);
+                    } catch (error) {
+                        console.log(error);
+                    }
                 }
+
             })
             .catch(function (error) {
                 App.showProgressBar(false);
@@ -81,48 +84,10 @@ var DatabaseOps = function () {
         });
     }
 
-    function requestFCM(message_title, message_body) {
-        const requestObject = {
-            title: message_title,
-            message: message_body
-        };
-
-        App.showProgressBar(true);
-
-        const successFunction = function (responseData) {
-            App.showProgressBar(false);
-
-            if (responseData.error) {
-                App.showErrorToast(responseData.message);
-            } else {
-                App.showToast(toastr.success('Notification ' + responseData.message + ' Message ID : ' + responseData.message_id));
-            }
-        };
-
-        const errorFunction = function (request, status, error) {
-            App.showProgressBar(false);
-            App.showErrorToast('Error ' + error);
-        };
-
-        firebase.auth().currentUser.getToken().then(function (idToken) {
-            FirebaseOps.request(
-                'POST',
-                './send_notification',
-                {
-                    'Authorization': "Bearer " + idToken
-                },
-                requestObject,
-                successFunction,
-                errorFunction
-            );
-
-        }).catch(function (error) {
-            App.showProgressBar(false);
-            App.showErrorToast(error);
-        });
-    }
-
+    var loadEditor;
     function sendNotification(title, message, link) {
+        loadEditor = true;
+
         if (title == null || message == null) {
             App.showErrorToast("Can't send empty message");
             return;
@@ -134,6 +99,7 @@ var DatabaseOps = function () {
         const date = $.format.date(new Date().getTime(), 'ddd, D MMMM yyyy');
 
         var newsObject = {
+            title: title,
             notice: message,
             date: date,
             timestamp: -Math.floor(Date.now() / 1000)
@@ -145,16 +111,18 @@ var DatabaseOps = function () {
         var option = $("input[name='sendOptions']:checked").val();
 
         switch (option) {
-            case 'news':
-                pushNews(newsObject);
+            case 'both':
+                newsObject.notification = 'yes';
                 break;
             case 'notification':
-                requestFCM(title, message);
+                loadEditor = false;
+                newsObject.notification = 'only';
                 break;
             default:
-                pushNews(newsObject);
-                requestFCM(title, message);
+                // Do nothing
         }
+
+        pushNews(newsObject);
 
     }
 
@@ -292,8 +260,6 @@ var AdminPanel = function () {
             'providerData': user.providerData
         };
 
-        console.log(userData);
-
         DatabaseOps.saveUser(userData);
 
         AdminPanel.elements.welcome.innerHTML = 'Welcome, <strong>' + userData.name + '</strong>';
@@ -341,8 +307,6 @@ var AdminPanel = function () {
         initialize: initApp
     }
 }();
-
-
 
 window.addEventListener('load', function () {
     AdminPanel.initialize();
