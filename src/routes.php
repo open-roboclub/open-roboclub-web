@@ -21,8 +21,6 @@ $app->get('/signin', App\Page\SigninPage::class);
 
 $app->get('/admin', App\Page\AdminPage::class);
 
-$app->post('/send_notification', App\NotificationSender::class);
-
 // Cache Control
 
 $app->get('/cache[/{option}[/{parameter}]]', App\CacheControl::class);
