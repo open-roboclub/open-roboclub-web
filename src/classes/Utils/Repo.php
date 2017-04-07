@@ -57,7 +57,7 @@ final class Repo {
     }
 
     public static function getTeam() {
-        return Repo::getCacheItem('team', 'https://amu-roboclub.firebaseio.com/team/16.json');
+        return Repo::getCacheItem('team', 'https://amu-roboclub.firebaseio.com/team/16.json?orderBy="rank"');
     }
 
     public static function getRoboconData() {

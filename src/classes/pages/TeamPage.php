@@ -8,6 +8,12 @@ use App\Utils\Repo;
 
 final class TeamPage extends GenericPage {
 
+    private static function sortByRank(&$team) {
+        usort($team, function ($member1, $member2) {
+            return $member1['rank'] - $member2['rank'];
+        });
+    }
+
 	private static function updateLinks(&$team) {
 		foreach ($team as &$member) {
 			if(!array_key_exists('links', $member))
@@ -29,7 +35,8 @@ final class TeamPage extends GenericPage {
 		$this->setTemplate('team.twig');
 
 		$team = Repo::getTeam();
-		$this->updateLinks($team);
+		self::updateLinks($team);
+		self::sortByRank($team);
 
 		$this->addTwigObject(['team' => $team]);
 		$this->render_page($request, $response);
