@@ -62,15 +62,15 @@ var FirebaseOps = function () {
     function updateSigninInfo() {
         FirebaseOps.onAuthChanged(function(user) {
             if(user) {
-                App.elements.signinButton.text('Admin Panel');
-                App.elements.signinButton.removeClass('btn-primary');
-                App.elements.signinButton.addClass('btn-info');
+                App.elements.signinButton.text('Admin');
+                App.elements.signinButton.addClass('purple');
+                App.elements.signinButton.removeClass('blue');
 
                 App.elements.signinLink.prop('href', base_url + '/admin');
             } else {
                 App.elements.signinButton.text('Sign In');
-                App.elements.signinButton.removeClass('btn-info');
-                App.elements.signinButton.addClass('btn-primary');
+                App.elements.signinButton.removeClass('purple');
+                App.elements.signinButton.addClass('blue');
 
                 App.elements.signinLink.prop('href', base_url + '/signin');
             }
@@ -92,4 +92,5 @@ var FirebaseOps = function () {
 
 window.addEventListener('load', function() {
     FirebaseOps.updateSigninInfo();
+    $('.button-collapse').sideNav();
 });
