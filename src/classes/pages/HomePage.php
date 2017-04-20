@@ -23,7 +23,7 @@ final class HomePage extends GenericPage {
 		$this->setTitle('Home');
 		$this->setTemplate('home.twig');
 
-		$news = array_slice(Repo::getNews(), 0, 10);
+		$news = array_slice(Repo::getNews(), 0, 5);
 
 		$this->addTwigObject(['news' => $news, 'coordinators' => $this->getCoordinators()]);
 		$this->render_page($request, $response);

@@ -1,18 +1,5 @@
-.rectangle {
-	background: #ccc;
-	padding: 5px;
-	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
-	margin-left: 10px;
-	margin-bottom: 10px;
-	min-width:300px;
-}
-
-.color-dark {
-    color: #333;
-}
-
-.padding-10 {
-  padding: 10px;
+.white-space-pre {
+    white-space: pre-wrap;
 }
 
 /* Progress Bar */

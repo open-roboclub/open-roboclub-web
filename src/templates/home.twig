@@ -1,44 +1,15 @@
 {% extends "components/base.twig" %}
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-md-4">
-            <div class="panel panel-danger">
-                <div class="panel-heading">
-                    <h4 class="panel-text">News</h4>
-                </div>
-                <div class="panel-body overflow" id="news-panel" >
-                    {% for news in news %}
+    <div class="container">
+        <div class="row" style="margin-top: 30px">
 
-                    <div class="row" style="margin: 10px;">
-                        <i class="mdi mdi-newspaper mdi-36px vcenter" aria-hidden="true"></i>
-                        <div class="vcenter news-notice white-space-pre" >{{ news.notice }}</div>
-                        <div class="news-date"><em> {{ news.date }} </em></div>
-                    </div>
-                    <hr>
-                    {% endfor %}
-                </div>
-                <a href="./announcements" style="text-decoration: none;">
-                    <div class="panel-footer" id="news-footer">
-                        <i class="mdi mdi-arrow-right mdi-24px vertical-ali" aria-hidden="true"></i> View all
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-md-8">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h4 class="panel-text">AMU Roboclub</h4>
-                </div>
-                <div class="panel-body"  >
-                    <div class="rectangle pull-right">
-                        <div class="embed-responsive embed-responsive-16by9">
-                            <iframe class="embed-responsive-item" frameborder="0" allowfullscreen
-                                src="https://www.youtube.com/embed/ME-akMrWflk?rel=0&showinfo=0&theme=light">
-                            </iframe>
-                        </div>
-                    </div>
-                    <p class="lead" id="info-panel">AMU Roboclub is a student’s body which caters to the need
+            <div class="col l9">
+                <div class="card-panel">
+                    <iframe class="left" style="padding-right: 10px" width="300" height="180" frameborder="0"
+                            allowfullscreen
+                            src="https://www.youtube.com/embed/ME-akMrWflk?rel=0&showinfo=0&theme=light">
+                    </iframe>
+                    <p>AMU Roboclub is a student’s body which caters to the need
                         of electronics enthusiasts and hobbyists in creating an environment which is driven by
                         innovation and implementation. Run under the able guidance and supervision of faculty
                         advisors from various branches of engineering, AMU Roboclub stands as an epitome of marvel.<br>
@@ -47,165 +18,167 @@
                         national competitions by encouraging participation.
                     </p>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="jumbotron text-dark" style="background: #607D8B;">
-        <div class="container-fluid">
-            <div class="row">
-                <img id="jumbo-image" class="pull-left img-responsive" src="https://res.cloudinary.com/amuroboclub/image/upload/old/robocon/6.jpg"></img>
-                <p class="lead">
-                    AMU Roboclub prepares every year for ABU Robocon.
-                    <br><br>
-                    The Asia-Pacific Robot Contest (ABU Robocon) is an Asian Oceanian College robot competition, founded in
-                    2002 by Asia-Pacific Broadcasting Union. In the competition robots compete to complete a task within a
-                    set period of time. The contest aims to create friendship among young people with similar interests who
-                    will lead their countries in the 21st century, as well as help advance engineering and broadcasting
-                    technologies in the region. The event is broadcast in many countries through ABU member broadcasters.
-                </p>
-                <p class="lead vertical-ali">
-                    To know more, &nbsp;
-                </p>
-                <a href="./robocon">
-                <button class="fab">
-                <i class="mdi mdi-arrow-right" aria-hidden="true"></i>
-                </button>
-                </a>
-            </div>
-        </div>
-    </div>
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <p class="lead">In the last couple of years, students from AMU Roboclub have won many
-                awards in various competitions which speak of its testimony.
-                Regular Classes, Annual Workshop, Guest Lectures, Project Exhibition, Student Competitions
-                etc are some of the main functions of the club. Robonics, the annual workshop of AMU
-                Roboclub has earned a name in itself.<br>
-                The highlights of the club which differentiates it from the peers are its adherence
-                to the curriculum, its student-student interaction and importantly project developments.
-                More than 80 ideas have culminated into working models so far and the number is on the rise.
-                The strength of the club lies in its Student members, it is them who has given a high repute
-                to the club. The members who complete at least one project under AMU Roboclub are felicitated
-                and they earn for themselves a separate webpage in the AMU Roboclub website which is dedicated
-                for their description and achievements.<br>
-                AMU Roboclub alumni always attribute a portion of their successes to the time and effort they
-                spent at AMU Roboclub which helped them become what they are today.
-            </p>
-        </div>
-    </div>
-    <div class="jumbotron text-dark container-fluid" style="background: #009688;">
-        <div class="container-fluid">
-            <div class="text-center">
-                <h3 class="text-dark">
-                    AMU Roboclub Team - Coordinators
-                </h3>
-            </div>
-            <div class="row">
-                {% for member in coordinators %}
-
-                <div class="col-md-4 text-center">
-                    <img class="img-responsive img-thumbnail center-block" src="{{ member.thumbnail }}"></img>
-                    <p class="lead">
-                        {{member.name}}
+                <div class="card hoverable" style="margin-top: 20px;">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator"
+                             src="https://res.cloudinary.com/amuroboclub/image/upload/old/robocon/6.jpg">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">ABU Robocon<i
+                                    class="material-icons right">more_vert</i></span>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">ABU Robocon<i class="material-icons right">close</i></span>
+                        <p>AMU Roboclub prepares every year for ABU Robocon.
+                            <br><br>
+                            The Asia-Pacific Robot Contest (ABU Robocon) is an Asian Oceanian College robot competition,
+                            founded in 2002 by Asia-Pacific Broadcasting Union. In the competition robots compete to
+                            complete a task within a
+                            set period of time. The contest aims to create friendship among young people with
+                            similar interests who
+                            will lead their countries in the 21st century, as well as help advance engineering and
+                            broadcasting
+                            technologies in the region. The event is broadcast in many countries through ABU member
+                            broadcasters.</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="./robocon">Know more</a>
+                    </div>
+                </div>
+                <div class="card-panel">
+                    <p>In the last couple of years, students from AMU Roboclub have won many
+                        awards in various competitions which speak of its testimony.
+                        Regular Classes, Annual Workshop, Guest Lectures, Project Exhibition, Student Competitions
+                        etc are some of the main functions of the club. Robonics, the annual workshop of AMU
+                        Roboclub has earned a name in itself.<br>
+                        The highlights of the club which differentiates it from the peers are its adherence
+                        to the curriculum, its student-student interaction and importantly project developments.
+                        More than 80 ideas have culminated into working models so far and the number is on the rise.
+                        The strength of the club lies in its Student members, it is them who has given a high repute
+                        to the club. The members who complete at least one project under AMU Roboclub are
+                        felicitated
+                        and they earn for themselves a separate webpage in the AMU Roboclub website which is
+                        dedicated
+                        for their description and achievements.<br>
+                        AMU Roboclub alumni always attribute a portion of their successes to the time and effort
+                        they
+                        spent at AMU Roboclub which helped them become what they are today.
                     </p>
                 </div>
-                {% endfor %}
-            </div>
-            <div class="row text-center" >
-                <p class="lead vertical-ali">
-                    Meet the rest of team, &nbsp;
-                </p>
-                <a href="./team">
-                <button class="fab" style="background-color: #CDDC39;">
-                <i class="mdi mdi-arrow-right" aria-hidden="true"></i>
-                </button>
-                </a>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <div  class="panel panel-warning">
-                <div class="panel-heading">
-                    <h4 class="panel-text">Zakir Hussain College of Engineering and Technology</h4>
-                </div>
-                <div id="zhcet-panel" class="panel-body">
-                    <img class="img-responsive pull-right padding-10" src="https://res.cloudinary.com/amuroboclub/image/upload/old/zhcet_thumb.jpg"></img>
-                    <p class="lead" >The Zakir Husain College of Engineering &amp; Technology with its foundation
-                        stone being laid on 21st November 1938, stands today as an epitome in the field of engineering
-                        and technology, manifesting quality education to build intellectual competitiveness. ZHCET
-                        named after a great scholar of AMU and the former President of India, Dr. Zakir Husain, extends
-                        its arms for hundreds of students from across the country and abroad.
-                    </p>
-                </div>
-                <div class="panel-footer">
-                    <p class="lead vertical-ali">
-                        To know more, &nbsp;
-                    </p>
-                    <a href="http://amu.ac.in/principal.jsp?did=10147" target="_blank">
-                    <button class="fab" style="background-color: #FF9800;">
-                    <i class="mdi mdi-arrow-right" aria-hidden="true"></i>
-                    </button>
+                <div class="card-panel center teal grey-text text-lighten-3">
+                    <h3>
+                        Team - Coordinators
+                    </h3>
+                    <div class="row">
+                        {% for member in coordinators %}
+                            <div class="col m6 s12">
+                                <img class="center circle" height="200" width="200"
+                                     src="{{ member.thumbnail }}"/>
+                                <p class="center flow-text">
+                                    {{ member.name }}
+                                </p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <a href="./team">
+                        <button class="btn-floating btn-large waves-effect waves-light lime accent-3">
+                            <i class="mdi mdi-arrow-right grey-text text-darken-2" aria-hidden="true"></i>
+                        </button>
                     </a>
                 </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="panel panel-success">
-                <div class="panel-heading">
-                    <h4 class="panel-text">Aligarh Muslim University</h4>
+                <div class="row">
+                    <div class="col m6">
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="https://res.cloudinary.com/amuroboclub/image/upload/v1492699176/14474306_1412485605448267_5100030826549084160_n_k7hi7c.jpg">
+                            </div>
+                            <div class="card-content">
+                                <p class="lead">The Zakir Husain College of Engineering &amp; Technology with its
+                                    foundation
+                                    stone being laid on 21st November 1938, stands today as an epitome in the field of
+                                    engineering
+                                    and technology, manifesting quality education to build intellectual competitiveness.
+                                    ZHCET
+                                    named after a great scholar of AMU and the former President of India, Dr. Zakir
+                                    Husain, extends
+                                    its arms for hundreds of students from across the country and abroad.
+                                </p>
+                            </div>
+                            <div class="card-action">
+                                <a href="http://amu.ac.in/principal.jsp?did=10147">Know more</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col m6">
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="https://res.cloudinary.com/amuroboclub/image/upload/v1492699314/amu_ps6arw.jpg">
+                            </div>
+                            <div class="card-content">
+                                <p class="lead">Aligarh Muslim University (AMU) occupies a unique position amongst
+                                    universities and
+                                    institutions of higher learning in the country. It was established in 1920, and
+                                    evolved out of the
+                                    Mohammedan Anglo-Oriental College (MAO College) which was set up in 1877 by the
+                                    great visionary and
+                                    social reformer, Sir Syed Ahmad Khan. Spread over 467.6 hectares in the city of
+                                    Aligarh, Uttar Pradesh,
+                                    Aligarh Muslim University offers more than 300 courses in the traditional and modern
+                                    branches of education.
+                                    It ranks 5th among the top universities in India.
+                                </p>
+                            </div>
+                            <div class="card-action">
+                                <a href="http://www.amu.ac.in/">Know more</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div id="amu-panel" class="panel-body" >
-                    <img class="img-responsive pull-right padding-10" src="https://res.cloudinary.com/amuroboclub/image/upload/old/amu_thumb.jpg"></img>
-                    <p class="lead">Aligarh Muslim University (AMU) occupies a unique position amongst universities and
-                        institutions of higher learning in the country. It was established in 1920, and evolved out of the
-                        Mohammedan Anglo-Oriental College (MAO College) which was set up in 1877 by the great visionary and
-                        social reformer, Sir Syed Ahmad Khan. Spread over 467.6 hectares in the city of Aligarh, Uttar Pradesh,
-                        Aligarh Muslim University offers more than 300 courses in the traditional and modern branches of education.
-                        It ranks 5th among the top universities in India.
-                    </p>
+                <div class="card-panel grey lighten-2 col m6 s12 padding-10">
+                    <div class="row">
+                        <div class="col s2">
+                            <i class="mdi mdi-home-modern mdi-48px" aria-hidden="true"></i>
+                        </div>
+                        <div class="col s10">
+                            WS-18,<br>
+                            Mechanical Workshop Compound,<br>
+                            Zakir Husain College of Engg &amp; Tech,<br>
+                            Aligarh Muslim University, Aligarh.<br>
+                            India.<br>
+                            <a href="//www.google.co.in/maps/place/AMU+Roboclub/@27.91423,78.07735,15z"
+                               data-toggle="tooltip" title="Find Us!" target="_blank">
+                                <button class="btn-floating btn-large waves-effect waves-light blue center-align">
+                                    <i class="mdi mdi-map" aria-hidden="true"></i>
+                                </button>
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <div class="panel-footer">
-                    <p class="lead vertical-ali">
-                        To know more, &nbsp;
-                    </p>
-                    <a href="http://www.amu.ac.in/" target="_blank">
-                    <button class="fab" style="background-color: #4CAF50;">
-                    <i class="mdi mdi-arrow-right" aria-hidden="true"></i>
-                    </button>
-                    </a>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="jumbotron" style="background: #E0E0E0;">
-        <div class="row">
-            <div class="col-xs-2 col-md-1">
-                <i class="mdi mdi-home-modern mdi-48px" aria-hidden="true"></i>
-            </div>
-            <div class="lead col-xs-10 col-md-6">
-                WS-18,<br>
-                Mechanical Workshop Compound,<br>
-                Zakir Husain College of Engg &amp; Tech,<br>
-                Aligarh Muslim University, Aligarh.<br>
-                India.
-                <a href="//www.google.co.in/maps/place/AMU+Roboclub/@27.91423,78.07735,15z"  data-toggle="tooltip" title="Find Us!" class="pull-right" target="_blank">
-                <button class="fab" style="background-color: #2196F3;">
-                <i class="mdi mdi-map" aria-hidden="true"></i>
-                </button>
+            <div class="col l3">
+                    {% for news in news %}
+                        <div class="card-panel hoverable">
+                            <div class="row">
+                                <div class="col s2">
+                                    <i class="mdi mdi-newspaper mdi-36px left" aria-hidden="true"></i>
+                                </div>
+                                <div class="col s10">
+                                    <div class="white-space-pre">{{ news.notice }}</div>
+                                    <hr>
+                                    <div><em> {{ news.date }} </em></div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                <div class="card-panel grey lighten-3">
+                <a href="./announcements" class="valign-wrapper">
+                    <div>
+                        <i class="mdi mdi-arrow-right mdi-24px" aria-hidden="true"></i>
+                    </div>
+                    <span>&nbsp; View All</span>
                 </a>
+                </div>
             </div>
         </div>
     </div>
-</div>
-</div>
-{% endblock %}
-{% block scripts %}
-<script type="text/javascript">
-    $(window).ready(function() {
-    	// Set same height of both info and news panel
-    	$('#news-panel').outerHeight($('#info-panel').height());
-    	$('[data-toggle="tooltip"]').tooltip();
-    });
-</script>
 {% endblock %}
