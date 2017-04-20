@@ -11,6 +11,10 @@
     color: #333;
 }
 
+.padding-10 {
+  padding: 10px;
+}
+
 /* Progress Bar */
 .progress {
   position: relative;
