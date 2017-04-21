@@ -1,72 +1,71 @@
 <div class="container">
-    <div class="panel panel-default text-center" style="background-color: #512DA8;">
-        <div class="panel-body">
-            <h5 class="panel-text">{{ robocon.title }}</h5>
+    <div class="card-panel indigo center-align">
+        <h5 class="white-text">{{ robocon.title }}</h5>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col l3">
+        <div class="card center-align">
+            <div class="card-content light-green darken-2">
+                <h5 class="light-green-text text-lighten-5">Introduction</h5>
+            </div>
+            <div class="card-content">
+                <img class="responsive-img" src="{{ robocon.image }}">
+                <p>{{ robocon.introduction|raw }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col l6">
+        <div class="card">
+            <div class="card-content grey lighten-2">
+                <h2>About</h2>
+            </div>
+            <div class="card-content member-position">{{ robocon.about|raw }}</div>
+        </div>
+    </div>
+    <div class="col l3">
+        <div class="card">
+            <div class="card-content blue center-align">
+                <h5 class="blue-text text-lighten-5">Downloads</h5>
+            </div>
+            <div class="card-content">
+                {% for item in downloads.items %}
+                    <div class="row valign-wrapper">
+                        <div class="col s10">
+                            <h6>{{ item.name }}</h6>
+                        </div>
+                        <div class="col s2 center-align">
+                            <a href="{{ item.url }}"
+                               style="display: block;" {% if item.file %} data-toggle="tooltip" title="{{ item.file }}" {% endif %}
+                               target="_blank">
+                                <button class="btn-floating btn-large waves-effect waves-light pink">
+                                    <i class="mdi mdi-share" aria-hidden="true"></i>
+                                </button>
+                            </a>
+                            {%- if item.size -%}
+                                <div>{{ item.size }}</div>
+                            {%- endif -%}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="card center-align">
+            <div class="card-content pink">
+                <h5 class="pink-text text-lighten-5">Sponsors</h5>
+            </div>
+            <div class="card-content">
+                <div class="row">
+                <img class="col m6 s12 responsive-img center"
+                     src="http://res.cloudinary.com/amuroboclub/image/upload/sponsors/lachef.jpg"/>
+                <img class="col m6 s12 responsive-img center"
+                     src="http://res.cloudinary.com/amuroboclub/image/upload/sponsors/engineers_choice.jpg"/>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-<div class="container-fluid">
-    <div class="col-lg-3">
-        <div class="panel panel-default text-center" style="background-color: #00C853;">
-            <div class="panel-body">
-                <h5 class="panel-text">Introduction</h5>
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <img class="img-responsive" src="{{ robocon.image }}">
-                <p style="font-size: 15px; padding-top: 10px;">{{ robocon.introduction|raw }}</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-6">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <h2>About</h2>
-                <hr style="border: 1px solid #ccc;">
-                <div style="font-size: 16px;">{{ robocon.about|raw }}</div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3">
-        <div class="panel panel-default text-center" style="background-color: #2196F3;">
-            <div class="panel-body">
-                <h5 class="panel-text">Downloads</h5>
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-body">
-            {% for item in downloads.items %}
 
-                <div class="row vertical-align">
-                    <div class="col-xs-10">
-                        <h6>{{ item.name }}</h6>
-                    </div>
-                    <div class="col-xs-3 text-center">
-                        <a href="{{ item.url }}" style="display: block;" {% if item.file %} data-toggle="tooltip" title="{{ item.file }}" {% endif %} target="_blank">
-                            <button class="fab text-center" style="background-color: #E91E63;">
-                            <i class="mdi mdi-share" aria-hidden="true"></i>
-                            </button>
-                        </a>
-                        {%- if item.size -%}
-                            <div>{{item.size}}</div>
-                        {%- else -%}
-                            <div>---</div>
-                        {%- endif -%}
-                    </div>
-                </div>
-            <hr style="margin-top: 2px; margin-bottom: 5px;">
-            {% endfor %}
-            </div>
-    </div>
-    <div class="panel panel-default text-center" style="background-color: #E91E63;">
-            <div class="panel-body">
-                <h5 class="panel-text">Sponsors</h5>
-            </div>
-        <div class="panel panel-default">
-            <div class="panel-body vcenter">
-                <img class="img-responsive" src="http://res.cloudinary.com/amuroboclub/image/upload/sponsors/lachef.jpg" />
-                <img class="img-responsive" src="http://res.cloudinary.com/amuroboclub/image/upload/sponsors/engineers_choice.jpg" />
-            </div>
-        </div>
-    </div>
+
+
