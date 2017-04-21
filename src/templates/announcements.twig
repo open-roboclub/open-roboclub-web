@@ -2,35 +2,49 @@
 {% block content %}
     <div class="container">
         {{ include('components/loading.twig') }}
-        <div id="news-container" >
-            <div class="col-md-1"></div>
-            <div class="col-md-10">
-                <div class="panel panel-default text-center" style="background-color: #607D8B;">
-                    <div class="panel-body">
-                        <h5 class="panel-text">News and Announcements</h5>
+        <div id="news-container">
+            <div class="row">
+                <div class="col m1"></div>
+                <div class="col m10">
+
+                    <div class="card-panel blue-grey center-align">
+                        <h5 class="blue-grey-text text-lighten-4">News and Announcements</h5>
                     </div>
                 </div>
+                <div class="col m1"></div>
             </div>
-            <div class="col-md-2"></div>
-            <div id="news-panel" class="col-md-8">
-                {% for it in news %}
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <i class="mdi mdi-newspaper mdi-36px vcenter" aria-hidden="true"></i>
-                            <div class="vcenter news-notice white-space-pre" >{{ it.notice }}</div>
-                            <div class="news-date"><em> {{ it.date }} </em></div>
-                        </div>
-                        {% if it.link %}
-                            <a href="{{ it.link }}" style="text-decoration : none;" target="_blank">
-                                <div class="panel-footer" id="newspanel-footer">
-                                    <i class="mdi mdi-link mdi-24px vertical-ali pr-5" aria-hidden="true"></i> View attached link
+            <div class="row">
+                <div class="col m2"></div>
+                <div id="news-panel" class="col m8">
+                    {% for it in news %}
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="row">
+                                    <div class="col m1 s2">
+                                        <i class="mdi mdi-newspaper mdi-36px grey-text text-darken-2" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="col m11 s10">
+                                        <div class="white-space-pre">{{ it.notice }}</div>
+                                        <hr>
+                                        <div><em> {{ it.date }} </em></div>
+                                    </div>
                                 </div>
-                            </a>
-                        {% endif %}
-                    </div>
-                {% endfor %}
+                            </div>
+                            {% if it.link %}
+                                <div class="card-content grey lighten-3 link-box" style="padding: 10px">
+                                    <a href="{{ it.link }}" style="text-decoration : none;" target="_blank">
+                                        <div class="valign-wrapper">
+                                        <i class="material-icons padding-small">link</i>
+                                        <span class="padding-small">View attached link</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="col m1"></div>
             </div>
-            <div class="col-md-2"></div>
         </div>
     </div>
 {% endblock %}

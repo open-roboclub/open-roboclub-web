@@ -1,25 +1,38 @@
 var NewsPanel = function () {
+
     var newsTemplate = doT.template(
-        '<div class="panel panel-default">\
-            <div class="panel-body">\
-                <i class="mdi mdi-newspaper mdi-36px vcenter" aria-hidden="true"></i>\
-                <div class="vcenter news-notice white-space-pre" >{{= it.notice }}</div>\
-                <div class="news-date"><em> {{= it.date }} </em></div>\
+        '<div class="card">\
+            <div class="card-content">\
+                <div class="row">\
+                    <div class="col m1 s2">\
+                        <i class="mdi mdi-newspaper mdi-36px grey-text text-darken-2" aria-hidden="true"></i>\
+                    </div>\
+                    <div class="col m11 s10">\
+                        <div class="white-space-pre">{{= it.notice }}</div>\
+                        <hr>\
+                        <div><em> {{= it.date }} </em></div>\
+                    </div>\
+                </div>\
             </div>\
             {{? it.link }}\
-            <a href="{{= it.link }}" style="text-decoration : none;" target="_blank">\
-                <div class="panel-footer" id="newspanel-footer">\
-                    <i class="mdi mdi-link mdi-24px vertical-ali pr-5" aria-hidden="true"></i> View attached link\
+                <div class="card-content grey lighten-3 link-box" style="padding: 10px">\
+                    <a href="{{= it.link }}" style="text-decoration : none;" target="_blank">\
+                        <div class="valign-wrapper">\
+                            <i class="material-icons padding-small">link</i>\
+                            <span class="padding-small">View attached link</span>\
+                        </div>\
+                    </a>\
                 </div>\
-            </a>\
             {{?}}\
-        </div>');
+     </div>');
 
 
     var loaded = false;
+
     function addNews(news, key) {
-        if(!loaded) {
+        if (!loaded) {
             App.showProgressBar(false);
+            $('#news-panel').html('');
             loaded = true;
         }
 
@@ -27,11 +40,11 @@ var NewsPanel = function () {
     }
 
     function changeNews(news, key) {
-        $('#'+key).html(newsTemplate(news));
+        $('#' + key).html(newsTemplate(news));
     }
 
     function removeNews(key) {
-        $('#'+key).remove();
+        $('#' + key).remove();
     }
 
     return {
@@ -39,15 +52,15 @@ var NewsPanel = function () {
             App.showProgressBar(true);
 
             var newsRef = FirebaseOps.getDatabaseReference('news');
-            newsRef.on('child_added', function(snapshot) {
+            newsRef.on('child_added', function (snapshot) {
                 addNews(snapshot.val(), snapshot.key);
             });
 
-            newsRef.on('child_changed', function(snapshot) {
+            newsRef.on('child_changed', function (snapshot) {
                 changeNews(snapshot.val(), snapshot.key);
             });
 
-            newsRef.on('child_removed', function(snapshot) {
+            newsRef.on('child_removed', function (snapshot) {
                 removeNews(snapshot.key);
             });
         }
@@ -55,7 +68,7 @@ var NewsPanel = function () {
 
 }();
 
-window.addEventListener('load', function() {
+window.addEventListener('load', function () {
     NewsPanel.initialize();
 });
 
