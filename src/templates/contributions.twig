@@ -1,22 +1,19 @@
 {% extends "components/base.twig" %}
 {% block content %}
-<div class="container">
-    <div class="jumbotron" style="background: #A5D6A7;">
-        <div class="container-fluid">
-            <div class="text-center" style="color: #1B5E20;">
-                <svg style="width:200px;height:200px" viewBox="0 0 24 24">
-                    <path fill="#2E7D32" d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M11,17V16H9V14H13V13H10A1,1 0 0,1 9,12V9A1,1 0 0,1 10,8H11V7H13V8H15V10H11V11H14A1,1 0 0,1 15,12V15A1,1 0 0,1 14,16H13V17H11Z" />
-                </svg>
-                <div class="lead">We are because of you!<br>Thanks for contributing and making us what we are!</div>
-            </div>
+    <div class="container">
+        <div class="card-panel green lighten-4 center-align">
+            <svg style="width:200px;height:200px" viewBox="0 0 24 24">
+                <path fill="#2E7D32"
+                      d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M11,17V16H9V14H13V13H10A1,1 0 0,1 9,12V9A1,1 0 0,1 10,8H11V7H13V8H15V10H11V11H14A1,1 0 0,1 15,12V15A1,1 0 0,1 14,16H13V17H11Z"/>
+            </svg>
+            <div class="flow-text green-text text-darken-3">We are because of you!<br>Thanks for contributing and making us what we are!</div>
+        </div>
+        {{ include('components/loading.twig') }}
+        <div class="row" id="contributions">
         </div>
     </div>
-    {{ include('components/loading.twig') }}
-    <div class="row" id="contributions">
-    </div>
-</div>
 {% endblock %}
 {% block scripts %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dot/1.1.0/doT.min.js"></script>
-<script src="{{ base_url }}/scripts/contributions.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dot/1.1.0/doT.min.js"></script>
+    <script src="{{ base_url }}/scripts/contributions.js"></script>
 {% endblock %}

@@ -1,16 +1,15 @@
 var ContributionPanel = function () {
     var contributionTemplate = doT.template(
-        '<div class="col-lg-3 col-md-4 col-sm-6">\
-            <div class="panel panel-default">\
-                <div class="panel-body text-size16" style="height: 380px;">\
-                    <div class="text-center">\
-                        <i class="mdi mdi-coin mdi-48px" style="color: #FFC107;" aria-hidden="true"></i>\
-                        <div class="text-size18"><strong>{{= it.amount }}</strong></div>\
-                        <br>\
-                        <div><em><strong>Contributors :</strong></em><br> {{= it.contributor }}</div>\
-                        <div><em><strong>Purpose :</strong></em><br> {{= it.purpose }}</div>\
-                        <div><em><strong>Remark :</strong></em><br> {{= it.remark }}</div>\
-                    </div>\
+        '<div class="col l3 m4 s12">\
+            <div class="card-panel hoverable">\
+                <div style="height: 230px;">\
+                        <div class="center-align">\
+                            <i class="mdi mdi-coin mdi-48px amber-text" aria-hidden="true"></i><br>\
+                            <div class="member-name"><strong>{{= it.amount }}</strong></div><br>\
+                            <span class="member-position">{{= it.contributor }}</span><br>\
+                        </div><br>\
+                        <div><em><strong>Purpose : &nbsp;</strong></em> {{= it.purpose }}</div>\
+                        <div><em><strong>Remark : &nbsp;</strong></em> {{= it.remark }}</div>\
                 </div>\
             </div>\
         </div>');
