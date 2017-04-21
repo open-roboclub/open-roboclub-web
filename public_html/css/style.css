@@ -11,9 +11,9 @@ footer {
 }
 
 .progress {
-  margin: 0;
-  padding: 0;
-  display: none;
+    margin: 0;
+    padding: 0;
+    display: none;
 }
 
 .member-name {
@@ -22,4 +22,24 @@ footer {
 
 .member-position {
     font-size: 15px;
+}
+
+.project-name {
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.center-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+}
+
+.bottom-sheet {
+    max-height: 100% !important;
 }

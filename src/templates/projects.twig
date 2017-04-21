@@ -1,10 +1,10 @@
 {% extends "components/base.twig" %}
 
 {% macro image(src) %}
-<div class="text-center">
-{%- if src ends with 'robo.jpg' -%}
-    <svg style="width:130px;height:130px" viewBox="0 0 24 24">
-        <path fill="#9E9E9E" d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,
+    <div class="text-center">
+        {%- if src ends with 'robo.jpg' -%}
+            <svg height="150" width="150" viewBox="0 0 24 24">
+                <path fill="#9E9E9E" d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,
             3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,
             15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,
             11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,
@@ -20,59 +20,59 @@
             21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,
             18.93C15.5,18.67 16.04,18.34 16.56,17.94L19.05,18.95C19.27,
             19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,
-            14.78 21.54,14.63L19.43,12.97Z" ></path>
-    </svg>
-{%- else -%}
-    <img src="{{src}}" class="img-circle" style="width: 130px; height: 130px; margin-bottom: 10px;"></img>
-{%- endif -%}
-</div>
+            14.78 21.54,14.63L19.43,12.97Z"></path>
+            </svg>
+        {%- else -%}
+            <img src="{{ src }}" class="circle" width="150" height="150"/>
+        {%- endif -%}
+    </div>
 {% endmacro %}
 
 {% block content %}
 
-{% import _self as utils %}
+    {% import _self as utils %}
 
-<div class="container">
-    <div class="row" id="projects">
-    {% for project in projects %}
+    <div class="container">
+        <div class="row" id="projects">
+            {% for project in projects %}
 
-    <div class="col-lg-3 col-md-4 col-sm-6">
-        <a href="#" data-toggle="modal" data-target="#{{ project.id }}" style="text-decoration: none; color: currentColor;">
-            <div class="panel panel-default" id="panel-shadow">
-                <div class="panel-body text-center" style="font-size: 16px;">
-                    <div class="container-fluid">
-                        {{ utils.image(project.image) }}
-                        <div>{{ project.name }}</div>
-                    </div>
-                </div>
-            </div>
-        </a>
-    </div>
-    <!-- Modal -->
-    <div id="{{ project.id }}" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">{{ project.name }}</h4>
-                </div>
-                <div class="modal-body">
-                    {{ utils.image(project.image) }}
-                    <h5>Team : {{ project.team }}</h5>
-                    <p class="lead">{{ project.description }}</p>
-                    <div class="row text-center">
-                    <a href="{{ path_for('projects', { 'id': project.id }) }}" class="text-center">
-                        <button type="button" class="btn btn-primary">Show Details</button>
+                <div class="col l3 m6 s12">
+                    <a href="#{{ project.id }}">
+                        <div class="waves-effect card-panel hoverable center-align full-width">
+                            {{ utils.image(project.image) }}
+                            <div class="center-flex">
+                                <div class="project-name grey-text text-darken-2">{{ project.name }}</div>
+                            </div>
+                        </div>
                     </a>
+                </div>
+                <!-- Modal -->
+                <div id="{{ project.id }}" class="modal bottom-sheet">
+                    <div class="container modal-content center-align">
+                        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">
+                            <i class="mdi mdi-close" aria-hidden="true"></i>
+                        </a>
+                        <h4 class="modal-title">{{ project.name }}</h4>
+                        {{ utils.image(project.image) }}
+                        <h5>Team : {{ project.team }}</h5>
+                        <p>{{ project.description }}</p>
+                        <a href="{{ path_for('projects', { 'id': project.id }) }}"
+                           class="btn btn-floating btn-large cyan pulse"><i class="material-icons">launch</i></a>
+
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
-    {% endfor %}
-    </div>
-</div>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.modal').modal();
+        });
+    </script>
 {% endblock %}
