@@ -2,6 +2,7 @@ var ProjectPanel = function () {
     const received = function(data) {
         App.showProgressAndAnimation(false);
         $('#project-container').html(data);
+        $('.materialboxed').materialbox();
     };
 
     const error = function(request, status, error) {
