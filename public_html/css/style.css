@@ -15,3 +15,11 @@ footer {
   padding: 0;
   display: none;
 }
+
+.member-name {
+    font-size: 20px;
+}
+
+.member-position {
+    font-size: 15px;
+}

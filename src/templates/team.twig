@@ -5,41 +5,41 @@
     <div class="row" id="team">
         {% for member in team %}
 
-        <div class="col-md-4 text-center">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <img src="{{member.thumbnail}}" class="img-circle" style="width: 120px; height: 120px; margin-bottom: 10px;"></img>
-                    <div style="font-size: 18px;">{{ member.name }}</div>
-                    <div style="font-size: 15px; color: #888;"><em> {{ member.position }} </em></div>
+        <div class="col m4 s12 center-align">
+            <div class="card hoverable">
+                <div class="card-content">
+                    <img src="{{member.thumbnail}}" class="circle" height="150" width="150" />
+                    <div class="member-name">{{ member.name }}</div>
+                    <div class="member-position grey-text text-darken-1"><em> {{ member.position }} </em></div>
                 </div>
-                <div class="panel-footer">
+                <div class="card-content grey lighten-4" style="height: 100px;">
                     {%- if member.links -%}
                         {%- for key, link in member.links -%}
                             {% set prefix = '' %}
                             {% if key == 'facebook' %}
-                                {% set color = '#3F51B5' %}
-                            {% elseif key == 'email' %} 
+                                {% set color = 'blue darken-2' %}
+                            {% elseif key == 'email' %}
                                 {% set prefix = 'mailto:' %}
-                                {% set color = '#c62828' %}
+                                {% set color = 'red' %}
                             {% elseif key == 'phone' %}
                                 {% set prefix = 'tel:' %}
-                                {% set color = '#2196F3' %}
-                            {% elseif key == 'google-plus' %} 
-                                {% set color = '#f44336' %}
-                            {% elseif key == 'linkedin' %} 
-                                {% set color = '#1A237E' %}
+                                {% set color = 'cyan' %}
+                            {% elseif key == 'google-plus' %}
+                                {% set color = 'red darken-2' %}
+                            {% elseif key == 'linkedin' %}
+                                {% set color = 'indigo' %}
                             {% else %}
-                                {% set color = '#E91E63' %}
+                                {% set color = 'grey darken-2' %}
                             {% endif %}
 
-                    <a href="{{ prefix }}{{ link }}" style="text-decoration: none;" target="_blank">
-                        <button class="fab text-center" data-toggle="tooltip" title="{{ link }}" style="background-color: {{ color }};">
+                    <a href="{{ prefix }}{{ link }}" target="_blank">
+                        <button class="btn-floating btn-large waves-effect waves-light {{ color }}" data-toggle="tooltip" title="{{ link }}" >
                         <i class="mdi mdi-{{ key }}" aria-hidden="true"></i>
                         </button>
                     </a>
                         {%- endfor -%}
                     {%- else -%}
-                    <div class="text-muted" style="padding-top: 15px; font-size: 17px;">No Contact</div>
+                    <h5 class="grey-text">No Contact</h5>
                     {%- endif -%}
                 </div>
             </div>
@@ -47,22 +47,4 @@
         {%- endfor -%}
     </div>
 </div>
-{% endblock %}
-
-{% block scripts %}
-<script type="text/javascript">
-    $(window).ready(function() {
-        // Finding the maximum height and applying to all columns
-        var max = -1;
-        $('#team').children().each( function() {
-            height = $(this).find('.panel-footer').outerHeight();
-            if(max<height) max = height;
-        });
-        console.log(max);
-        $('#team').children().each( function() {
-            $(this).find('.panel-footer').outerHeight(max);
-        });
-        $('[data-toggle="tooltip"]').tooltip();
-    });
-</script>
 {% endblock %}
