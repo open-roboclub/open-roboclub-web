@@ -8,132 +8,120 @@
 {% block content %}
     <div class="container">
 
-    <div class="card">
-        <div class="row valign-wrapper" style="padding: 30px;">
-            <div class="col m10 s12">
-                <h4 id="welcome">Welcome to Admin Panel</h4>
-            </div>
-            <div class="col m2 s12">
-                <button class="btn blue" id="sign-in">Sign In</button>
-            </div>
-        </div>
-    </div>
-
-    {{ include('components/loading.twig') }}
-
-    <div id="account-detail" class="row" style="display: none">
-
-        <div class="col m3 s12">
-            <div class="collection">
-                <a href="#profile" id="tab-profile" class="collection-item active purple">Profile</a>
-                <a href="#notification" id="tab-notification" class="collection-item purple-text">Notification</a>
+        <div class="card">
+            <div class="row valign-wrapper" style="padding: 30px;">
+                <div class="col m10 s12">
+                    <h4 id="welcome">Welcome to Admin Panel</h4>
+                </div>
+                <div class="col m2 s12">
+                    <button class="btn blue" id="sign-in">Sign In</button>
+                </div>
             </div>
         </div>
 
-        <div class="col m9 s12">
+        {{ include('components/loading.twig') }}
 
-            <div id="profile" class="card-panel">
-                <div class="margin-small">
-                    <h5>Profile</h5>
-                    <div class="center-align">
-                        <img id="avatar" height="200"
-                             src="https://res.cloudinary.com/amuroboclub/image/upload/person.svg"/><br>
-                    </div>
-                    <div class="input-field">
-                        <i class="material-icons prefix">account_circle</i>
-                        <input id="inputName" type="text" class="validate">
-                        <label class="active" for="inputName">Name</label>
-                    </div>
-                    <div class="input-field">
-                        <i class="material-icons prefix">photo</i>
-                        <select id="select"></select>
-                        <label>Profile Pic</label>
-                    </div>
-                    <div class="row">
-                        <div class="col s2 offset-s10">
-                            <button type="submit" id="save" class="btn purple right">Save</button>
-                        </div>
-                    </div>
+        <div id="account-detail" class="row" style="display: none">
+
+            <div class="col m3 s12">
+                <div class="collection">
+                    <a href="#profile" id="tab-profile" class="collection-item active purple">Profile</a>
+                    <a href="#notification" id="tab-notification" class="collection-item purple-text">Notification</a>
                 </div>
             </div>
 
-            <div id="notification" class="card-panel">
-                <form class="margin-small" id="notification-form">
-                    <h5>Send Notification</h5>
-                    <div class="form-group">
-                        <label for="title" class="col-lg-2 control-label">Title</label>
-                        <div class="col-lg-10">
-                            <input type="text" class="form-control" id="title" placeholder="Notification Title">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="message" class="col-lg-2 control-label">Message</label>
-                        <div class="col-lg-10">
-                            <textarea class="form-control" rows="1" name="message" id="message"
-                                      placeholder="Notification Message"></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="link" class="col-lg-2 control-label">Link</label>
-                        <div class="col-lg-10">
-                            <input type="text" class="form-control" id="link" placeholder="Link URL (Optional)">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label">Options</label>
-                        <div class="col-lg-10">
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="sendOptions" id="both" value="both" checked="">
-                                    Send notification and save to Announcements
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="sendOptions" id="news" value="news">
-                                    Save to Announcements only
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="sendOptions" id="notification" value="notification">
-                                    Send notification only
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-lg-10 col-lg-offset-2">
-                            <button type="submit" class="btn btn-primary">Send</button>
-                        </div>
-                    </div>
-                </form>
+            <div class="col m9 s12">
 
-                <form class="form-horizontal" id="edit-form" style="margin: 10px;">
-                    <fieldset>
-                        <legend>Edit Announcement</legend>
-                        <div class="form-group">
-                            <label class="col-lg-2 control-label" for="newsKey">Post Key</label>
-                            <div class="col-lg-10">
-                                <input class="form-control" id="newsKey" type="text" placeholder="Key Value"
-                                       disabled="">
+                <div id="profile" class="card-panel">
+                    <div class="margin-small">
+                        <h5>Profile</h5>
+                        <div class="center-align">
+                            <img id="avatar" height="200"
+                                 src="https://res.cloudinary.com/amuroboclub/image/upload/person.svg"/><br>
+                        </div>
+                        <div class="input-field">
+                            <i class="material-icons prefix">account_circle</i>
+                            <input id="inputName" type="text" class="validate">
+                            <label class="active" for="inputName">Name</label>
+                        </div>
+                        <div class="input-field">
+                            <i class="material-icons prefix">photo</i>
+                            <select id="select"></select>
+                            <label>Profile Pic</label>
+                        </div>
+                        <div class="row">
+                            <div class="col s2 offset-s10">
+                                <button type="submit" id="save" class="waves-effect waves-light btn purple right">Save
+                                </button>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="edit-message" class="col-lg-2 control-label">Message</label>
-                            <div class="col-lg-10">
-                                <input type="text" class="form-control" id="edit-message"
-                                       placeholder="Announcement Message" value="lol">
+                    </div>
+                </div>
+
+                <div id="notification" class="card-panel">
+                    <form class="margin-small" id="notification-form">
+                        <h5 class="padding-small">Notification</h5>
+                        <div class="input-field">
+                            <i class="material-icons prefix">title</i>
+                            <input id="title" type="text" class="validate">
+                            <label for="title">Title</label>
+                        </div>
+                        <div class="input-field">
+                            <i class="material-icons prefix">mode_edit</i>
+                            <textarea id="message" class="materialize-textarea"></textarea>
+                            <label for="message">Notification Message</label>
+                        </div>
+                        <div class="input-field">
+                            <i class="material-icons prefix">link</i>
+                            <input id="link" type="text" class="validate">
+                            <label for="link">Link (Optional)</label>
+                        </div>
+                        <div>
+                            <p>
+                                <input class="with-gap" name="sendOptions" type="radio" id="both" value="both" checked/>
+                                <label for="both">Send notification and save to Announcements</label>
+                            </p>
+                            <p>
+                                <input class="with-gap" name="sendOptions" type="radio" id="news" value="news"/>
+                                <label for="news">Save to Announcements only</label>
+                            </p>
+                            <p>
+                                <input class="with-gap" name="sendOptions" type="radio" id="noti" value="noti"/>
+                                <label for="noti">Send notification only</label>
+                            </p>
+                        </div>
+                        <div class="row">
+                            <div class="col s2 offset-s10">
+                                <button type="submit" id="send" class="waves-effect waves-light btn purple right">Send
+                                </button>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="col-lg-10 col-lg-offset-2">
-                                <button id="update-news" type="button" class="btn btn-info">Update</button>
-                                <button id="delete-news" type="button" class="btn btn-danger">Delete</button>
+                    </form>
+
+                    <form class="margin-small" id="edit-form">
+                        <h5 class="padding-small">Edit Announcement</h5>
+                        <div class="input-field">
+                            <i class="material-icons prefix">key</i>
+                            <input id="newsKey" type="text" class="validate" placeholder="Key Value" disabled>
+                            <label for="newsKey">Post Key</label>
+                        </div>
+                        <div class="input-field">
+                            <i class="material-icons prefix">mode_edit</i>
+                            <textarea id="edit-message" class="materialize-textarea"
+                                      placeholder="Announcement Message"></textarea>
+                            <label for="edit-message">Announcement Message</label>
+                        </div>
+                        <div class="row">
+                            <div class="col l10 offset-l2">
+                                <button id="update-news" type="button" class="waves-effect waves-light btn purple">
+                                    Update
+                                </button>
+                                <button id="delete-news" type="button" class="waves-effect waves-light btn red">Delete
+                                </button>
                             </div>
                         </div>
-                    </fieldset>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

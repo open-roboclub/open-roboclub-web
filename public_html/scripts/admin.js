@@ -42,7 +42,7 @@ var DatabaseOps = function () {
 
         if (key) {
             FirebaseOps.getDatabaseReference(newsRef + key).update({
-                notice: newsObject.replace(/\n/g, "\\n")
+                notice: newsObject
             }).then(function () {
                 App.showProgressBar(false);
                 App.showToast('Message successfully updated!');
@@ -50,8 +50,6 @@ var DatabaseOps = function () {
 
             return;
         }
-
-        newsObject.notice = newsObject.notice.replace(/\n/g, "\\n");
 
         FirebaseOps.getDatabaseReference(newsRef).push(newsObject)
             .then(function (snapshot) {
@@ -90,7 +88,7 @@ var DatabaseOps = function () {
         if (title == null || message == null) {
             App.showErrorToast("Can't send empty message");
             return;
-        } else if (title.length < 4 || message.length < 5) {
+        } else if (title.length < 5 || message.length < 5) {
             App.showErrorToast("Title or Message is too small");
             return;
         }
@@ -113,7 +111,7 @@ var DatabaseOps = function () {
             case 'both':
                 newsObject.notification = 'yes';
                 break;
-            case 'notification':
+            case 'noti':
                 loadEditor = false;
                 newsObject.notification = 'only';
                 break;
@@ -235,7 +233,6 @@ var AdminPanel = function () {
         document.getElementById('notification-form').onsubmit = function () {
             DatabaseOps.sendNotification(title.value, message.value, link.value);
 
-            console.log('clicked');
             return false;
         };
 
