@@ -50,18 +50,12 @@ var App = function () {
         progress(show);
     }
 
-    toastr.options = {
-        "closeButton": true,
-        "progressBar": true,
-        "timeOut": "2000"
-    };
-
-    function show(notification) {
-        notification.css("top", 70);
+    function showSuccess(notification) {
+        Materialize.toast(notification, 4000, 'green rounded');
     }
 
     function showError(error) {
-        show(toastr.error(error));
+        Materialize.toast(error, 4000, 'red rounded');
     }
 
     const signinButton = $('#signin-button');
@@ -73,7 +67,7 @@ var App = function () {
         showProgressBar: progress,
         showLoadingAnimation: loadingAnimation,
         showProgressAndAnimation: loaders,
-        showToast: show,
+        showToast: showSuccess,
         showErrorToast: showError,
 
         elements: {

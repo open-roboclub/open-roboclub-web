@@ -30,7 +30,7 @@ var DatabaseOps = function () {
             photoURL: photo
         }).then(function () {
             App.showProgressBar(false);
-            App.showToast(toastr.success('Profile updated successfully!'));
+            App.showToast('Profile updated successfully!');
         }, function (error) {
             App.showProgressBar(false);
             App.showErrorToast(error);
@@ -45,7 +45,7 @@ var DatabaseOps = function () {
                 notice: newsObject.replace(/\n/g, "\\n")
             }).then(function () {
                 App.showProgressBar(false);
-                App.showToast(toastr.success('Message successfully updated!'));
+                App.showToast('Message successfully updated!');
             });
 
             return;
@@ -56,7 +56,7 @@ var DatabaseOps = function () {
         FirebaseOps.getDatabaseReference(newsRef).push(newsObject)
             .then(function (snapshot) {
                 App.showProgressBar(false);
-                App.showToast(toastr.success('News posted successfully'));
+                App.showToast('News posted successfully');
 
                 if(loadEditor) {
                     try {
@@ -76,10 +76,9 @@ var DatabaseOps = function () {
     function deleteNews(key) {
         FirebaseOps.getDatabaseReference(newsRef + key).remove().then(function () {
             App.showProgressBar(false);
-            App.showToast(toastr.success('Announcement Deleted'));
+            App.showToast('Announcement Deleted');
             App.toggleVisibility(false, AdminPanel.elements.editForm);
         }).catch(function (error) {
-            App.showErrorToast(false);
             App.showErrorToast(error);
         });
     }
@@ -131,7 +130,8 @@ var DatabaseOps = function () {
         saveUser: saveUser,
         pushNews: pushNews,
         deleteNews: deleteNews,
-        sendNotification: sendNotification
+        sendNotification: sendNotification,
+        updateProfile: updateProfile
     }
 }();
 
@@ -157,6 +157,8 @@ var AdminPanel = function () {
         const name = document.getElementById('inputName');
         const photoSelect = document.getElementById('select');
 
+        name.value = username;
+
         var option = document.createElement('option');
         option.value = currentPhoto;
         option.text = 'Default Photo (Current)';
@@ -168,16 +170,14 @@ var AdminPanel = function () {
             option.text = profile.providerId;
             photoSelect.options.add(option);
         });
+        $('select').material_select();
 
         photoSelect.onchange = function () {
             changeProfilePic(this.value);
         };
 
-        name.value = username;
-
-        document.getElementById('profile-form').onsubmit = function () {
-            updateProfile(name.value, photoSelect.options.item(photoSelect.options.selectedIndex).value);
-            return false;
+        document.getElementById('save').onclick = function () {
+            DatabaseOps.updateProfile(name.value, photoSelect.options.item(photoSelect.options.selectedIndex).value);
         };
     }
 
@@ -247,6 +247,8 @@ var AdminPanel = function () {
     function populateOptions(user) {
         loadProfileSettings(user.displayName, user.photoURL, user.providerData);
         initializeNotificationPanel(user.uid);
+
+        Materialize.updateTextFields();
     }
 
     function setupUSerInfo(user) {

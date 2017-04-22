@@ -1,150 +1,140 @@
 {% extends "components/base.twig" %}
 
 {% block scripts %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-dateFormat/1.0/jquery.dateFormat.min.js"></script>
-<script src="{{ base_url }}/scripts/admin.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-dateFormat/1.0/jquery.dateFormat.min.js"></script>
+    <script src="{{ base_url }}/scripts/admin.js"></script>
 {% endblock %}
 
 {% block content %}
-  <div class="container" style="padding: 10px;">
+    <div class="container">
 
-    <div class="panel panel-body">
-      <div class="row" style="padding: 10px;">
-        <div class="col-sm-10">
-          <h4 id="welcome" style="margin-top: 7px;">Welcome to Admin Panel</h4>
+    <div class="card">
+        <div class="row valign-wrapper" style="padding: 30px;">
+            <div class="col m10 s12">
+                <h4 id="welcome">Welcome to Admin Panel</h4>
+            </div>
+            <div class="col m2 s12">
+                <button class="btn blue" id="sign-in">Sign In</button>
+            </div>
         </div>
-        <div class="col-sm-2">
-          <button class="btn btn-primary" id="sign-in">Sign In</button>
-        </div>
-      </div>
     </div>
 
     {{ include('components/loading.twig') }}
 
-    <div id="account-detail" style="display: none;">
+    <div id="account-detail" class="row" style="display: none">
 
-      <div class="col-md-3">
-        <div class="list-group">
-          <a href="#profile" id="tab-profile" class="list-group-item">Profile</a>
-          <a href="#notification" id="tab-notification" class="list-group-item">Notification</a>
-        </div>
-      </div>
-
-      <div class="col-md-9">
-
-        <div id="profile" class="panel panel-default">
-          <div class="panel panel-body">
-            <form class="form-horizontal"  id="profile-form" style="margin: 10px;">
-              <fieldset>
-                <legend>Profile Settings</legend>
-                <div class="text-center">
-                  <img id="avatar" class="img-thumbnail" src="https://res.cloudinary.com/amuroboclub/image/upload/person.svg" style="height: 200px;" /><br>
-                </div>
-                <div class="form-group">
-                  <label for="inputName" class="col-lg-2 control-label">Name</label>
-                  <div class="col-lg-10">
-                    <input type="text" class="form-control" id="inputName" placeholder="Name" >
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="select" class="col-lg-2 control-label">Profile Picture</label>
-                  <div class="col-lg-10">
-                    <select class="form-control" id="select">
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-lg-10 col-lg-offset-2">
-                    <button type="submit" id="save" class="btn btn-primary">Save</button>
-                  </div>
-                </div>
-              </fieldset>
-            </form>
-          </div>
+        <div class="col m3 s12">
+            <div class="collection">
+                <a href="#profile" id="tab-profile" class="collection-item active purple">Profile</a>
+                <a href="#notification" id="tab-notification" class="collection-item purple-text">Notification</a>
+            </div>
         </div>
 
-        <div id="notification" class="panel panel-default" >
-          <div class="panel panel-body">
-          <form class="form-horizontal"  id="notification-form" style="margin: 10px;">
-              <fieldset>
-                <legend>Send Notifications</legend>
-                <div class="form-group">
-                  <label for="title" class="col-lg-2 control-label">Title</label>
-                  <div class="col-lg-10">
-                    <input type="text" class="form-control" id="title" placeholder="Notification Title" >
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="message" class="col-lg-2 control-label">Message</label>
-                  <div class="col-lg-10">
-                    <textarea class="form-control" rows="1" name="message" id="message" placeholder="Notification Message"></textarea>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="link" class="col-lg-2 control-label">Link</label>
-                  <div class="col-lg-10">
-                    <input type="text" class="form-control" id="link" placeholder="Link URL (Optional)" >
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-lg-2 control-label">Options</label>
-                  <div class="col-lg-10">
-                    <div class="radio">
-                      <label>
-                        <input type="radio" name="sendOptions" id="both" value="both" checked="">
-                        Send notification and save to Announcements
-                      </label>
-                    </div>
-                    <div class="radio">
-                      <label>
-                        <input type="radio" name="sendOptions" id="news" value="news">
-                        Save to Announcements only
-                      </label>
-                    </div>
-                    <div class="radio">
-                      <label>
-                        <input type="radio" name="sendOptions" id="notification" value="notification">
-                        Send notification only
-                      </label>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-lg-10 col-lg-offset-2">
-                    <button type="submit" class="btn btn-primary">Send</button>
-                  </div>
-                </div>
-              </fieldset>
-            </form>
+        <div class="col m9 s12">
 
-            <form class="form-horizontal"  id="edit-form" style="margin: 10px;">
-              <fieldset>
-                <legend>Edit Announcement</legend>
-                <div class="form-group">
-                  <label class="col-lg-2 control-label" for="newsKey">Post Key</label>
-                  <div class="col-lg-10">
-                    <input class="form-control" id="newsKey" type="text" placeholder="Key Value" disabled="">
-                  </div>
+            <div id="profile" class="card-panel">
+                <div class="margin-small">
+                    <h5>Profile</h5>
+                    <div class="center-align">
+                        <img id="avatar" height="200"
+                             src="https://res.cloudinary.com/amuroboclub/image/upload/person.svg"/><br>
+                    </div>
+                    <div class="input-field">
+                        <i class="material-icons prefix">account_circle</i>
+                        <input id="inputName" type="text" class="validate">
+                        <label class="active" for="inputName">Name</label>
+                    </div>
+                    <div class="input-field">
+                        <i class="material-icons prefix">photo</i>
+                        <select id="select"></select>
+                        <label>Profile Pic</label>
+                    </div>
+                    <div class="row">
+                        <div class="col s2 offset-s10">
+                            <button type="submit" id="save" class="btn purple right">Save</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                  <label for="edit-message" class="col-lg-2 control-label">Message</label>
-                  <div class="col-lg-10">
-                    <input type="text" class="form-control" id="edit-message" placeholder="Announcement Message" value="lol">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-lg-10 col-lg-offset-2">
-                    <button id="update-news" type="button" class="btn btn-info">Update</button>
-                    <button id="delete-news" type="button" class="btn btn-danger">Delete</button>
-                  </div>
-                </div>
-              </fieldset>
-            </form>
+            </div>
+
+            <div id="notification" class="card-panel">
+                <form class="margin-small" id="notification-form">
+                    <h5>Send Notification</h5>
+                    <div class="form-group">
+                        <label for="title" class="col-lg-2 control-label">Title</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" id="title" placeholder="Notification Title">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message" class="col-lg-2 control-label">Message</label>
+                        <div class="col-lg-10">
+                            <textarea class="form-control" rows="1" name="message" id="message"
+                                      placeholder="Notification Message"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="link" class="col-lg-2 control-label">Link</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" id="link" placeholder="Link URL (Optional)">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Options</label>
+                        <div class="col-lg-10">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="sendOptions" id="both" value="both" checked="">
+                                    Send notification and save to Announcements
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="sendOptions" id="news" value="news">
+                                    Save to Announcements only
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="sendOptions" id="notification" value="notification">
+                                    Send notification only
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-10 col-lg-offset-2">
+                            <button type="submit" class="btn btn-primary">Send</button>
+                        </div>
+                    </div>
+                </form>
+
+                <form class="form-horizontal" id="edit-form" style="margin: 10px;">
+                    <fieldset>
+                        <legend>Edit Announcement</legend>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="newsKey">Post Key</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" id="newsKey" type="text" placeholder="Key Value"
+                                       disabled="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-message" class="col-lg-2 control-label">Message</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="edit-message"
+                                       placeholder="Announcement Message" value="lol">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <button id="update-news" type="button" class="btn btn-info">Update</button>
+                                <button id="delete-news" type="button" class="btn btn-danger">Delete</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
         </div>
-
-      </div>
-
     </div>
-
-  </div>
 {% endblock %}
