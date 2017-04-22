@@ -1,39 +1,46 @@
-<nav class="grey lighten-5" role="navigation">
-    <div class="nav-wrapper container">
-        <a class="brand-logo" href="./">
-            <img src="https://res.cloudinary.com/amuroboclub/image/upload/logo-vector.svg" alt="AMU RoboClub" />
-        </a>
-        <ul class="right hide-on-med-and-down">
-            {%- for item in navigation -%}
-                {% if route == item %}
-                    <li class="active"><a class="grey-text text-darken-4" href="./{{ item }}">{{ item|title }}</a></li>
-                {% elseif route == '' and item == 'home' %}
-                    <li class="active"><a class="grey-text text-darken-4" href="./">{{ item|title }}</a></li>
-                {% else %}
-                    <li><a class="grey-text text-darken-4" href="{{ base_url }}/{{ item }}">{{ item|title }}</a></li>
-                {% endif %}
-            {%- endfor -%}
-            <li><a id="signin-link" href="{{ base_url }}/signin"><button id="signin-button" class="waves-effect waves-light btn blue">Sign In</button></a></li>
-            <li><a class="grey-text text-darken-4" href="{{ base_url }}/developers">Developers</a></li>
-        </ul>
+<div class="navbar-fixed">
+    <nav class="grey lighten-5" role="navigation">
+        <div class="nav-wrapper container">
+            <a class="brand-logo" href="./">
+                <img src="https://res.cloudinary.com/amuroboclub/image/upload/logo-vector.svg" alt="AMU RoboClub"/>
+            </a>
+            <ul class="right hide-on-med-and-down">
+                {%- for item in navigation -%}
+                    {% if route == item %}
+                        <li class="active"><a class="grey-text text-darken-4" href="./{{ item }}">{{ item|title }}</a>
+                        </li>
+                    {% elseif route == '' and item == 'home' %}
+                        <li class="active"><a class="grey-text text-darken-4" href="./">{{ item|title }}</a></li>
+                    {% else %}
+                        <li><a class="grey-text text-darken-4" href="{{ base_url }}/{{ item }}">{{ item|title }}</a>
+                        </li>
+                    {% endif %}
+                {%- endfor -%}
+                <li><a id="signin-link" href="{{ base_url }}/signin">
+                        <button id="signin-button" class="waves-effect waves-light btn blue">Sign In</button>
+                    </a></li>
+                <li><a class="grey-text text-darken-4" href="{{ base_url }}/developers">Developers</a></li>
+            </ul>
 
-        <ul id="nav-mobile" class="side-nav">
-            {%- for item in navigation -%}
-                {% if route == item %}
-                    <li class="active"><a class="grey-text text-darken-4" href="./{{ item }}">{{ item|title }}</a></li>
-                {% elseif route == '' and item == 'home' %}
-                    <li class="active"><a class="grey-text text-darken-4" href="./">{{ item|title }}</a></li>
-                {% else %}
-                    <li><a class="grey-text text-darken-4" href="{{ base_url }}/{{ item }}">{{ item|title }}</a></li>
-                {% endif %}
-            {%- endfor -%}
-            <li><a id="signin-link" href="{{ base_url }}/signin">Sign In</a></li>
-            <li><a class="grey-text text-darken-4" href="{{ base_url }}/developers">Developers</a></li>
-        </ul>
 
-        <a href="#" data-activates="nav-mobile" class="button-collapse grey-text text-darken-2"><i class="material-icons">menu</i></a>
-    </div>
-    <div id="progress-bar" class="progress purple lighten-4">
-        <div class="indeterminate purple"></div>
-    </div>
-</nav>
+            <a href="#" data-activates="nav-mobile" class="button-collapse grey-text text-darken-2"><i
+                        class="material-icons">menu</i></a>
+        </div>
+        <div id="progress-bar" class="progress purple lighten-4">
+            <div class="indeterminate purple"></div>
+        </div>
+    </nav>
+</div>
+<ul id="nav-mobile" class="side-nav">
+    {%- for item in navigation -%}
+        {% if route == item %}
+            <li class="active"><a class="grey-text text-darken-4" href="./{{ item }}">{{ item|title }}</a></li>
+        {% elseif route == '' and item == 'home' %}
+            <li class="active"><a class="grey-text text-darken-4" href="./">{{ item|title }}</a></li>
+        {% else %}
+            <li><a class="grey-text text-darken-4" href="{{ base_url }}/{{ item }}">{{ item|title }}</a></li>
+        {% endif %}
+    {%- endfor -%}
+    <li><a id="signin-link" href="{{ base_url }}/signin">Sign In</a></li>
+    <li><a class="grey-text text-darken-4" href="{{ base_url }}/developers">Developers</a></li>
+</ul>
