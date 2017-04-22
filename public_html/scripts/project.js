@@ -1,18 +1,18 @@
 var ProjectPanel = function () {
     const received = function(data) {
-        App.showProgressAndAnimation(false);
+        App.showProgressBar(false);
         $('#project-container').html(data);
         $('.materialboxed').materialbox();
     };
 
     const error = function(request, status, error) {
         console.log(error);
-        App.showProgressAndAnimation(false);
+        App.showProgressBar(false);
     };
 
     return {
         initialize: function () {
-            App.showProgressAndAnimation(true);
+            App.showProgressBar(true);
 
             const project_id = window.location.href.split("/").pop();
 
@@ -31,7 +31,7 @@ var ProjectPanel = function () {
                         console.log(error);
                     }
 
-                    if(docLoaded) App.showProgressAndAnimation(true);
+                    if(docLoaded) App.showProgressBar(true);
 
                     docLoaded = true;
 
@@ -46,7 +46,7 @@ var ProjectPanel = function () {
                     );
 
             }, function(error) {
-                App.showProgressAndAnimation(false);
+                App.showProgressBar(false);
                 console.log(error);
             });
         }

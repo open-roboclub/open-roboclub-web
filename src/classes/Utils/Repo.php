@@ -17,17 +17,26 @@ final class Repo {
 
         if(!empty($keys)) {
             Repo::$cache->deleteItems($keys);
+            foreach ($keys as $key) {
+                Database::deleteAll($key);
+            }
             return;
         }
 
         Repo::$cache->clear();
+        Database::destroy();
     }
 
-    private static function getCacheItem($key, $url, $seconds = 600) {
+    private static function getCacheItem($key, $url, $override=TRUE, $seconds = 10000) {
         $item = Repo::$cache->getItem($key);
 
         if (is_null($item->get())) {
-            $data = Utils::getJsonArray($url);
+            $data = Database::get($key);
+
+            if(is_null($data) || !$override) {
+                $data = Utils::getJsonArray($url);
+                Database::save($key, $data);
+            }
 
             if (!empty($data)) {
                 $item->set($data)->expiresAfter($seconds);
@@ -52,8 +61,8 @@ final class Repo {
         return array_reverse(Repo::getCacheItem('contributions', 'https://amu-roboclub.firebaseio.com/contribution.json'));
     }
 
-    public static function getProjects() {
-        return Repo::getCacheItem('projects', 'https://amu-roboclub.firebaseio.com/projects.json?orderBy="ongoing"&equalTo=false');
+    public static function getProjects($blocking=TRUE) {
+        return Repo::getCacheItem('projects', 'https://amu-roboclub.firebaseio.com/projects.json?orderBy="ongoing"&equalTo=false', $blocking);
     }
 
     public static function getTeam() {
@@ -62,14 +71,6 @@ final class Repo {
 
     public static function getRoboconData() {
         return Repo::getCacheItem('robocon', 'https://amu-roboclub.firebaseio.com/robocon/17.json');
-    }
-
-    public static function getRobotsMetaData() {
-        return Repo::getCacheItem('google_robots', 'https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system.gserviceaccount.com');
-    }
-
-    public static function getAdmins($uid, $token) {
-        return Repo::getCacheItem("admin_$uid_$token", "https://amu-roboclub.firebaseio.com/admins/$uid.json?auth=$token", 60);
     }
 
     public static function rebuildCache($key=''){
@@ -83,7 +84,6 @@ final class Repo {
             Repo::getContributions();
             Repo::getTeam();
             Repo::getRoboconData();
-            Repo::getRobotsMetaData();
 
             return TRUE;
         }
@@ -108,9 +108,6 @@ final class Repo {
                 return TRUE;
             case 'robocon':
                 Repo::getRoboconData();
-                return TRUE;
-            case 'robots':
-                Repo::getRobotsMetaData();
                 return TRUE;
             default:
                 return FALSE;

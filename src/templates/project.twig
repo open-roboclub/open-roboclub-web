@@ -1,8 +1,9 @@
 {% extends "components/base.twig" %}
 {% block content %}
 <div class="container">
-    {{ include('components/loading.twig') }}
-    <div id="project-container" ></div>
+    <div id="project-container">
+        {{ include('project-core.twig') }}
+    </div>
 </div>
 {% endblock %}
 

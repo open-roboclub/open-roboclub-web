@@ -2,6 +2,7 @@
 
 namespace App\Page;
 
+use App\Utils\Repo;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
@@ -11,6 +12,7 @@ final class ContributionsPage extends GenericPage {
 		$this->setTitle('Contributions');
 		$this->setTemplate('contributions.twig');
 
+        $this->addTwigObject(['contributions' => Repo::getContributions()]);
 		$this->render_page($request, $response);
 	}
 

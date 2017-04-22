@@ -17,7 +17,7 @@ var ContributionPanel = function () {
     var loaded = false;
     function addContribution(contribution, key) {
         if(!loaded) {
-            App.showProgressAndAnimation(false);
+            App.showProgressBar(false);
             loaded = true;
         }
 
@@ -34,7 +34,7 @@ var ContributionPanel = function () {
 
     return {
         initialize: function () {
-            App.showProgressAndAnimation(true);
+            App.showProgressBar(true);
 
             var newsRef = FirebaseOps.getDatabaseReference('contribution');
             newsRef.on('child_added', function(snapshot) {

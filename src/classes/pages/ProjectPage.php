@@ -2,24 +2,25 @@
 
 namespace App\Page;
 
+use App\Utils\Repo;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
 final class ProjectPage extends GenericPage {
 
-	private function generateThumbs(&$project) {
-		if(!@array_key_exists('images', $project))
-			return $project;
+	private function getProject($id) {
+        $projects = Repo::getProjects($blocking = FALSE);
+        if(isset($projects)) {
+            foreach ($projects as $project) {
+                if($project['id'] == $id)
+                    return $project;
+            }
+        } else {
+            return false;
+        }
 
-		$thumbs = [];
-		foreach ($project['images'] as $image) {
-			$thumbs[] = str_replace('upload/', 'upload/c_thumb,w_150,h_150/', $image);
-		}
-
-		$project['thumbs'] = $thumbs;
-
-		return $project;
-	}
+        return NULL;
+    }
 
 	public function __invoke(Request $request, Response $response, $args) {
 		$this->setTitle('Project');
@@ -29,9 +30,14 @@ final class ProjectPage extends GenericPage {
 			$this->setTemplate('project-core.twig');
 			
 			$project = $request->getParsedBody();
-			$this->generateThumbs($project);
 			$this->addTwigObject(['project' => $project]);
-		}
+		} else {
+		    $project = $this->getProject($request->getAttribute('id'));
+		    if($project) {
+                $this->addTwigObject(['project' => $project]);
+                $this->addTwigObject(['hide' => TRUE]);
+            }
+        }
 		
 		$this->render_page($request, $response);
 	}

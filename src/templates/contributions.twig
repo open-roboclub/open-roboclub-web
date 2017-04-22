@@ -10,6 +10,21 @@
         </div>
         {{ include('components/loading.twig') }}
         <div class="row" id="contributions">
+        {% for it in contributions %}
+            <div class="col l3 m4 s12">
+                <div class="card-panel hoverable">
+                    <div style="height: 230px;">
+                        <div class="center-align">
+                            <i class="mdi mdi-coin mdi-48px amber-text" aria-hidden="true"></i><br>
+                            <div class="member-name"><strong>{{ it.amount }}</strong></div><br>
+                            <span class="member-position">{{ it.contributor }}</span><br>
+                        </div><br>
+                        <div><em><strong>Purpose : &nbsp;</strong></em> {{ it.purpose }}</div>
+                        <div><em><strong>Remark : &nbsp;</strong></em> {{ it.remark }}</div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
         </div>
     </div>
 {% endblock %}
