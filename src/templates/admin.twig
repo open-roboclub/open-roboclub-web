@@ -1,5 +1,9 @@
 {% extends "components/base.twig" %}
 
+{% block styles %}
+    <link href="{{ base_url }}/css/admin.css" rel="stylesheet" />
+{% endblock %}
+
 {% block scripts %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-dateFormat/1.0/jquery.dateFormat.min.js"></script>
     <script src="{{ base_url }}/scripts/admin.js"></script>
@@ -112,7 +116,7 @@
                             <label for="edit-message">Announcement Message</label>
                         </div>
                         <div class="row">
-                            <div class="col l10 offset-l2">
+                            <div class="col s8 offset-s4">
                                 <button id="update-news" type="button" class="waves-effect waves-light btn purple">
                                     Update
                                 </button>

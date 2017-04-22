@@ -1,0 +1,53 @@
+/* label focus color */
+.input-field input:focus + label {
+    color: #AA00FF !important;
+}
+/* label underline focus color */
+.input-field input:focus {
+    border-bottom: 1px solid #AA00FF !important;
+    box-shadow: 0 1px 0 0 #AA00FF !important
+}
+
+.input-field textarea:focus + label {
+    color: #AA00FF !important;
+}
+
+.input-field textarea:focus {
+    border-bottom: 1px solid #AA00FF !important;
+    box-shadow: 0 1px 0 0 #AA00FF !important
+}
+
+/* icon prefix focus color */
+.input-field .prefix.active {
+    color: #AA00FF;
+}
+
+/* icon prefix color */
+.input-field .prefix {
+    color: #999;
+}
+
+.select-wrapper ul > li > span {
+    color: #AA00FF;
+}
+
+.dropdown-content li > a {
+    color: #AA00FF;
+}
+
+[type="radio"].with-gap:checked + label:before {
+    border-radius: 50%;
+    border: 2px solid #AA00FF;
+}
+
+[type="radio"].with-gap:checked + label:after {
+    border-radius: 50%;
+    border: 2px solid #AA00FF;
+    background-color: #AA00FF;
+    z-index: 0;
+    -webkit-transform: scale(.5);
+    -moz-transform: scale(.5);
+    -ms-transform: scale(.5);
+    -o-transform: scale(.5);
+    transform: scale(.5);
+}

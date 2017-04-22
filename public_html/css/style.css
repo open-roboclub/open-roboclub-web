@@ -15,43 +15,6 @@ hr {
     padding: 0;
 }
 
-/* label focus color */
-.input-field input:focus + label {
-    color: #AA00FF !important;
-}
-/* label underline focus color */
-.input-field input:focus {
-    border-bottom: 1px solid #AA00FF !important;
-    box-shadow: 0 1px 0 0 #AA00FF !important
-}
-
-.input-field textarea:focus + label {
-    color: #AA00FF !important;
-}
-
-.input-field textarea:focus {
-    border-bottom: 1px solid #AA00FF !important;
-    box-shadow: 0 1px 0 0 #AA00FF !important
-}
-
-/* icon prefix focus color */
-.input-field .prefix.active {
-    color: #AA00FF;
-}
-
-/* icon prefix color */
-.input-field .prefix {
-    color: #999;
-}
-
-.select-wrapper ul > li > span {
-    color: #AA00FF;
-}
-
-.dropdown-content li > a {
-    color: #AA00FF;
-}
-
 .white-space-pre {
     white-space: pre-wrap;
 }
@@ -100,8 +63,4 @@ hr {
 
 .margin-small {
     margin: 10px;
-}
-
-.hidden {
-    display: none;
 }
