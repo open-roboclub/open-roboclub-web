@@ -23,7 +23,7 @@
                                 </div>
                                 <div class="col s2 center-align">
                                     <a href="{{ item.url }}"
-                                       style="display: block;" {% if item.file %} data-toggle="tooltip" title="{{ item.file }}" {% endif %}
+                                       style="display: block;" {% if item.file %} class="tooltipped" data-tooltip="{{ item.file }}" {% endif %}
                                        target="_blank">
                                         <button class="btn-floating btn-large waves-effect waves-light pink margin-small">
                                             <i class="mdi mdi-share" aria-hidden="true"></i>
