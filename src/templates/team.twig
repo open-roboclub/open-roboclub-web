@@ -1,50 +1,51 @@
 {% extends "components/base.twig" %}
 
 {% block content %}
-<div class="container">
-    <div class="row" id="team">
-        {% for member in team %}
+    <div class="container">
+        <div class="row" id="team">
+            {% for member in team %}
 
-        <div class="col m4 s12 center-align">
-            <div class="card hoverable">
-                <div class="card-content">
-                    <img src="{{member.thumbnail}}" class="circle" height="150" width="150" />
-                    <div class="member-name">{{ member.name }}</div>
-                    <div class="member-position grey-text text-darken-1"><em> {{ member.position }} </em></div>
-                </div>
-                <div class="card-content grey lighten-4" style="height: 100px;">
-                    {%- if member.links -%}
-                        {%- for key, link in member.links -%}
-                            {% set prefix = '' %}
-                            {% if key == 'facebook' %}
-                                {% set color = 'blue darken-2' %}
-                            {% elseif key == 'email' %}
-                                {% set prefix = 'mailto:' %}
-                                {% set color = 'red' %}
-                            {% elseif key == 'phone' %}
-                                {% set prefix = 'tel:' %}
-                                {% set color = 'cyan' %}
-                            {% elseif key == 'google-plus' %}
-                                {% set color = 'red darken-2' %}
-                            {% elseif key == 'linkedin' %}
-                                {% set color = 'indigo' %}
-                            {% else %}
-                                {% set color = 'grey darken-2' %}
-                            {% endif %}
+                <div class="col m4 s12 center-align">
+                    <div class="card hoverable">
+                        <div class="card-content">
+                            <img src="{{ member.thumbnail }}" class="circle" height="150" width="150"/>
+                            <div class="member-name">{{ member.name }}</div>
+                            <div class="member-position grey-text text-darken-1"><em> {{ member.position }} </em></div>
+                        </div>
+                        <div class="card-content grey lighten-4" style="height: 100px;">
+                            {%- if member.links -%}
+                                {%- for key, link in member.links -%}
+                                    {% set prefix = '' %}
+                                    {% if key == 'facebook' %}
+                                        {% set color = 'blue darken-2' %}
+                                    {% elseif key == 'email' %}
+                                        {% set prefix = 'mailto:' %}
+                                        {% set color = 'red' %}
+                                    {% elseif key == 'phone' %}
+                                        {% set prefix = 'tel:' %}
+                                        {% set color = 'cyan' %}
+                                    {% elseif key == 'google-plus' %}
+                                        {% set color = 'red darken-2' %}
+                                    {% elseif key == 'linkedin' %}
+                                        {% set color = 'indigo' %}
+                                    {% else %}
+                                        {% set color = 'grey darken-2' %}
+                                    {% endif %}
 
-                    <a href="{{ prefix }}{{ link }}" target="_blank">
-                        <button class="btn-floating btn-large waves-effect waves-light {{ color }}" data-toggle="tooltip" title="{{ link }}" >
-                        <i class="mdi mdi-{{ key }}" aria-hidden="true"></i>
-                        </button>
-                    </a>
-                        {%- endfor -%}
-                    {%- else -%}
-                    <h5 class="grey-text">No Contact</h5>
-                    {%- endif -%}
+                                    <a href="{{ prefix }}{{ link }}" class="tooltipped" data-tooltip="{{ link }}"
+                                       target="_blank">
+                                        <button class="btn-floating btn-large waves-effect waves-light {{ color }}">
+                                            <i class="mdi mdi-{{ key }}" aria-hidden="true"></i>
+                                        </button>
+                                    </a>
+                                {%- endfor -%}
+                            {%- else -%}
+                                <h5 class="grey-text">No Contact</h5>
+                            {%- endif -%}
+                        </div>
+                    </div>
                 </div>
-            </div>
+            {%- endfor -%}
         </div>
-        {%- endfor -%}
     </div>
-</div>
 {% endblock %}
