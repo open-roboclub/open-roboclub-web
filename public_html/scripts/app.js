@@ -1,5 +1,9 @@
 const base_url = $('#base_url').text();
 
+$(document).ready(function () {
+    $('.button-collapse').sideNav();
+});
+
 var App = function () {
     function toggleVisibility(show, view) {
         if (show) {

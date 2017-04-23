@@ -92,5 +92,4 @@ var FirebaseOps = function () {
 
 window.addEventListener('load', function() {
     FirebaseOps.updateSigninInfo();
-    $('.button-collapse').sideNav();
 });
