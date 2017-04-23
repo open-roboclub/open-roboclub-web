@@ -3,6 +3,7 @@ var RoboconPanel = function () {
     const received = function(data) {
         App.showProgressBar(false);
         $('#robocon-container').html(data);
+        $('.tooltipped').tooltip();
     };
 
     const error = function(request, status, error) {

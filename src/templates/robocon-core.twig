@@ -36,7 +36,7 @@
                             <h6>{{ item.name }}</h6>
                         </div>
                         <div class="col s2 center-align">
-                            <a href="{{ item.url }}" {% if item.file %} data-toggle="tooltip" title="{{ item.file }}" {% endif %}
+                            <a href="{{ item.url }}" {% if item.file %} class="tooltipped" data-tooltip="{{ item.file }}" {% endif %}
                                target="_blank">
                                 <button class="btn-floating btn-large waves-effect waves-light pink">
                                     <i class="mdi mdi-share" aria-hidden="true"></i>
