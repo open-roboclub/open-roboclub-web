@@ -132,51 +132,54 @@
                                 <a href="http://www.amu.ac.in/">Know more</a>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="card-panel grey lighten-2 col m6 s12 padding-10">
-                    <div class="row">
-                        <div class="col s2">
-                            <i class="mdi mdi-home-modern mdi-48px" aria-hidden="true"></i>
-                        </div>
-                        <div class="col s10">
-                            WS-18,<br>
-                            Mechanical Workshop Compound,<br>
-                            Zakir Husain College of Engg &amp; Tech,<br>
-                            Aligarh Muslim University, Aligarh.<br>
-                            India.<br>
-                            <a href="//www.google.co.in/maps/place/AMU+Roboclub/@27.91423,78.07735,15z"
-                               data-toggle="tooltip" title="Find Us!" target="_blank">
-                                <button class="btn-floating btn-large waves-effect waves-light blue center-align">
-                                    <i class="mdi mdi-map" aria-hidden="true"></i>
-                                </button>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                </div>
-            <div class="col l3">
-                    {% for news in news %}
-                        <div class="card-panel hoverable">
+                        <div class="card-panel grey lighten-2 padding-10">
                             <div class="row">
                                 <div class="col s2">
-                                    <i class="mdi mdi-newspaper mdi-36px left" aria-hidden="true"></i>
+                                    <i class="mdi mdi-home-modern mdi-48px" aria-hidden="true"></i>
                                 </div>
                                 <div class="col s10">
-                                    <div class="white-space-pre">{{ news.notice }}</div>
-                                    <hr>
-                                    <div><em> {{ news.date }} </em></div>
+                                    WS-18,<br>
+                                    Mechanical Workshop Compound,<br>
+                                    Zakir Husain College of Engg &amp; Tech,<br>
+                                    Aligarh Muslim University, Aligarh.<br>
+                                    India.<br>
+
                                 </div>
                             </div>
+                            <div class="center-align">
+                                <a href="//www.google.co.in/maps/place/AMU+Roboclub/@27.91423,78.07735,15z"
+                                   data-toggle="tooltip" title="Find Us!" target="_blank">
+                                    <button class="btn-floating btn-large waves-effect waves-light blue center-align">
+                                        <i class="mdi mdi-map" aria-hidden="true"></i>
+                                    </button>
+                                </a>
+                            </div>
                         </div>
-                    {% endfor %}
-                <div class="card-panel grey lighten-3">
-                <a href="./announcements" class="valign-wrapper">
-                    <div>
-                        <i class="mdi mdi-arrow-right mdi-24px" aria-hidden="true"></i>
                     </div>
-                    <span>&nbsp; View All</span>
-                </a>
+                </div>
+            </div>
+            <div class="col l3">
+                {% for news in news %}
+                    <div class="card-panel hoverable">
+                        <div class="row">
+                            <div class="col s2">
+                                <i class="mdi mdi-newspaper mdi-36px left" aria-hidden="true"></i>
+                            </div>
+                            <div class="col s10">
+                                <div class="white-space-pre">{{ news.notice }}</div>
+                                <hr>
+                                <div><em> {{ news.date }} </em></div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                <div class="card-panel grey lighten-3">
+                    <a href="./announcements" class="valign-wrapper">
+                        <div>
+                            <i class="mdi mdi-arrow-right mdi-24px" aria-hidden="true"></i>
+                        </div>
+                        <span>&nbsp; View All</span>
+                    </a>
                 </div>
             </div>
         </div>
