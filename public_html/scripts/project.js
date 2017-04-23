@@ -3,6 +3,7 @@ var ProjectPanel = function () {
         App.showProgressBar(false);
         $('#project-container').html(data);
         $('.materialboxed').materialbox();
+        $('.tooltipped').tooltip();
     };
 
     const error = function(request, status, error) {
