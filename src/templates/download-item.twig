@@ -1,0 +1,20 @@
+<div class="row valign-wrapper">
+    <div class="col s10">
+        <div class="member-position padding-small">{{ item.name }}</div>
+        {% if item.about %}
+            <div class="grey-text text-darken-2 padding-small">{{ item.about }}</div>
+        {% endif %}
+    </div>
+    <div class="col s2 center-align">
+        <a href="{{ item.url }}" {% if item.file %} class="tooltipped" data-tooltip="{{ item.file }}" {% endif %}
+           target="_blank">
+            <button class="btn-floating btn-large waves-effect waves-light pink margin-small">
+                <i class="mdi mdi-share" aria-hidden="true"></i>
+            </button>
+        </a>
+        {%- if item.size -%}
+            <div>{{ item.size }}</div>
+        {%- endif -%}
+    </div>
+</div>
+<div class="divider"></div>

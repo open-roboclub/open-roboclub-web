@@ -31,22 +31,7 @@
             </div>
             <div class="card-content">
                 {% for item in downloads.items %}
-                    <div class="row valign-wrapper">
-                        <div class="col s10">
-                            <h6>{{ item.name }}</h6>
-                        </div>
-                        <div class="col s2 center-align">
-                            <a href="{{ item.url }}" {% if item.file %} class="tooltipped" data-tooltip="{{ item.file }}" {% endif %}
-                               target="_blank">
-                                <button class="btn-floating btn-large waves-effect waves-light pink">
-                                    <i class="mdi mdi-share" aria-hidden="true"></i>
-                                </button>
-                            </a>
-                            {%- if item.size -%}
-                                <div>{{ item.size }}</div>
-                            {%- endif -%}
-                        </div>
-                    </div>
+                    {{ include('download-item.twig') }}
                 {% endfor %}
             </div>
         </div>

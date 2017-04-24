@@ -14,27 +14,7 @@
                 {% for download in downloads %}
                     <div class="tab-pane fade" id="{{ download.name }}">
                         {% for item in download.items %}
-                            <div class="row valign-wrapper">
-                                <div class="col s10">
-                                    <div class="member-position padding-small">{{ item.name }}</div>
-                                    {% if item.about %}
-                                        <div class="grey-text text-darken-2">{{ item.about }}</div>
-                                    {% endif %}
-                                </div>
-                                <div class="col s2 center-align">
-                                    <a href="{{ item.url }}"
-                                       style="display: block;" {% if item.file %} class="tooltipped" data-tooltip="{{ item.file }}" {% endif %}
-                                       target="_blank">
-                                        <button class="btn-floating btn-large waves-effect waves-light pink margin-small">
-                                            <i class="mdi mdi-share" aria-hidden="true"></i>
-                                        </button>
-                                    </a>
-                                    {%- if item.size -%}
-                                        <div>{{ item.size }}</div>
-                                    {%- endif -%}
-                                </div>
-                            </div>
-                            <hr>
+                            {{ include('download-item.twig') }}
                         {% endfor %}
                     </div>
                 {% endfor %}
