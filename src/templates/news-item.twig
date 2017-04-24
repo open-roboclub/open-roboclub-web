@@ -1,0 +1,24 @@
+<div class="card">
+    <div class="card-content">
+        <div class="row">
+            <div class="col m1 s2">
+                <i class="mdi mdi-newspaper mdi-36px grey-text text-darken-2" aria-hidden="true"></i>
+            </div>
+            <div class="col m11 s10">
+                <div class="white-space-pre">{{ it.notice }}</div>
+                <div class="divider margin-small"></div>
+                <div><em> {{ it.date }} </em></div>
+            </div>
+        </div>
+    </div>
+    {% if it.link %}
+        <div class="card-content grey lighten-3 link-box" style="padding: 10px">
+            <a href="{{ it.link }}" target="_blank">
+                <div class="valign-wrapper">
+                    <i class="material-icons padding-small">link</i>
+                    <span class="padding-small">View attached link</span>
+                </div>
+            </a>
+        </div>
+    {% endif %}
+</div>

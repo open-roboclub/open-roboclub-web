@@ -9,7 +9,7 @@ var NewsPanel = function () {
                     </div>\
                     <div class="col m11 s10">\
                         <div class="white-space-pre">{{= it.notice }}</div>\
-                        <hr>\
+                        <div class="divider margin-small"></div>\
                         <div><em> {{= it.date }} </em></div>\
                     </div>\
                 </div>\
@@ -30,13 +30,14 @@ var NewsPanel = function () {
     var loaded = false;
 
     function addNews(news, key) {
+        const newsPanel = $('#news-panel');
         if (!loaded) {
             App.showProgressBar(false);
-            $('#news-panel').html('');
+            newsPanel.html('');
             loaded = true;
         }
 
-        $('#news-panel').prepend('<div id="' + key + '" >' + newsTemplate(news) + '</div>');
+        newsPanel.prepend('<div id="' + key + '" >' + newsTemplate(news) + '</div>');
     }
 
     function changeNews(news, key) {
