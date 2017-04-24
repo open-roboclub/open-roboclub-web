@@ -16,12 +16,14 @@ var ContributionPanel = function () {
 
     var loaded = false;
     function addContribution(contribution, key) {
+        const contributions = $('#contributions');
         if(!loaded) {
+            contributions.html('');
             App.showProgressBar(false);
             loaded = true;
         }
 
-        $('#contributions').prepend('<div id="' + key + '" >' + contributionTemplate(contribution) + '</div>');
+        contributions.prepend('<div id="' + key + '" >' + contributionTemplate(contribution) + '</div>');
     }
 
     function changeContribution(contribution, key) {
