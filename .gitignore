@@ -4,3 +4,4 @@
 composer.phar
 .idea/
 *.db
+.git-ftp-tmp
