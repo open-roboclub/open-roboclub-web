@@ -1,27 +1,33 @@
 <div class="navbar-fixed">
     <nav class="grey lighten-5" role="navigation">
-        <div class="nav-wrapper container">
+        <ul id="dropdown1" class="dropdown-content">
+            {%- for item in navigation|slice(4) -%}
+                <li><a class="grey-text text-darken-4" href="{{ base_url }}/{{ item }}">{{ item|title }}</a></li>
+            {%- endfor -%}
+            <li><a class="grey-text text-darken-4" href="{{ base_url }}/developers">Developers</a></li>
+        </ul>
+
+        <div class="nav-wrapper">
             <a class="brand-logo" href="./">
                 <img src="https://res.cloudinary.com/amuroboclub/image/upload/logo-vector.svg" alt="AMU RoboClub"/>
             </a>
             <ul class="right hide-on-med-and-down">
-                {%- for item in navigation -%}
+                {%- for item in navigation|slice(0, 4) -%}
                     {% if route == item %}
-                        <li class="active"><a class="grey-text text-darken-4" href="./{{ item }}">{{ item|title }}</a>
-                        </li>
+                        <li class="active"><a class="grey-text text-darken-4" href="./{{ item }}">{{ item|title }}</a></li>
                     {% elseif route == '' and item == 'home' %}
                         <li class="active"><a class="grey-text text-darken-4" href="./">{{ item|title }}</a></li>
                     {% else %}
-                        <li><a class="grey-text text-darken-4" href="{{ base_url }}/{{ item }}">{{ item|title }}</a>
-                        </li>
+                        <li><a class="grey-text text-darken-4" href="{{ base_url }}/{{ item }}">{{ item|title }}</a></li>
                     {% endif %}
                 {%- endfor -%}
-                <li><a id="signin-link" href="{{ base_url }}/signin">
-                        <button id="signin-button" class="waves-effect waves-light btn blue">Sign In</button>
-                    </a></li>
-                <li><a class="grey-text text-darken-4" href="{{ base_url }}/developers">Developers</a></li>
+                <li>
+                    <a id="signin-link" href="{{ base_url }}/signin">
+                            <button id="signin-button" class="waves-effect waves-light btn blue">Sign In</button>
+                    </a>
+                </li>
+                <li><a class="dropdown-button grey-text text-darken-4" href="#!" data-activates="dropdown1">See More<i class="material-icons right">arrow_drop_down</i></a></li>
             </ul>
-
 
             <a href="#" data-activates="nav-mobile" class="button-collapse grey-text text-darken-2" style="margin-left: -15px;"><i
                         class="material-icons">menu</i></a>

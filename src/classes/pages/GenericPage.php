@@ -8,13 +8,14 @@ use Slim\Http\Response;
 class GenericPage extends BasePage {
 	private $title;
 	private $template;
+
 	private $navigation = [
 		'home', 
 		'team', 
 		'projects', 
+		'news',
 		'robocon', 
 		'downloads',
-		'announcements',
 		'contributions'
 	];
 

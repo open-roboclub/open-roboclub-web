@@ -3,3 +3,4 @@
 /cache/*
 composer.phar
 .idea/
+*.db
