@@ -4,6 +4,7 @@ var RoboconPanel = function () {
         App.showProgressBar(false);
         $('#robocon-container').html(data);
         $('.tooltipped').tooltip();
+        $('.slider').slider();
     };
 
     const error = function(request, status, error) {
@@ -32,6 +33,7 @@ var RoboconPanel = function () {
 
     return {
         initialize: function () {
+            $('.slider').slider();
             App.showProgressBar(true);
 
             var synced = 0;

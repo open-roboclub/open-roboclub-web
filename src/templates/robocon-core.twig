@@ -5,7 +5,27 @@
 </div>
 
 <div class="row">
-    <div class="col l3">
+
+</div>
+<div class="row">
+    <div class="col s12 m10 xl6 offset-m1 push-xl3">
+        <div class="slider card">
+            <ul class="slides">
+                {% for item in robocon.gallery %}
+                    <li>
+                        <img src="{{ item }}" />
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="card">
+            <div class="card-content grey lighten-2">
+                <h2>About</h2>
+            </div>
+            <div class="card-content member-position">{{ robocon.about|raw }}</div>
+        </div>
+    </div>
+    <div class="col s12 m10 xl3 offset-m1 pull-xl6">
         <div class="card center-align">
             <div class="card-content light-green darken-2">
                 <h5 class="light-green-text text-lighten-5">Introduction</h5>
@@ -16,15 +36,7 @@
             </div>
         </div>
     </div>
-    <div class="col l6">
-        <div class="card">
-            <div class="card-content grey lighten-2">
-                <h2>About</h2>
-            </div>
-            <div class="card-content member-position">{{ robocon.about|raw }}</div>
-        </div>
-    </div>
-    <div class="col l3">
+    <div class="col s12 m10 xl3 offset-m1">
         <div class="card">
             <div class="card-content blue center-align">
                 <h5 class="blue-text text-lighten-5">Downloads</h5>
@@ -50,6 +62,5 @@
         </div>
     </div>
 </div>
-
 
 
