@@ -31,7 +31,7 @@ Once you have installed composer either locally or globally, run `composer insta
 
 In the WAMP or MAMP version, it should work by accessing the default `www` directory address, and hence is skipped.  
 In the standalone PHP version, you just need to run this command in the project root:  
-`php -S localhost:7000 -t public_html public_html/index.php`
+`php -S localhost:7000 -t public_html`
 
 And then access `localhost:7000` in your browser to surf the site. Of course you can change the port to whatever you like.
 
